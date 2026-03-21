@@ -1,4 +1,10 @@
-CREATE TABLE cpns2024.ft2024 AS -- ft2024 = 'final table 2024' which contains rows from eliminated candidates at the 2nd stage of the recruitment process.
+/* Import missing columns from different PDF:
+```psql
+\copy cpns2024.test2_missings FROM '/test2_tiutkp.csv' CSV HEADER DELIMITER ',' QUOTE '"';
+```
+*/
+
+-- CREATE TABLE cpns2024.ft2024 AS -- ft2024 = 'final table 2024' which contains rows from eliminated candidates at the 2nd stage of the recruitment process.
 WITH rmv_header AS (
 	SELECT *
 	FROM cpns2024.test2
@@ -84,7 +90,9 @@ proper2 AS(
 )
 
 SELECT
-	rank, id, birthdate, last_edu, edu_group, gpa, twk, skd, skd40, skb, skb60,
+	rank, lt.id, birthdate, last_edu, edu_group, gpa, twk, tiu, tkp, skd, skd40, skb, skb60,
 	final_score, decl_code, jp_code, loc_code, type_code, edu_qual, page_num
-FROM proper2
+FROM proper2 AS lt
+LEFT JOIN cpns2024.test2_missings AS rt
+	ON rt.id = lt.id
 ORDER BY page_num, rank;
