@@ -1,0 +1,705 @@
+---
+title: "Analisis Hasil CPNS 2024 Kemendikdasmen"
+subtitle: "Spesifik Formasi Dosen Asisten Ahli Pendidikan Bahasa Inggris dan Pendidikan Fisika (atau yang serumpun/sejenis)"
+author: "Zelvy Fauzan"
+date: "TBA"
+output: html_document
+---
+
+# Pendahuluan
+
+Bagian ini memaparkan latar belakang, pertanyaan riset, tujuan riset, kontribusi riset, dan sumber data--secara berurutan.
+
+## Latar Belakang
+
+Berawal dari pengalaman kegagalan dalam menghadapi CPNS 2024, saya membuat analisis hasil CPNS (Calon Pegawai Negeri Sipil) untuk mengetahui lebih mendalam tentang kompetitor saya. Walau begitu, pengumuman hasil CPNS yang dipublikasikan oleh Kementerian sangat sulit untuk dianalisis mengingat jumlah halamannya yang banyak. Oleh karena itu, saya berinisiatif untuk melakukan analisis data hasil CPNS menggunakan teknik rekayasa informasi (*data engineerfing, data analysis*). Selain itu, mengingat banyak rekan saya yang memiliki cita-cita untuk menjadi ASN (Aparatur Sipil Negara), hasil analisis ini saya persembahkan untuk seluruh warga Indonesia yang hendak menjadi ASN di kemudian hari.
+
+Mengingat pengumuman hasil CPNS yang disiarkan per instansi, akan sangat sulit bagi saya untuk mendapatkan semua data secara holistik. Selain itu, lingkungan sosial dimana saya tumbuh didominasi dengan (calon) pendidik sehingga saya tertarik dengan data yang lebih spesifik. Dengan pertimbangan ini, saya memutuskan untuk mengambil data dari Kementerian yang berhubungan dengan dunia pendidikan. Di sini saya tidak spesifik merujuk pada Kementerian Pendidikan Dasar dan Menengah (Kemendikdasmen) ataupun Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi (Kemendikbudristek) karena nama Kementerian cenderung berganti seiring dengan pergantian kepemimpinan negara. Dengan pertimbangan ini, saya memutuskan untuk menggunakan terminologi Kementerian Pendidikan (Kemendik) sebagai definisi payung untuk Kementerian yang bergerak secara khusus di bidang pendidikan.
+
+Proyek ini bersifat kontinyu/berkelanjutan. Pengumuman hasil CPNS 5 periode sebelum 2024 dan setelah periode 2024 (dan seterusnya) akan saya analisis.
+
+## Pertanyaan Riset
+
+Investigasi ini memiliki beberapa pertanyaan yang akan memandu proses analisis, diantaranya adalah:
+
+1.  Secara umum, berapa skor TWK, TIU, TKP, dan total yang aman untuk lolos ke tahap SKB?
+
+------------------------------------------------------------------------
+
+2.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan dari rumpun keguruan dan ilmu pendidikan untuk lolos ke tahap SKB?
+3.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk lolos ke tahap SKB?
+
+------------------------------------------------------------------------
+
+4.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan dan tujuan jabatan formasi yang berkaitan dengan "Inggris" untuk lolos ke tahap SKB?
+5.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar Dosen Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan dengan "Inggris" untuk lolos ke tahap SKB?
+
+---
+
+6.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan yang berkaitan dengan "Fisika" untuk lolos ke tahap SKB?
+7.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar Widyaiswara untuk lolos ke tahap SKB?
+
+---
+
+8.  Secara umum, berapa skor SKB yang aman untuk lolos tahap SKB?
+
+---
+
+9.  Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan dari rumpun keguruan dan ilmu pendidikan untuk lolos tahap SKB?
+10. Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk lolos tahap SKB?
+
+---
+
+11. Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan yang berkaitan dengan "Inggris" untuk lolos tahap SKB?
+12. Berapa skor SKB yang aman bagi pelamar Dosen Asisten Ahli untuk formasi yang berkaitan dengan "Inggris" untuk lolos tahap SKB?
+
+---
+
+13. Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan yang berkaitan dengan "Fisika" untuk lolos tahap SKB?
+14. Berapa skor SKB yang aman bagi pelamar WIdyaiswara untuk lolos tahap SKB?
+
+---
+
+15. Berapa probabilitas pelamar S-2 Pendidikan Bahasa Inggris untuk lolos SKD di masing-masing formasi yang tersedia?
+16. Berapa probabilitas pelamar S-2 Pendidikan Fisika untuk lolos SKD di masing-masing formasi yang tersedia?
+
+## Tujuan Riset
+
+Secara umum, dilakukannya investigasi ini adalah untuk memberikan gambaran umum tentang kompetitor pada rekrutmen CPNS. Tujuan lebih spesifik tertera di bawah ini:
+
+1.  Untuk mengetahui *passing grade* yang aman untuk lolos ke tahap SKB.
+2.  Untuk mengetahui *passing grade* yang aman bagi pelamar dengan latar belakang pendidikan dari rumpun keguruan dan ilmu pendidikan untuk lolos ke tahap SKB.
+3.  Untuk mengetahui *passing grade* yang aman bagi pelamar dengan latar belakang pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk lolos ke tahap SKB.
+4.  Untuk mengetahui *passing grade* yang aman bagi pelamar dengan latar pendidikan dan jabatan formasi tujuan yang berkaitan dengan "Inggris" untuk lolos ke tahap SKB.
+5.  Untuk mengetahui *passing grade* yang aman bagi pelamar Dosen Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan dengan "Inggris" untuk lolos ke tahap SKB.
+6.  Untuk mengetahui *passing grade* yang aman bagi pelamar dengan latar pendidikan dan jabatan formasi tujuan yang berkaitan dengan "Fisika" untuk lolos ke tahap SKB.
+7.  Untuk mengetahui *passing grade* yang aman bagi pelamar Widyaiswara untuk lolos ke tahap SKB.
+8.  Untuk mengetahui *passing grade* yang aman untuk lolos tahap SKB.
+9.  Untuk mengetahui *passing grade* yang aman untuk lolos tahap SKB.
+10.  Untuk mengetahui *passing grade* yang aman bagi pelamar dengan latar belakang pendidikan dari rumpun keguruan dan ilmu pendidikan untuk lolos tahap SKB.
+11.  Untuk mengetahui *passing grade* yang aman bagi pelamar dengan latar belakang pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk lolos tahap SKB.
+12.  Untuk mengetahui *passing grade* yang aman bagi pelamar dengan latar pendidikan dan jabatan formasi tujuan yang berkaitan dengan "Inggris" untuk lolos tahap SKB.
+13.  Untuk mengetahui *passing grade* yang aman bagi pelamar Dosen Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan dengan "Inggris" untuk lolos tahap SKB.
+14.  Untuk mengetahui *passing grade* yang aman bagi pelamar dengan latar pendidikan dan jabatan formasi tujuan yang berkaitan dengan "Fisika" untuk lolos tahap SKB.
+15.  Untuk mengetahui *passing grade* yang aman bagi pelamar Widyaiswara untuk lolos tahap SKB.
+16.  Untuk mengetahui *probabilitas* pelamar S-2 Pendidikan Bahasa Inggris untuk lolos SKD di masing-masing formasi yang tersedia.
+17. Untuk mengetahui *probabilitas* pelamar S-2 Pendidikan Fisika untuk lolos SKD di masing-masing formasi yang tersedia
+
+## Kontribusi Riset
+
+Investigasi ini menitikberatkan kontribusi praktikal yang bisa digunakan oleh seluruh warga Indonesia yang memiliki motivasi untuk mengikuti CPNS, terutama bagi mereka yang menargetkan Kementerian Pendidikan. Dengan wawasan yang didapat dari hasil investigasi ini, saya berharap calon PNS dapat membuat rencana belajar yang efektif dan efisien, analisa kompetitor, dan peluang keberhasilan lolos di masing-masing tahap tes CPNS.
+
+Di samping kontribusi praktikal, hasil analisis ini juga menawarkan wawasan yang bersifat teoretis-eksploratif tentang karakteristik dari demografi calon PNS berdasarkan sudut pandang retrospektif. Analisis prediktif yang disajikan dalam hasil investigasi ini juga dapat dijadikan sebagai bahan dasar dalam perencanaan peningkatan mutu SDM (Sumber Daya Alam) PNS generasi yang akan datang.
+
+Tidak terlewat juga kontribusi berupa data empiris yang ditawarkan dari hasil investigasi ini. Jumlah data yang masif ini memiliki nilai yang berharga untuk pengambilan keputusan baik di sektor formal atau informal, di level operasional maupun managerial, dan/atau di level eksekutif.
+
+## Sumber Data
+
+Data diambil dari pengumuman hasil SKD dan SKB (dua pengumuman berbeda) CPNS 2024 spesifik pada Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi (Kemendikbudristek).
+
+# Persiapan Data
+
+## Perkakas (Library)
+
+Kode di bawah ini akan mempersiapkan *library* yang diperlukan untuk menunjang analisis.
+
+```{r libraries, results = 'hide', warning = FALSE, message = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(ggridges)
+library(ggtext)
+library(ggdist)
+library(glue)
+library(patchwork)
+library(RColorBrewer)
+library(viridis)
+library(visdat)
+library(psych)
+library(MetBrewer)
+```
+
+## Impor Data
+
+Data sudah melalui tahap ekstraksi dari PDF ke CSV menggunakan Python. Setelah data diekstrak ke format CSV, data kemudian dibersihkan menggunakan PostgreSQL. Pada dokumen ini, impor data yang dimaksud adalah impor data dari CSV ke R. Kode di bawah ini akan mengimpor data dari CSV ke R.
+
+### Hasil SKD
+
+```{r import-data-skd}
+hasil_skd <- read_csv("2024/test1v3.csv",
+                      col_types = cols(rank = col_number(),
+                                       twk = col_integer(),
+                                       tiu = col_integer(),
+                                       tkp = col_integer(),
+                                       skd = col_integer(),
+                                       allotment = col_integer(),
+                                       page_num = col_integer()
+                      ))
+hasil_skd
+```
+
+### Hasil SKB
+
+```{r import-data-skb}
+hasil_skb <- read_csv("2024/test2v1.csv", 
+                      col_types = cols(id = col_character())
+                      )
+hasil_skb
+```
+
+### Jabatan Formasi
+
+```{r import-data-job-position}
+jabatan_formasi <- read_csv("2024/jabatan_formasi.csv") %>% 
+  rename(jp_code = parent)
+
+jabatan_formasi
+```
+
+## Pembersihan Data
+
+### Dataset SKD
+
+Tahap ini akan memberikan ringkasan jumlah data duplikat. Di sini saya mengecek secara (1) keseluruhan, (2) variabel id, dan (3) variabel full_name.
+
+```{r check-duplicate-skd}
+chk_dupl_skd_all <- sum(duplicated(hasil_skd))
+chk_dupl_skd_id <- sum(duplicated(hasil_skd$id))
+chk_dupl_skd_full_name <- sum(duplicated(hasil_skd$full_name))
+
+chk_dupl_skd_all
+chk_dupl_skd_id
+chk_dupl_skd_full_name
+```
+
+Ketika dicek berdasarkan variabel *id* dan *full_name*, ada `r chk_dupl_skd_id` dan `r chk_dupl_skd_full_name` data duplikat pada masing-masing variabel *id* dan *full_name*. Inkonsistensi data ini akan menyebabkan menurunnya keakuratan hasil analisis di tahap yang akan datang sehingga perlu didalami lebih lanjut.
+
+```{r inspect-duplicate-skd}
+hasil_skd %>% 
+  select(id, full_name, twk) %>% # tambah variabel full_name dan twk untuk V&V (verifikasi dan validasi)
+  group_by(id) %>% 
+  filter(n() > 1) %>% 
+  ungroup()
+```
+
+Variabel `full_name` tampak memiliki duplikat untuk nama yang memiliki sedikit perbedaan. Dalam hal ini, data yang mengandung `\r`, `\n` atau `\r\n`akan dianggap data yang berbeda walaupun secara holistik tidak ada perbedaan. Untuk memperbaiki hal ini, menghapus lalu menyisakan satu data unik dari variabel `id` akan lebih tepat.
+
+```{r remove-duplicate-skd}
+hasil_skd_no_dupl <- hasil_skd %>% 
+  distinct(id, .keep_all = TRUE)
+
+hasil_skd_no_dupl
+```
+
+Perlu dicatat bahwa kolom/variabel `full_name` tidak perlu dibersihkan lebih lanjut (terutama untuk menghapus `\r`, `\n`, atau `\r\n`) karena tidak ada sama sekali urgensi untuk menginvestigasi satu atau sekian nama secara spesifik. Walau begitu, kolom `last_edu` memiliki kendala *new rows* dan/atau *new lines* yang terpatri dalam datanya sehingga pembersihan lanjutan sangat diperlukan untuk tahap analisis.
+
+```{r clean-str-last-edu}
+hasil_skd_no_dupl$last_edu <- 
+  str_replace_all(hasil_skd_no_dupl$last_edu, "[\\r\\n]", " ") %>%
+  str_squish()
+
+hasil_skd_no_dupl
+```
+
+Tahap pembersihan data selanjutnya adalah menyeregamkan data `NULL`. Di dataset ini, data kosong diisi dengan `NULL` atau `NA` (system default R). Data poin `NULL` harus diganti menjadi `NA` (system default R) sehingga menjadi seragam.
+
+```{r standardize-nulls-skd}
+hasil_skd_standardized_null <- hasil_skd_no_dupl %>% 
+  mutate(across(where(is.character), ~ str_replace_all(.x, "^NULL$", NA_character_)))
+
+hasil_skd_standardized_null
+```
+
+Setelah standarisasi data kosong (NULL/NA), langkah selanjutnya adalah melakukan pengisian data kosong. Pada baris data ke 19 sampai 75, banyak data (`jp_code`, `loc_code`, `type_code`, `allotment`) yang kosong karena proses impor data yang kurang akurat dan presisi. Untuk mengisi kekosongan data ini, saya menggunakan *forward filling* dengan kondisi sebagai berikut:
+
+> *IF `page_num` == `page_num` \| `page_num` == `page_num` + 1 THEN forward fill ELSE do nothing*
+
+```{r forward-fill-skd}
+hasil_skd_forward_fill <- hasil_skd_standardized_null %>% 
+  mutate(breakk = !(page_num == lag(page_num) | page_num == lag(page_num) + 1),
+         group_id = cumsum(replace_na(breakk, TRUE))) %>%
+  group_by(group_id) %>% 
+  fill(c(jp_code, loc_code, type_code, allotment), .direction = "down") %>% 
+  ungroup() %>% 
+  select(-breakk, -group_id)
+
+hasil_skd_forward_fill
+```
+
+Kolom `twk`, `tiu`, `tkp`, dan `skd` tidak diterapkan *forward filling* ini karena data kosong di kolom tersebut menandakan peserta yang tidak hadir dalam tes CPNS sehingga tidak ada nilai yang terekam. WAlau begitu, nilai `NA` pada 4 kolom tersebut akan digantikan dengan dengan nilai 0 alih-alih `NA`.
+
+```{r na-to-zero-skd}
+hasil_skd_na2zero <- hasil_skd_forward_fill %>% 
+  replace_na(list(twk = 0L,
+                  tiu = 0L,
+                  tkp = 0L,
+                  skd = 0L))
+
+hasil_skd_na2zero
+```
+
+```{r}
+summary(hasil_skd_na2zero)
+
+which(is.na(hasil_skd_na2zero$rank))
+```
+
+### Dataset SKB
+
+Setelah membersihkan dataset SKD, selanjutnya adalah pembersihan dataset SKB. Prosedur pembersihan ini mirip dengan prosedur pembersihan data SKD pada bagian sebelumnya. Diawali dengan pengecekan secara umum tentang dataset SKB.
+
+```{r check-duplicate-skb}
+hasil_skb
+sum(duplicated(hasil_skb$id))
+```
+
+Tidak tampak data duplikat pada dataset SKB. Namun begitu, kolom `jp_code`, `loc_code`, `type_code`, `edu_qual`, dan `num_edu_qual` memiliki data *NULL* yang tidak konsisten dengan nilai kosong system default R. Maka dari itu, penyeragaman perlu dilakukan untuk standarisasi nilai kosong.
+
+```{r standardize-null-skb}
+hasil_skb_standardized_nulls <- hasil_skb %>% 
+  mutate(across(where(is.character), ~ str_replace_all(.x, "^NULL$", NA_character_)))
+
+hasil_skb_standardized_nulls
+```
+
+```{r forward-fill-skb}
+hasil_skb_forward_fill <- hasil_skb_standardized_nulls %>% 
+  mutate(breakk = !(page_num == lag(page_num) | page_num == lag(page_num) + 1),
+         group_id = cumsum(replace_na(breakk, TRUE))) %>%
+  group_by(group_id) %>% 
+  fill(c(jp_code, loc_code, type_code, edu_qual, num_edu_qual), .direction = "down") %>% 
+  ungroup() %>% 
+  select(-breakk, -group_id)
+
+hasil_skb_forward_fill
+```
+
+## Hasil Pembersihan Data
+
+Data SKD dan SKB yang sudah bersih dan siap untuk dianalisa sudah direkam dan bisa dipanggil menggunakan variabel berikut:
+
+`hasil_skd_na2zero` *untuk data SKD*
+
+`hasil_skb_forward_fill` *untuk data SKB*
+
+# Analisis Data
+
+Pada bagian ini, saya menjawab pertanyaan riset tidak secara berurutan seperti pada [Tujuan Riset] namun mengelompokkannya menjadi SKD dan SKB secara terpisah. Hal ini bertujuan untuk meningkatkan fokus bahasan dan diskusi data dan menghindari distraksi yang mungkin akan timbul apabila hasil analisis berpindah-pindah dari SKD ke SKB lalu kembali ke SKD dan diulangi terus menerus. Walau bahasan hasil tes CPNS ini tidak mengikuti kronologi di Tujuan Riset, alur analisis tetap sama dengan yang apa yang tertera.
+
+## Hasil Analisis SKB
+
+Hasil analisis akan dirunutkan berdasarkan pertanyaan riset yang tertera pada [Pertanyaan Riset].
+
+### 1. Skor TWK, TIU, TKP, dan Total yang aman untuk lolos ke tahap SKB
+
+```{r first-rq}
+hasil_skd_na2zero %>% 
+  select(twk, tiu, tkp, skd) %>% 
+  pivot_longer(cols = twk:skd,
+               values_to = "skor",
+               names_to = "tipe_tes") %>% 
+  mutate(tipe_tes = factor(tipe_tes, levels = c("skd", "tkp", "tiu", "twk"))) %>% 
+  ggplot(aes(x = skor, y = tipe_tes, fill = tipe_tes)) +
+  theme_bw() +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(shape = 1,
+              size = .02,
+              alpha = .01) +
+  labs(title = "Sebaran Nilai Masing-Masing Subtes SKD (Umum)",
+       subtitle = 
+         paste0("Rekomendasi capaian nilai (Q3):\n", 
+           "TWK >= ", round(quantile(hasil_skd_na2zero$twk, .75)), "; ",
+           "TIU >= ", round(quantile(hasil_skd_na2zero$tiu, .75)), "; ",
+           "TKP >= ", round(quantile(hasil_skd_na2zero$tkp, .75)), "; ",
+           "SKD >= ", round(quantile(hasil_skd_na2zero$skd, .75))
+           ),
+       x = "skor",
+       y = "subtes") +
+  theme(legend.position = "none")
+```
+
+
+### 2. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan FKIP untuk lolos ke tahap SKB
+
+```{r second-rq}
+skd_rumpun_fkip <- hasil_skd_na2zero %>% 
+  select(last_edu:skd) %>% 
+  filter(str_detect(last_edu, "PENDIDIKAN"))
+
+skd_rumpun_fkip %>% 
+  select(-last_edu) %>% 
+  pivot_longer(cols = twk:skd,
+               names_to = "subtes",
+               values_to = "skor") %>% 
+  mutate(subtes = factor(subtes, 
+                         levels = c("skd", "tkp", "tiu", "twk"))) %>% 
+  ggplot(aes(x = skor, y = subtes, fill = subtes)) +
+  theme_bw() +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(size = .02,
+              alpha = .05) +
+  theme(legend.position = "none") +
+  labs(title = "Sebaran Nilai SKD rumpun FKIP",
+       subtitle = paste0("Rekomendasi capaian nilai (Q3):\n", 
+           "TWK >= ", round(quantile(skd_rumpun_fkip$twk, .75)), "; ",
+           "TIU >= ", round(quantile(skd_rumpun_fkip$tiu, .75)), "; ",
+           "TKP >= ", round(quantile(skd_rumpun_fkip$tkp, .75)), "; ",
+           "SKD >= ", round(quantile(skd_rumpun_fkip$skd, .75))
+           ),
+       x = "skor",
+       y = "subtes") +
+  theme(legend.position = "none")
+```
+
+
+### 3. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan non-FKIP untuk lolos ke tahap SKB
+
+```{r third-question}
+skd_rumpun_non_fkip <- hasil_skd_na2zero %>% 
+  select(last_edu:skd)
+
+skd_rumpun_non_fkip %>% 
+  select(-last_edu) %>% 
+  pivot_longer(cols = twk:skd,
+               names_to = "subtes",
+               values_to = "skor") %>% 
+  mutate(subtes = factor(subtes, 
+                         levels = c("skd", "tkp", "tiu", "twk"))) %>% 
+  ggplot(aes(x = skor, y = subtes, fill = subtes)) +
+  theme_bw() +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(size = .02,
+              alpha = .05) +
+  theme(legend.position = "none") +
+  labs(title = "Sebaran Nilai SKD rumpun non-FKIP",
+       subtitle = paste0("Rekomendasi capaian nilai (Q3):\n", 
+           "TWK >= ", round(quantile(skd_rumpun_non_fkip$twk, .75)), "; ",
+           "TIU >= ", round(quantile(skd_rumpun_non_fkip$tiu, .75)), "; ",
+           "TKP >= ", round(quantile(skd_rumpun_non_fkip$tkp, .75)), "; ",
+           "SKD >= ", round(quantile(skd_rumpun_non_fkip$skd, .75))
+           ),
+       x = "skor",
+       y = "subtes") +
+  theme(legend.position = "none")
+```
+
+### 4. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan jurusan "Inggris" untuk lolos ke tahap SKB di jabatan formasi yang tersedia
+
+```{r fourth-question}
+skd_jf_ing <- hasil_skd_na2zero %>% 
+  filter(str_detect(last_edu, "INGGRIS")) %>% 
+  select(jp_code, twk:skd) %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  replace_na(list(job_position = "PENERJEMAH BAHASA INGGRIS")) %>% 
+  select(-jp_code)
+
+median_twk_ing <- median(skd_jf_ing$twk, na.rm = TRUE)
+median_tiu_ing <- median(skd_jf_ing$tiu, na.rm = TRUE)
+median_tkp_ing <- median(skd_jf_ing$tkp, na.rm = TRUE)
+median_skd_ing <- median(skd_jf_ing$skd, na.rm = TRUE)
+n_skd_ing <- nrow(skd_jf_ing)
+
+font_family <- "Fira Sans"
+
+plot_subtitle_skd_ing <- glue("Komparasi dari berbagai Jabatan Formasi yang
+                      tersedia untuk kualifikasi pendidikan yang berkaitan
+                      dengan 'Inggris'. (n = {scales::number(n_skd_ing, big.mark = ',')})")
+
+# TWK
+skd_jf_ing %>% 
+  ggplot(aes(x = twk, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "E") +
+  geom_vline(xintercept = median_twk_ing,
+             lty = "dashed",
+             col = "black") +
+  annotate("text", 
+           x = median_twk_ing + 16,
+           y = 10.2,
+           label = glue("Median TWK
+                        {scales::number(median_twk_ing)}"),
+           #family = font_family,
+           size = 3) +
+  labs(
+    title = glue("Sebaran Nilai TWK"),
+    subtitle = plot_subtitle_skd_ing) +
+  theme_bw() +
+  theme(panel.spacing = unit(0.1, "lines"),
+        legend.position = "none") 
+
+# TIU
+skd_jf_ing %>% 
+  ggplot(aes(x = tiu, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "E") +
+  geom_vline(xintercept = median_tiu_ing,
+             lty = "dashed",
+             col = "black") +
+  annotate("text", 
+           x = median_tiu_ing + 20,
+           y = 10.2,
+           label = glue("Median TIU
+                        {scales::number(median_tiu_ing)}"),
+           #family = font_family,
+           size = 3) +
+  labs(
+    title = glue("Sebaran Nilai TIU"),
+    subtitle = plot_subtitle_skd_ing) +
+  theme_bw() +
+  theme(panel.spacing = unit(0.1, "lines"),
+        legend.position = "none") 
+
+# TKP
+skd_jf_ing %>% 
+  ggplot(aes(x = tkp, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "E") +
+  geom_vline(xintercept = median_tkp_ing,
+             lty = "dashed",
+             col = "black") +
+  annotate("text", 
+           x = median_tkp_ing + 20,
+           y = 10.2,
+           label = glue("Median TKP
+                        {scales::number(median_tkp_ing)}"),
+           #family = font_family,
+           size = 3) +
+  labs(
+    title = glue("Sebaran Nilai TKP"),
+    subtitle = plot_subtitle_skd_ing) +
+  theme_bw() +
+  theme(panel.spacing = unit(0.1, "lines"),
+        legend.position = "none") 
+
+# Skor Total SKD
+skd_jf_ing %>% 
+  ggplot(aes(x = skd, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "E") +
+  geom_vline(xintercept = median_skd_ing,
+             lty = "dashed",
+             col = "black") +
+  annotate("text", 
+           x = median_skd_ing + 80,
+           y = 10.2,
+           label = glue("Median Skor Total 
+                        {scales::number(median_skd_ing)}"),
+           #family = font_family,
+           size = 3) +
+  labs(
+    title = glue("Sebaran Nilai Skor Total"),
+    subtitle = plot_subtitle_skd_ing) +
+  theme_bw() +
+  theme(panel.spacing = unit(0.1, "lines"),
+        legend.position = "none") 
+```
+
+### 5. Skor TWK, TIU, TKP, dan Total yang aman bagi pelamar Dosen jurusan "Pendidikan Bahasa Inggris" untuk lolos ke tahap SKB
+
+```{r fifth-question}
+skd_dosen_ing <- hasil_skd_na2zero %>% 
+  select(last_edu:skd, jp_code) %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(job_position, "DOSEN"),
+         str_detect(last_edu, "PENDIDIKAN BAHASA INGGRIS")) %>% 
+  select(-last_edu, -jp_code)
+
+
+n_skd_dosen_ing <- nrow(skd_dosen_ing)
+
+skd_dosen_ing_long <- skd_dosen_ing %>%
+  pivot_longer(cols = twk:skd,
+               values_to = "skor",
+               names_to = "subtes") %>% 
+  mutate(subtes = factor(subtes, levels = c("twk", "tiu", "tkp", "skd")))
+
+plot_subtitle_skd_ing <- glue("Komparasi nilai untuk Jabatan Formasi Dosen (Asisten Ahli, Lektor) bagi pelamar 
+                              dengan latar belakang Pendidikan Bahasa Inggris. (n = {scales::number(n_skd_dosen_ing, big.mark = ',')})
+                              Rekomendasi Analis (Q3):
+                              TWK >= {round(quantile(skd_dosen_ing$twk, 0.75))}; TIU >= {round(quantile(skd_dosen_ing$tiu, 0.75))}; TKP >= {round(quantile(skd_dosen_ing$tkp, 0.75))}; SKD >= {round(quantile(skd_dosen_ing$skd, 0.75))}")
+
+skd_dosen_ing_long %>% 
+  ggplot(aes(x = skor, fill = job_position)) +
+  geom_density(alpha = .50) +
+  facet_wrap(~ subtes) +
+  labs(
+    title = "Sebaran nilai TWK, TIU, TKP",
+    subtitle = plot_subtitle_skd_ing
+  ) +
+  theme_bw()
+```
+
+
+### 6. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan jurusan "Fisika" untuk lolos ke tahap SKB di jabatan formasi yang tersedia
+
+```{r sixth-question}
+skd_jf_fis <- hasil_skd_na2zero %>% 
+  filter(str_detect(last_edu, "FISIKA")) %>% 
+  select(jp_code, twk:skd) %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  #replace_na(list(job_position = "PENERJEMAH BAHASA INGGRIS")) %>% 
+  select(-jp_code)
+
+median_twk_fis <- median(skd_jf_fis$twk, na.rm = TRUE)
+median_tiu_fis <- median(skd_jf_fis$tiu, na.rm = TRUE)
+median_tkp_fis <- median(skd_jf_fis$tkp, na.rm = TRUE)
+median_skd_fis <- median(skd_jf_fis$skd, na.rm = TRUE)
+n_skd_fis <- nrow(skd_jf_fis)
+
+font_family <- "Fira Sans"
+
+plot_subtitle_skd_fis <- glue("Komparasi dari berbagai Jabatan Formasi yang
+                      tersedia untuk kualifikasi pendidikan yang berkaitan
+                      dengan 'Fisika'. (n = {scales::number(n_skd_fis, big.mark = ',')})")
+
+# TWK
+skd_jf_fis %>% 
+  ggplot(aes(x = twk, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "E") +
+  geom_vline(xintercept = median_twk_fis,
+             lty = "dashed",
+             col = "black") +
+  annotate("text", 
+           x = median_twk_fis + 16,
+           y = 10.2,
+           label = glue("Median TWK
+                        {scales::number(median_twk_fis)}"),
+           #family = font_family,
+           size = 3) +
+  labs(
+    title = glue("Sebaran Nilai TWK"),
+    subtitle = plot_subtitle_skd_fis) +
+  theme_bw() +
+  theme(panel.spacing = unit(0.1, "lines"),
+        legend.position = "none") 
+
+# TIU
+skd_jf_fis %>% 
+  ggplot(aes(x = tiu, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "E") +
+  geom_vline(xintercept = median_tiu_fis,
+             lty = "dashed",
+             col = "black") +
+  annotate("text", 
+           x = median_tiu_fis + 20,
+           y = 10.2,
+           label = glue("Median TIU
+                        {scales::number(median_tiu_fis)}"),
+           #family = font_family,
+           size = 3) +
+  labs(
+    title = glue("Sebaran Nilai TIU"),
+    subtitle = plot_subtitle_skd_fis) +
+  theme_bw() +
+  theme(panel.spacing = unit(0.1, "lines"),
+        legend.position = "none") 
+
+# TKP
+skd_jf_fis %>% 
+  ggplot(aes(x = tkp, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "E") +
+  geom_vline(xintercept = median_tkp_fis,
+             lty = "dashed",
+             col = "black") +
+  annotate("text", 
+           x = median_tkp_fis + 20,
+           y = 10.2,
+           label = glue("Median TKP
+                        {scales::number(median_tkp_fis)}"),
+           #family = font_family,
+           size = 3) +
+  labs(
+    title = glue("Sebaran Nilai TKP"),
+    subtitle = plot_subtitle_skd_fis) +
+  theme_bw() +
+  theme(panel.spacing = unit(0.1, "lines"),
+        legend.position = "none") 
+
+# Skor Total SKD
+skd_jf_fis %>% 
+  ggplot(aes(x = skd, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "E") +
+  geom_vline(xintercept = median_skd_fis,
+             lty = "dashed",
+             col = "black") +
+  annotate("text", 
+           x = median_skd_fis + 80,
+           y = 10.2,
+           label = glue("Median Skor Total 
+                        {scales::number(median_skd_fis)}"),
+           #family = font_family,
+           size = 3) +
+  labs(
+    title = glue("Sebaran Nilai Skor Total"),
+    subtitle = plot_subtitle_skd_fis) +
+  theme_bw() +
+  theme(panel.spacing = unit(0.1, "lines"),
+        legend.position = "none") 
+
+```
+
+### 7. Skor TWK, TIU, TKP, dan Total yang aman bagi pelamar Widyaiswara untuk lolos ke tahap SKB
+
+```{r seventh-question}
+skd_wi <- hasil_skd_na2zero %>% 
+  select(last_edu:skd, jp_code) %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(job_position, "WIDYAISWARA")) %>% 
+  select(-last_edu, -jp_code)
+
+
+n_skd_wi <- nrow(skd_wi)
+
+skd_wi_long <- skd_wi %>%
+  pivot_longer(cols = twk:skd,
+               values_to = "skor",
+               names_to = "subtes") %>% 
+  mutate(subtes = factor(subtes, levels = c("twk", "tiu", "tkp", "skd")))
+
+plot_subtitle_wi <- glue("Komparasi nilai untuk Jabatan Formasi Widyaiswara (n = {scales::number(n_skd_dosen_ing, big.mark = ',')})
+                              Rekomendasi Analis (Q3):
+                              TWK >= {round(quantile(skd_wi$twk, 0.75))}; TIU >= {round(quantile(skd_wi$tiu, 0.75))}; TKP >= {round(quantile(skd_wi$tkp, 0.75))}; SKD >= {round(quantile(skd_wi$skd, 0.75))}")
+
+skd_wi_long %>% 
+  ggplot(aes(x = skor, fill = job_position)) +
+  geom_density(alpha = .50) +
+  facet_wrap(~ subtes) +
+  labs(
+    title = "Sebaran nilai TWK, TIU, TKP",
+    subtitle = plot_subtitle_wi
+  ) +
+  theme_bw()
+```
+
+### 8. Skor SKB yang aman untuk lolos SKB
+
+```{r eighth-question}
+
+```
+
+### 9. Skor SKB yang aman bagi lulusan FKIP untuk lolos SKB
+
+### 10. SKor SKB yang aman bagi lulusan non-FKIP untuk lolos SKB
+
+### 11. Skor SKB yang aman yang aman bagi lulusan jurusan "Inggris" untuk lolos tahap SKB di jabatan formasi yang tersedia
+
+### 12. Skor SKB yang aman bagi pelamar Dosen AA jurusan "Inggris" untuk lolos tahap SKB
+
+### 13. Skor SKB yang aman yang aman bagi lulusan jurusan "Fisika" untuk lolos tahap SKB di jabatan formasi yang tersedia
+
+### 14. Skor SKB yang aman bagi pelamar Widyaiswara untuk lolos tahap SKB
+
+### 15. Probabilitas pelamar S-2 Pendidikan Bahasa Inggris untuk lolos SKD di masing-masing jabatan formasi yang tersesia
+
+### 16. Probabilitas pelamar S-2 Pendidikan Fisika untuk lolos SKD di masing-masing jabatan formasi yang tersesia
+
+
+
+
+
+
+
