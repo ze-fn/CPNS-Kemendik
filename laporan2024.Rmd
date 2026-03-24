@@ -304,7 +304,7 @@ hasil_skd_na2zero %>%
   geom_boxplot(outliers = FALSE) +
   geom_jitter(shape = 1,
               size = .02,
-              alpha = .01) +
+              alpha = .05) +
   labs(title = "Sebaran Nilai Masing-Masing Subtes SKD (Umum)",
        subtitle = 
          paste0("Rekomendasi capaian nilai (Q3):\n", 
@@ -369,7 +369,7 @@ skd_rumpun_non_fkip %>%
   theme_bw() +
   geom_boxplot(outliers = FALSE) +
   geom_jitter(size = .02,
-              alpha = .05) +
+              alpha = .03) +
   theme(legend.position = "none") +
   labs(title = "Sebaran Nilai SKD rumpun non-FKIP",
        subtitle = paste0("Rekomendasi capaian nilai (Q3):\n", 
