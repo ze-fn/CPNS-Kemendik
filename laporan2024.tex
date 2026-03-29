@@ -1,0 +1,2178 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Analisis Hasil CPNS 2024 Kemendik},
+  pdfauthor={Zelvy Fauzan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Analisis Hasil CPNS 2024 Kemendik}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Spesifik Formasi Dosen Asisten Ahli Pendidikan Bahasa Inggris
+dan Pendidikan Fisika (atau yang serumpun/sejenis)}
+\author{Zelvy Fauzan}
+\date{Last Edited: 2026-27-03 (Ongoing)}
+
+\begin{document}
+\maketitle
+
+\section{Pendahuluan}\label{pendahuluan}
+
+Bagian ini memaparkan latar belakang, pertanyaan riset, tujuan riset,
+kontribusi riset, dan sumber data--secara berurutan.
+
+\subsection{Latar Belakang}\label{latar-belakang}
+
+Berawal dari pengalaman kegagalan dalam menghadapi CPNS 2024, saya
+membuat analisis hasil CPNS (Calon Pegawai Negeri Sipil) untuk
+mengetahui lebih mendalam tentang kompetitor saya. Walau begitu,
+pengumuman hasil CPNS yang dipublikasikan oleh Kementerian sangat sulit
+untuk dianalisis mengingat jumlah halamannya yang banyak. Oleh karena
+itu, saya berinisiatif untuk melakukan analisis data hasil CPNS
+menggunakan teknik rekayasa informasi (\emph{data engineerfing, data
+analysis}). Selain itu, mengingat banyak rekan saya yang memiliki
+cita-cita untuk menjadi ASN (Aparatur Sipil Negara), hasil analisis ini
+saya persembahkan untuk seluruh warga Indonesia yang hendak menjadi ASN
+di kemudian hari.
+
+Mengingat pengumuman hasil CPNS yang disiarkan per instansi, akan sangat
+sulit bagi saya untuk mendapatkan semua data secara holistik. Selain
+itu, lingkungan sosial dimana saya tumbuh didominasi dengan (calon)
+pendidik sehingga saya tertarik dengan data yang lebih spesifik. Dengan
+pertimbangan ini, saya memutuskan untuk mengambil data dari Kementerian
+yang berhubungan dengan dunia pendidikan. Di sini saya tidak spesifik
+merujuk pada Kementerian Pendidikan Dasar dan Menengah (Kemendikdasmen)
+ataupun Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi
+(Kemendikbudristek) karena nama Kementerian cenderung berganti seiring
+dengan pergantian kepemimpinan negara. Dengan pertimbangan ini, saya
+memutuskan untuk menggunakan terminologi Kementerian Pendidikan
+(Kemendik) sebagai definisi payung untuk Kementerian yang bergerak
+secara khusus di bidang pendidikan.
+
+Proyek ini bersifat kontinyu/berkelanjutan. Pengumuman hasil CPNS 5
+periode sebelum 2024 dan setelah periode 2024 (dan seterusnya) akan saya
+analisis.
+
+\subsection{Pertanyaan Riset}\label{pertanyaan-riset}
+
+Investigasi ini memiliki beberapa pertanyaan yang akan memandu proses
+analisis, diantaranya adalah:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Secara umum, berapa skor TWK, TIU, TKP, dan total yang aman untuk
+  lolos ke tahap SKB?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan
+  latar pendidikan dari rumpun keguruan dan ilmu pendidikan untuk lolos
+  ke tahap SKB?
+\item
+  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan
+  latar pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk
+  lolos ke tahap SKB?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan
+  latar pendidikan dan tujuan jabatan formasi yang berkaitan dengan
+  ``Inggris'' untuk lolos ke tahap SKB?
+\item
+  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar Dosen
+  Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan dengan
+  ``Inggris'' untuk lolos ke tahap SKB?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan
+  latar pendidikan yang berkaitan dengan ``Fisika'' untuk lolos ke tahap
+  SKB?
+\item
+  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar
+  Widyaiswara untuk lolos ke tahap SKB?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Secara umum, berapa skor SKB yang aman untuk lolos tahap SKB?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan dari
+  rumpun keguruan dan ilmu pendidikan untuk lolos tahap SKB?
+\item
+  Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan dari
+  rumpun non keguruan dan ilmu pendidikan untuk lolos tahap SKB?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan yang
+  berkaitan dengan ``Inggris'' untuk lolos tahap SKB?
+\item
+  Berapa skor SKB yang aman bagi pelamar Dosen Asisten Ahli untuk
+  formasi yang berkaitan dengan ``Inggris'' untuk lolos tahap SKB?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+  Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan yang
+  berkaitan dengan ``Fisika'' untuk lolos tahap SKB?
+\item
+  Berapa skor SKB yang aman bagi pelamar WIdyaiswara untuk lolos tahap
+  SKB?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  Berapa probabilitas pelamar S-2 Pendidikan Bahasa Inggris untuk lolos
+  SKD di masing-masing formasi yang tersedia?
+\item
+  Berapa probabilitas pelamar S-2 Pendidikan Fisika untuk lolos SKD di
+  masing-masing formasi yang tersedia?
+\end{enumerate}
+
+\subsection{Tujuan Riset}\label{tujuan-riset}
+
+Secara umum, dilakukannya investigasi ini adalah untuk memberikan
+gambaran umum tentang kompetitor pada rekrutmen CPNS. Tujuan lebih
+spesifik tertera di bawah ini:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Untuk mengetahui \emph{passing grade} yang aman untuk lolos ke tahap
+  SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar dengan
+  latar belakang pendidikan dari rumpun keguruan dan ilmu pendidikan
+  untuk lolos ke tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar dengan
+  latar belakang pendidikan dari rumpun non keguruan dan ilmu pendidikan
+  untuk lolos ke tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar dengan
+  latar pendidikan dan jabatan formasi tujuan yang berkaitan dengan
+  ``Inggris'' untuk lolos ke tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar Dosen
+  Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan dengan
+  ``Inggris'' untuk lolos ke tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar dengan
+  latar pendidikan dan jabatan formasi tujuan yang berkaitan dengan
+  ``Fisika'' untuk lolos ke tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar
+  Widyaiswara untuk lolos ke tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman untuk lolos tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman untuk lolos tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar dengan
+  latar belakang pendidikan dari rumpun keguruan dan ilmu pendidikan
+  untuk lolos tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar dengan
+  latar belakang pendidikan dari rumpun non keguruan dan ilmu pendidikan
+  untuk lolos tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar dengan
+  latar pendidikan dan jabatan formasi tujuan yang berkaitan dengan
+  ``Inggris'' untuk lolos tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar Dosen
+  Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan dengan
+  ``Inggris'' untuk lolos tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar dengan
+  latar pendidikan dan jabatan formasi tujuan yang berkaitan dengan
+  ``Fisika'' untuk lolos tahap SKB.
+\item
+  Untuk mengetahui \emph{passing grade} yang aman bagi pelamar
+  Widyaiswara untuk lolos tahap SKB.
+\item
+  Untuk mengetahui \emph{probabilitas} pelamar S-2 Pendidikan Bahasa
+  Inggris untuk lolos SKD di masing-masing formasi yang tersedia.
+\item
+  Untuk mengetahui \emph{probabilitas} pelamar S-2 Pendidikan Fisika
+  untuk lolos SKD di masing-masing formasi yang tersedia
+\end{enumerate}
+
+\subsection{Kontribusi Riset}\label{kontribusi-riset}
+
+Investigasi ini menitikberatkan kontribusi praktikal yang bisa digunakan
+oleh seluruh warga Indonesia yang memiliki motivasi untuk mengikuti
+CPNS, terutama bagi mereka yang menargetkan Kementerian Pendidikan.
+Dengan wawasan yang didapat dari hasil investigasi ini, saya berharap
+calon PNS dapat membuat rencana belajar yang efektif dan efisien,
+analisa kompetitor, dan peluang keberhasilan lolos di masing-masing
+tahap tes CPNS.
+
+Di samping kontribusi praktikal, hasil analisis ini juga menawarkan
+wawasan yang bersifat teoretis-eksploratif tentang karakteristik dari
+demografi calon PNS berdasarkan sudut pandang retrospektif. Analisis
+prediktif yang disajikan dalam hasil investigasi ini juga dapat
+dijadikan sebagai bahan dasar dalam perencanaan peningkatan mutu SDM
+(Sumber Daya Alam) PNS generasi yang akan datang.
+
+Tidak terlewat juga kontribusi berupa data empiris yang ditawarkan dari
+hasil investigasi ini. Jumlah data yang masif ini memiliki nilai yang
+berharga untuk pengambilan keputusan baik di sektor formal atau
+informal, di level operasional maupun managerial, dan/atau di level
+eksekutif.
+
+\subsection{Sumber Data}\label{sumber-data}
+
+Data diambil dari pengumuman hasil SKD dan SKB (dua pengumuman berbeda)
+CPNS 2024 spesifik pada Kementerian Pendidikan, Kebudayaan, Riset, dan
+Teknologi (Kemendikbudristek).
+
+\section{Persiapan Data}\label{persiapan-data}
+
+\subsection{Perkakas (Library)}\label{perkakas-library}
+
+Kode di bawah ini akan mempersiapkan \emph{library} yang diperlukan
+untuk menunjang analisis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(ggthemes)}
+\FunctionTok{library}\NormalTok{(ggridges)}
+\FunctionTok{library}\NormalTok{(ggtext)}
+\FunctionTok{library}\NormalTok{(ggdist)}
+\FunctionTok{library}\NormalTok{(glue)}
+\FunctionTok{library}\NormalTok{(patchwork)}
+\FunctionTok{library}\NormalTok{(RColorBrewer)}
+\FunctionTok{library}\NormalTok{(viridis)}
+\FunctionTok{library}\NormalTok{(visdat)}
+\FunctionTok{library}\NormalTok{(psych)}
+\FunctionTok{library}\NormalTok{(MetBrewer)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Impor Data}\label{impor-data}
+
+Data sudah melalui tahap ekstraksi dari PDF ke CSV menggunakan Python.
+Setelah data diekstrak ke format CSV, data kemudian dibersihkan
+menggunakan PostgreSQL. Pada dokumen ini, impor data yang dimaksud
+adalah impor data dari CSV ke R. Kode di bawah ini akan mengimpor data
+dari CSV ke R.
+
+\subsubsection{Hasil SKD}\label{hasil-skd}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"2024/test1v3.csv"}\NormalTok{,}
+                      \AttributeTok{col\_types =} \FunctionTok{cols}\NormalTok{(}\AttributeTok{rank =} \FunctionTok{col\_number}\NormalTok{(),}
+                                       \AttributeTok{twk =} \FunctionTok{col\_integer}\NormalTok{(),}
+                                       \AttributeTok{tiu =} \FunctionTok{col\_integer}\NormalTok{(),}
+                                       \AttributeTok{tkp =} \FunctionTok{col\_integer}\NormalTok{(),}
+                                       \AttributeTok{skd =} \FunctionTok{col\_integer}\NormalTok{(),}
+                                       \AttributeTok{allotment =} \FunctionTok{col\_integer}\NormalTok{(),}
+                                       \AttributeTok{page\_num =} \FunctionTok{col\_integer}\NormalTok{()}
+\NormalTok{                      ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: One or more parsing issues, call `problems()` on your data frame for details,
+## e.g.:
+##   dat <- vroom(...)
+##   problems(dat)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 99,547 x 14
+##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+##  1     1 243010201~ ANITA VE~ S-1 HUK~   115   120   195   430 P/L       JF0000~
+##  2     2 243010201~ AISYAH S~ S-1 HUK~   100   120   196   416 P/L       JF0000~
+##  3     3 243010201~ DYAH AYU~ S-1 HUK~    85   135   191   411 P/L       JF0000~
+##  4     4 243010201~ MUHAMMAD~ S-1 HUK~    85   115   199   399 P/L       JF0000~
+##  5     5 243010201~ EDO DWI ~ S-1 HUK~    90   115   193   398 P/L       JF0000~
+##  6     6 243010201~ SILVIA M~ S-1 HUK~    90   105   201   396 P/L       JF0000~
+##  7     7 243010201~ WIDYA PU~ S-1 HUK~    90   105   196   391 P/L       JF0000~
+##  8     8 243010201~ RHEA ART~ S-1 HUK~    95   110   184   389 P/L       JF0000~
+##  9     9 243010201~ DICHO SI~ S-1 HUK~    90   100   192   382 P/L       JF0000~
+## 10    10 243010201~ FARADITA~ S-1 HUK~    85   110   180   375 P/L       JF0000~
+## # i 99,537 more rows
+## # i 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+## #   page_num <int>
+\end{verbatim}
+
+\subsubsection{Hasil SKB}\label{hasil-skb}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skb }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"2024/test2v1.csv"}\NormalTok{, }
+                      \AttributeTok{col\_types =} \FunctionTok{cols}\NormalTok{(}\AttributeTok{id =} \FunctionTok{col\_character}\NormalTok{())}
+\NormalTok{                      )}
+\NormalTok{hasil\_skb}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14,989 x 21
+##     rank id    birthdate  last_edu edu_group   gpa   twk   tiu   tkp   skd skd40
+##    <dbl> <chr> <date>     <chr>    <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+##  1     1 2430~ 1997-05-26 S-1 HUK~ Universi~  2.92    85   135   191   411  29.9
+##  2     2 2430~ 1997-03-17 S-1 HUK~ Universi~  3.87    95   110   184   389  28.3
+##  3     3 2430~ 2003-04-20 S-1 HUK~ Universi~  3.93   100   120   196   416  30.3
+##  4     4 2430~ 2001-10-12 S-1 HUK~ Universi~  3.78    90   105   201   396  28.8
+##  5     5 2430~ 2001-07-26 S-1 HUK~ Universi~  3.84    90   100   192   382  27.8
+##  6     6 2430~ 1996-05-03 S-1 HUK~ Universi~  3.26    70    90   178   338  24.6
+##  7     7 2430~ 2000-01-01 S-1 HUK~ Universi~  3.74    85   115   199   399  29.0
+##  8     8 2430~ 2001-11-23 S-1 HUK~ Universi~  3.84    80   100   182   362  26.3
+##  9     9 2430~ 1993-03-29 S-1 HUK~ Universi~  3.8     85   110   180   375  27.3
+## 10    10 2430~ 1994-09-19 S-1 HUK~ Universi~  3.66    80   100   177   357  26.0
+## # i 14,979 more rows
+## # i 10 more variables: skb <dbl>, skb60 <dbl>, final_score <dbl>,
+## #   decl_code <chr>, jp_code <chr>, loc_code <chr>, type_code <chr>,
+## #   edu_qual <chr>, num_edu_qual <chr>, page_num <dbl>
+\end{verbatim}
+
+\subsubsection{Jabatan Formasi}\label{jabatan-formasi}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{jabatan\_formasi }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"2024/jabatan\_formasi.csv"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{jp\_code =}\NormalTok{ parent)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 51 Columns: 2
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (2): parent, job_position
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{jabatan\_formasi}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51 x 2
+##    jp_code   job_position                                    
+##    <chr>     <chr>                                           
+##  1 JF0000334 ANALIS HUKUM AHLI PERTAMA                       
+##  2 JF0000905 DOSEN LEKTOR                                    
+##  3 JF0000908 DOSEN ASISTEN AHLI                              
+##  4 JF0001001 PENGEMBANG TEKNOLOGI PEMBELAJARAN AHLI PERTAMA  
+##  5 JF0008014 ANALIS SUMBER DAYA MANUSIA APARATUR AHLI PERTAMA
+##  6 JF0008017 PRANATA SUMBER DAYA MANUSIA APARATUR TERAMPIL   
+##  7 JF0008403 PAMONG BUDAYA AHLI PERTAMA                      
+##  8 JF0008406 PAMONG BUDAYA TERAMPIL                          
+##  9 JF0008904 PERENCANA AHLI PERTAMA                          
+## 10 JF0010504 PRANATA KOMPUTER AHLI PERTAMA                   
+## # i 41 more rows
+\end{verbatim}
+
+\subsubsection{Lokasi Formasi}\label{lokasi-formasi}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lokasi\_formasi }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"2024/lokasi\_formasi.csv"}\NormalTok{,}
+                           \AttributeTok{col\_types =} \FunctionTok{cols}\NormalTok{(}\AttributeTok{lc\_code =} \FunctionTok{col\_character}\NormalTok{())) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{loc\_code =}\NormalTok{ lc\_code)}
+
+\NormalTok{lokasi\_formasi}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,549 x 4
+##    loc_code inst                             faculty                       dept 
+##    <chr>    <chr>                            <chr>                         <chr>
+##  1 30100004 Politeknik Perikanan Negeri Tual Jurusan Teknologi Sumberdaya~ NULL 
+##  2 30100007 Politeknik Negeri Banyuwangi     Jurusan Teknik Mesin          D4 T~
+##  3 30100015 Politeknik Negeri Ujung Pandang  Jurusan Teknik Elektro        D3 T~
+##  4 30100016 Politeknik Negeri Ujung Pandang  Jurusan Administrasi Niaga    D3 A~
+##  5 30100017 Politeknik Negeri Bandung        Jurusan Teknik Konversi Ener~ NULL 
+##  6 30100018 Universitas Jambi                Fakultas dan Teknologi        Prod~
+##  7 30100025 Universitas Riau                 Fakultas Fisika               Prod~
+##  8 30100030 Politeknik Negeri Indramayu      Bagian Akademik dan Kemahasi~ Subb~
+##  9 30100033 Politeknik Negeri Banyuwangi     Jurusan Pertanian             D4 T~
+## 10 30100035 Universitas Jember               Fakultas Keguruan dan Ilmu P~ Juru~
+## # i 1,539 more rows
+\end{verbatim}
+
+\subsection{Pembersihan Data}\label{pembersihan-data}
+
+\subsubsection{Dataset SKD}\label{dataset-skd}
+
+Tahap ini akan memberikan ringkasan jumlah data duplikat. Di sini saya
+mengecek secara (1) keseluruhan, (2) variabel id, dan (3) variabel
+full\_name.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chk\_dupl\_skd\_all }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(hasil\_skd))}
+\NormalTok{chk\_dupl\_skd\_id }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(hasil\_skd}\SpecialCharTok{$}\NormalTok{id))}
+\NormalTok{chk\_dupl\_skd\_full\_name }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(hasil\_skd}\SpecialCharTok{$}\NormalTok{full\_name))}
+
+\NormalTok{chk\_dupl\_skd\_all}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chk\_dupl\_skd\_id}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30885
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chk\_dupl\_skd\_full\_name}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32934
+\end{verbatim}
+
+Ketika dicek berdasarkan variabel \emph{id} dan \emph{full\_name}, ada
+30885 dan 32934 data duplikat pada masing-masing variabel \emph{id} dan
+\emph{full\_name}. Inkonsistensi data ini akan menyebabkan menurunnya
+keakuratan hasil analisis di tahap yang akan datang sehingga perlu
+didalami lebih lanjut.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(id, full\_name, twk) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# tambah variabel full\_name dan twk untuk V\&V (verifikasi dan validasi)}
+  \FunctionTok{group\_by}\NormalTok{(id) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{n}\NormalTok{() }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 61,770 x 3
+##    id                full_name                                     twk
+##    <chr>             <chr>                                       <int>
+##  1 24301020120017621 "LINGGOMI ADINDA TAMARADHINA\nNAPITUPULU"      80
+##  2 24301020120017621 "LINGGOMI ADINDA TAMARADHINA\r\nNAPITUPULU"    80
+##  3 24301020110021143 "MUH ANDRI ALVIAN RAMADHAN\r\nALPHAROEDI"      NA
+##  4 24301020110021143 "MUH ANDRI ALVIAN RAMADHAN\nALPHAROEDI"        NA
+##  5 24301020120001553 "DIAN ASWITA"                                  75
+##  6 24301020120001553 "DIAN ASWITA"                                  75
+##  7 24301020110008472 "RAHMAT SALEH"                                105
+##  8 24301020110008472 "RAHMAT SALEH"                                105
+##  9 24301020120023931 "ANDI ANDARIANA"                              100
+## 10 24301020120023931 "ANDI ANDARIANA"                              100
+## # i 61,760 more rows
+\end{verbatim}
+
+Variabel \texttt{full\_name} tampak memiliki duplikat untuk nama yang
+memiliki sedikit perbedaan. Dalam hal ini, data yang mengandung
+\texttt{\textbackslash{}r}, \texttt{\textbackslash{}n} atau
+\texttt{\textbackslash{}r\textbackslash{}n}akan dianggap data yang
+berbeda walaupun secara holistik tidak ada perbedaan. Untuk memperbaiki
+hal ini, menghapus lalu menyisakan satu data unik dari variabel
+\texttt{id} akan lebih tepat.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd\_no\_dupl }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{distinct}\NormalTok{(id, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{hasil\_skd\_no\_dupl}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 68,662 x 14
+##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+##  1     1 243010201~ ANITA VE~ S-1 HUK~   115   120   195   430 P/L       JF0000~
+##  2     2 243010201~ AISYAH S~ S-1 HUK~   100   120   196   416 P/L       JF0000~
+##  3     3 243010201~ DYAH AYU~ S-1 HUK~    85   135   191   411 P/L       JF0000~
+##  4     4 243010201~ MUHAMMAD~ S-1 HUK~    85   115   199   399 P/L       JF0000~
+##  5     5 243010201~ EDO DWI ~ S-1 HUK~    90   115   193   398 P/L       JF0000~
+##  6     6 243010201~ SILVIA M~ S-1 HUK~    90   105   201   396 P/L       JF0000~
+##  7     7 243010201~ WIDYA PU~ S-1 HUK~    90   105   196   391 P/L       JF0000~
+##  8     8 243010201~ RHEA ART~ S-1 HUK~    95   110   184   389 P/L       JF0000~
+##  9     9 243010201~ DICHO SI~ S-1 HUK~    90   100   192   382 P/L       JF0000~
+## 10    10 243010201~ FARADITA~ S-1 HUK~    85   110   180   375 P/L       JF0000~
+## # i 68,652 more rows
+## # i 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+## #   page_num <int>
+\end{verbatim}
+
+Perlu dicatat bahwa kolom/variabel \texttt{full\_name} tidak perlu
+dibersihkan lebih lanjut (terutama untuk menghapus
+\texttt{\textbackslash{}r}, \texttt{\textbackslash{}n}, atau
+\texttt{\textbackslash{}r\textbackslash{}n}) karena tidak ada sama
+sekali urgensi untuk menginvestigasi satu atau sekian nama secara
+spesifik. Walau begitu, kolom \texttt{last\_edu} memiliki kendala
+\emph{new rows} dan/atau \emph{new lines} yang terpatri dalam datanya
+sehingga pembersihan lanjutan sangat diperlukan untuk tahap analisis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd\_no\_dupl}\SpecialCharTok{$}\NormalTok{last\_edu }\OtherTok{\textless{}{-}} 
+  \FunctionTok{str\_replace\_all}\NormalTok{(hasil\_skd\_no\_dupl}\SpecialCharTok{$}\NormalTok{last\_edu, }\StringTok{"[}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{r}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{n]"}\NormalTok{, }\StringTok{" "}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_squish}\NormalTok{()}
+
+\NormalTok{hasil\_skd\_no\_dupl}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 68,662 x 14
+##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+##  1     1 243010201~ ANITA VE~ S-1 HUK~   115   120   195   430 P/L       JF0000~
+##  2     2 243010201~ AISYAH S~ S-1 HUK~   100   120   196   416 P/L       JF0000~
+##  3     3 243010201~ DYAH AYU~ S-1 HUK~    85   135   191   411 P/L       JF0000~
+##  4     4 243010201~ MUHAMMAD~ S-1 HUK~    85   115   199   399 P/L       JF0000~
+##  5     5 243010201~ EDO DWI ~ S-1 HUK~    90   115   193   398 P/L       JF0000~
+##  6     6 243010201~ SILVIA M~ S-1 HUK~    90   105   201   396 P/L       JF0000~
+##  7     7 243010201~ WIDYA PU~ S-1 HUK~    90   105   196   391 P/L       JF0000~
+##  8     8 243010201~ RHEA ART~ S-1 HUK~    95   110   184   389 P/L       JF0000~
+##  9     9 243010201~ DICHO SI~ S-1 HUK~    90   100   192   382 P/L       JF0000~
+## 10    10 243010201~ FARADITA~ S-1 HUK~    85   110   180   375 P/L       JF0000~
+## # i 68,652 more rows
+## # i 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+## #   page_num <int>
+\end{verbatim}
+
+Tahap pembersihan data selanjutnya adalah menyeregamkan data
+\texttt{NULL}. Di dataset ini, data kosong diisi dengan \texttt{NULL}
+atau \texttt{NA} (system default R). Data poin \texttt{NULL} harus
+diganti menjadi \texttt{NA} (system default R) sehingga menjadi seragam.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd\_standardized\_null }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd\_no\_dupl }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.character), }\SpecialCharTok{\textasciitilde{}} \FunctionTok{str\_replace\_all}\NormalTok{(.x, }\StringTok{"\^{}NULL$"}\NormalTok{, }\ConstantTok{NA\_character\_}\NormalTok{)))}
+
+\NormalTok{hasil\_skd\_standardized\_null}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 68,662 x 14
+##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+##  1     1 243010201~ ANITA VE~ S-1 HUK~   115   120   195   430 P/L       JF0000~
+##  2     2 243010201~ AISYAH S~ S-1 HUK~   100   120   196   416 P/L       JF0000~
+##  3     3 243010201~ DYAH AYU~ S-1 HUK~    85   135   191   411 P/L       JF0000~
+##  4     4 243010201~ MUHAMMAD~ S-1 HUK~    85   115   199   399 P/L       JF0000~
+##  5     5 243010201~ EDO DWI ~ S-1 HUK~    90   115   193   398 P/L       JF0000~
+##  6     6 243010201~ SILVIA M~ S-1 HUK~    90   105   201   396 P/L       JF0000~
+##  7     7 243010201~ WIDYA PU~ S-1 HUK~    90   105   196   391 P/L       JF0000~
+##  8     8 243010201~ RHEA ART~ S-1 HUK~    95   110   184   389 P/L       JF0000~
+##  9     9 243010201~ DICHO SI~ S-1 HUK~    90   100   192   382 P/L       JF0000~
+## 10    10 243010201~ FARADITA~ S-1 HUK~    85   110   180   375 P/L       JF0000~
+## # i 68,652 more rows
+## # i 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+## #   page_num <int>
+\end{verbatim}
+
+Setelah standarisasi data kosong (NULL/NA), langkah selanjutnya adalah
+melakukan pengisian data kosong. Pada baris data ke 19 sampai 75, banyak
+data (\texttt{jp\_code}, \texttt{loc\_code}, \texttt{type\_code},
+\texttt{allotment}) yang kosong karena proses impor data yang kurang
+akurat dan presisi. Untuk mengisi kekosongan data ini, saya menggunakan
+\emph{forward filling} dengan kondisi sebagai berikut:
+
+\begin{quote}
+\emph{IF \texttt{page\_num} == \texttt{page\_num} \textbar{}
+\texttt{page\_num} == \texttt{page\_num} + 1 THEN forward fill ELSE do
+nothing}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd\_forward\_fill }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd\_standardized\_null }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{breakk =} \SpecialCharTok{!}\NormalTok{(page\_num }\SpecialCharTok{==} \FunctionTok{lag}\NormalTok{(page\_num) }\SpecialCharTok{|}\NormalTok{ page\_num }\SpecialCharTok{==} \FunctionTok{lag}\NormalTok{(page\_num) }\SpecialCharTok{+} \DecValTok{1}\NormalTok{),}
+         \AttributeTok{group\_id =} \FunctionTok{cumsum}\NormalTok{(}\FunctionTok{replace\_na}\NormalTok{(breakk, }\ConstantTok{TRUE}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(group\_id) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{fill}\NormalTok{(}\FunctionTok{c}\NormalTok{(jp\_code, loc\_code, type\_code, allotment), }\AttributeTok{.direction =} \StringTok{"down"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{breakk, }\SpecialCharTok{{-}}\NormalTok{group\_id)}
+
+\NormalTok{hasil\_skd\_forward\_fill}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 68,662 x 14
+##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+##  1     1 243010201~ ANITA VE~ S-1 HUK~   115   120   195   430 P/L       JF0000~
+##  2     2 243010201~ AISYAH S~ S-1 HUK~   100   120   196   416 P/L       JF0000~
+##  3     3 243010201~ DYAH AYU~ S-1 HUK~    85   135   191   411 P/L       JF0000~
+##  4     4 243010201~ MUHAMMAD~ S-1 HUK~    85   115   199   399 P/L       JF0000~
+##  5     5 243010201~ EDO DWI ~ S-1 HUK~    90   115   193   398 P/L       JF0000~
+##  6     6 243010201~ SILVIA M~ S-1 HUK~    90   105   201   396 P/L       JF0000~
+##  7     7 243010201~ WIDYA PU~ S-1 HUK~    90   105   196   391 P/L       JF0000~
+##  8     8 243010201~ RHEA ART~ S-1 HUK~    95   110   184   389 P/L       JF0000~
+##  9     9 243010201~ DICHO SI~ S-1 HUK~    90   100   192   382 P/L       JF0000~
+## 10    10 243010201~ FARADITA~ S-1 HUK~    85   110   180   375 P/L       JF0000~
+## # i 68,652 more rows
+## # i 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+## #   page_num <int>
+\end{verbatim}
+
+Kolom \texttt{twk}, \texttt{tiu}, \texttt{tkp}, dan \texttt{skd} tidak
+diterapkan \emph{forward filling} ini karena data kosong di kolom
+tersebut menandakan peserta yang tidak hadir dalam tes CPNS sehingga
+tidak ada nilai yang terekam. WAlau begitu, nilai \texttt{NA} pada 4
+kolom tersebut akan digantikan dengan dengan nilai 0 alih-alih
+\texttt{NA}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd\_na2zero }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd\_forward\_fill }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{replace\_na}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{twk =} \DecValTok{0}\DataTypeTok{L}\NormalTok{,}
+                  \AttributeTok{tiu =} \DecValTok{0}\DataTypeTok{L}\NormalTok{,}
+                  \AttributeTok{tkp =} \DecValTok{0}\DataTypeTok{L}\NormalTok{,}
+                  \AttributeTok{skd =} \DecValTok{0}\DataTypeTok{L}\NormalTok{))}
+
+\NormalTok{hasil\_skd\_na2zero}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 68,662 x 14
+##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+##  1     1 243010201~ ANITA VE~ S-1 HUK~   115   120   195   430 P/L       JF0000~
+##  2     2 243010201~ AISYAH S~ S-1 HUK~   100   120   196   416 P/L       JF0000~
+##  3     3 243010201~ DYAH AYU~ S-1 HUK~    85   135   191   411 P/L       JF0000~
+##  4     4 243010201~ MUHAMMAD~ S-1 HUK~    85   115   199   399 P/L       JF0000~
+##  5     5 243010201~ EDO DWI ~ S-1 HUK~    90   115   193   398 P/L       JF0000~
+##  6     6 243010201~ SILVIA M~ S-1 HUK~    90   105   201   396 P/L       JF0000~
+##  7     7 243010201~ WIDYA PU~ S-1 HUK~    90   105   196   391 P/L       JF0000~
+##  8     8 243010201~ RHEA ART~ S-1 HUK~    95   110   184   389 P/L       JF0000~
+##  9     9 243010201~ DICHO SI~ S-1 HUK~    90   100   192   382 P/L       JF0000~
+## 10    10 243010201~ FARADITA~ S-1 HUK~    85   110   180   375 P/L       JF0000~
+## # i 68,652 more rows
+## # i 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+## #   page_num <int>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(hasil\_skd\_na2zero)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       rank           id             full_name           last_edu        
+##  Min.   :   1   Length:68662       Length:68662       Length:68662      
+##  1st Qu.:   5   Class :character   Class :character   Class :character  
+##  Median :  18   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   : 123                                                           
+##  3rd Qu.:  98                                                           
+##  Max.   :1879                                                           
+##  NA's   :1                                                              
+##       twk              tiu              tkp             skd       
+##  Min.   :  0.00   Min.   :  0.00   Min.   :  0.0   Min.   :  0.0  
+##  1st Qu.: 55.00   1st Qu.: 60.00   1st Qu.:172.0   1st Qu.:299.0  
+##  Median : 70.00   Median : 85.00   Median :183.0   Median :338.0  
+##  Mean   : 66.93   Mean   : 80.78   Mean   :167.6   Mean   :315.3  
+##  3rd Qu.: 85.00   3rd Qu.:105.00   3rd Qu.:190.0   3rd Qu.:372.0  
+##  Max.   :140.00   Max.   :175.00   Max.   :218.0   Max.   :499.0  
+##                                                                   
+##   decl_code           jp_code            loc_code          type_code        
+##  Length:68662       Length:68662       Length:68662       Length:68662      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##                                                                             
+##    allotment         page_num    
+##  Min.   : 1.000   Min.   :    4  
+##  1st Qu.: 2.000   1st Qu.: 8246  
+##  Median : 3.000   Median :13977  
+##  Mean   : 5.462   Mean   :12104  
+##  3rd Qu.: 5.000   3rd Qu.:16360  
+##  Max.   :91.000   Max.   :17798  
+##  NA's   :1        NA's   :1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(hasil\_skd\_na2zero}\SpecialCharTok{$}\NormalTok{rank))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 68662
+\end{verbatim}
+
+\subsubsection{Dataset SKB}\label{dataset-skb}
+
+Setelah membersihkan dataset SKD, selanjutnya adalah pembersihan dataset
+SKB. Prosedur pembersihan ini mirip dengan prosedur pembersihan data SKD
+pada bagian sebelumnya. Diawali dengan pengecekan secara umum tentang
+dataset SKB.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skb}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14,989 x 21
+##     rank id    birthdate  last_edu edu_group   gpa   twk   tiu   tkp   skd skd40
+##    <dbl> <chr> <date>     <chr>    <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+##  1     1 2430~ 1997-05-26 S-1 HUK~ Universi~  2.92    85   135   191   411  29.9
+##  2     2 2430~ 1997-03-17 S-1 HUK~ Universi~  3.87    95   110   184   389  28.3
+##  3     3 2430~ 2003-04-20 S-1 HUK~ Universi~  3.93   100   120   196   416  30.3
+##  4     4 2430~ 2001-10-12 S-1 HUK~ Universi~  3.78    90   105   201   396  28.8
+##  5     5 2430~ 2001-07-26 S-1 HUK~ Universi~  3.84    90   100   192   382  27.8
+##  6     6 2430~ 1996-05-03 S-1 HUK~ Universi~  3.26    70    90   178   338  24.6
+##  7     7 2430~ 2000-01-01 S-1 HUK~ Universi~  3.74    85   115   199   399  29.0
+##  8     8 2430~ 2001-11-23 S-1 HUK~ Universi~  3.84    80   100   182   362  26.3
+##  9     9 2430~ 1993-03-29 S-1 HUK~ Universi~  3.8     85   110   180   375  27.3
+## 10    10 2430~ 1994-09-19 S-1 HUK~ Universi~  3.66    80   100   177   357  26.0
+## # i 14,979 more rows
+## # i 10 more variables: skb <dbl>, skb60 <dbl>, final_score <dbl>,
+## #   decl_code <chr>, jp_code <chr>, loc_code <chr>, type_code <chr>,
+## #   edu_qual <chr>, num_edu_qual <chr>, page_num <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(hasil\_skb}\SpecialCharTok{$}\NormalTok{id))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+Tidak tampak data duplikat pada dataset SKB. Namun begitu, kolom
+\texttt{jp\_code}, \texttt{loc\_code}, \texttt{type\_code},
+\texttt{edu\_qual}, dan \texttt{num\_edu\_qual} memiliki data
+\emph{NULL} yang tidak konsisten dengan nilai kosong system default R.
+Maka dari itu, penyeragaman perlu dilakukan untuk standarisasi nilai
+kosong.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skb\_standardized\_nulls }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skb }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.character), }\SpecialCharTok{\textasciitilde{}} \FunctionTok{str\_replace\_all}\NormalTok{(.x, }\StringTok{"\^{}NULL$"}\NormalTok{, }\ConstantTok{NA\_character\_}\NormalTok{)))}
+
+\NormalTok{hasil\_skb\_standardized\_nulls}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14,989 x 21
+##     rank id    birthdate  last_edu edu_group   gpa   twk   tiu   tkp   skd skd40
+##    <dbl> <chr> <date>     <chr>    <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+##  1     1 2430~ 1997-05-26 S-1 HUK~ Universi~  2.92    85   135   191   411  29.9
+##  2     2 2430~ 1997-03-17 S-1 HUK~ Universi~  3.87    95   110   184   389  28.3
+##  3     3 2430~ 2003-04-20 S-1 HUK~ Universi~  3.93   100   120   196   416  30.3
+##  4     4 2430~ 2001-10-12 S-1 HUK~ Universi~  3.78    90   105   201   396  28.8
+##  5     5 2430~ 2001-07-26 S-1 HUK~ Universi~  3.84    90   100   192   382  27.8
+##  6     6 2430~ 1996-05-03 S-1 HUK~ Universi~  3.26    70    90   178   338  24.6
+##  7     7 2430~ 2000-01-01 S-1 HUK~ Universi~  3.74    85   115   199   399  29.0
+##  8     8 2430~ 2001-11-23 S-1 HUK~ Universi~  3.84    80   100   182   362  26.3
+##  9     9 2430~ 1993-03-29 S-1 HUK~ Universi~  3.8     85   110   180   375  27.3
+## 10    10 2430~ 1994-09-19 S-1 HUK~ Universi~  3.66    80   100   177   357  26.0
+## # i 14,979 more rows
+## # i 10 more variables: skb <dbl>, skb60 <dbl>, final_score <dbl>,
+## #   decl_code <chr>, jp_code <chr>, loc_code <chr>, type_code <chr>,
+## #   edu_qual <chr>, num_edu_qual <chr>, page_num <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skb\_forward\_fill }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skb\_standardized\_nulls }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{breakk =} \SpecialCharTok{!}\NormalTok{(page\_num }\SpecialCharTok{==} \FunctionTok{lag}\NormalTok{(page\_num) }\SpecialCharTok{|}\NormalTok{ page\_num }\SpecialCharTok{==} \FunctionTok{lag}\NormalTok{(page\_num) }\SpecialCharTok{+} \DecValTok{1}\NormalTok{),}
+         \AttributeTok{group\_id =} \FunctionTok{cumsum}\NormalTok{(}\FunctionTok{replace\_na}\NormalTok{(breakk, }\ConstantTok{TRUE}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(group\_id) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{fill}\NormalTok{(}\FunctionTok{c}\NormalTok{(jp\_code, loc\_code, type\_code, edu\_qual, num\_edu\_qual), }\AttributeTok{.direction =} \StringTok{"down"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{breakk, }\SpecialCharTok{{-}}\NormalTok{group\_id)}
+
+\NormalTok{hasil\_skb\_forward\_fill}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14,989 x 21
+##     rank id    birthdate  last_edu edu_group   gpa   twk   tiu   tkp   skd skd40
+##    <dbl> <chr> <date>     <chr>    <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+##  1     1 2430~ 1997-05-26 S-1 HUK~ Universi~  2.92    85   135   191   411  29.9
+##  2     2 2430~ 1997-03-17 S-1 HUK~ Universi~  3.87    95   110   184   389  28.3
+##  3     3 2430~ 2003-04-20 S-1 HUK~ Universi~  3.93   100   120   196   416  30.3
+##  4     4 2430~ 2001-10-12 S-1 HUK~ Universi~  3.78    90   105   201   396  28.8
+##  5     5 2430~ 2001-07-26 S-1 HUK~ Universi~  3.84    90   100   192   382  27.8
+##  6     6 2430~ 1996-05-03 S-1 HUK~ Universi~  3.26    70    90   178   338  24.6
+##  7     7 2430~ 2000-01-01 S-1 HUK~ Universi~  3.74    85   115   199   399  29.0
+##  8     8 2430~ 2001-11-23 S-1 HUK~ Universi~  3.84    80   100   182   362  26.3
+##  9     9 2430~ 1993-03-29 S-1 HUK~ Universi~  3.8     85   110   180   375  27.3
+## 10    10 2430~ 1994-09-19 S-1 HUK~ Universi~  3.66    80   100   177   357  26.0
+## # i 14,979 more rows
+## # i 10 more variables: skb <dbl>, skb60 <dbl>, final_score <dbl>,
+## #   decl_code <chr>, jp_code <chr>, loc_code <chr>, type_code <chr>,
+## #   edu_qual <chr>, num_edu_qual <chr>, page_num <dbl>
+\end{verbatim}
+
+\subsection{Hasil Pembersihan Data}\label{hasil-pembersihan-data}
+
+Data SKD dan SKB yang sudah bersih dan siap untuk dianalisa sudah
+direkam dan bisa dipanggil menggunakan variabel berikut:
+
+\texttt{hasil\_skd\_na2zero} \emph{untuk data SKD}
+
+\texttt{hasil\_skb\_forward\_fill} \emph{untuk data SKB}
+
+\section{Analisis Data}\label{analisis-data}
+
+Pada bagian ini, saya menjawab pertanyaan riset tidak secara berurutan
+seperti pada \hyperref[tujuan-riset]{Tujuan Riset} namun
+mengelompokkannya menjadi SKD dan SKB secara terpisah. Hal ini bertujuan
+untuk meningkatkan fokus bahasan dan diskusi data dan menghindari
+distraksi yang mungkin akan timbul apabila hasil analisis
+berpindah-pindah dari SKD ke SKB lalu kembali ke SKD dan diulangi terus
+menerus. Walau bahasan hasil tes CPNS ini tidak mengikuti kronologi di
+Tujuan Riset, alur analisis tetap sama dengan yang apa yang tertera.
+
+\subsection{Hasil Analisis SKB}\label{hasil-analisis-skb}
+
+Hasil analisis akan dirunutkan berdasarkan pertanyaan riset yang tertera
+pada \hyperref[pertanyaan-riset]{Pertanyaan Riset}.
+
+\subsubsection{1. Skor TWK, TIU, TKP, dan Total yang aman untuk lolos ke
+tahap
+SKB}\label{skor-twk-tiu-tkp-dan-total-yang-aman-untuk-lolos-ke-tahap-skb}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd\_na2zero }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(twk, tiu, tkp, skd) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ twk}\SpecialCharTok{:}\NormalTok{skd,}
+               \AttributeTok{values\_to =} \StringTok{"skor"}\NormalTok{,}
+               \AttributeTok{names\_to =} \StringTok{"tipe\_tes"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{tipe\_tes =} \FunctionTok{factor}\NormalTok{(tipe\_tes, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"skd"}\NormalTok{, }\StringTok{"tkp"}\NormalTok{, }\StringTok{"tiu"}\NormalTok{, }\StringTok{"twk"}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skor, }\AttributeTok{y =}\NormalTok{ tipe\_tes, }\AttributeTok{fill =}\NormalTok{ tipe\_tes)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{outliers =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{shape =} \DecValTok{1}\NormalTok{,}
+              \AttributeTok{size =}\NormalTok{ .}\DecValTok{02}\NormalTok{,}
+              \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{05}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Sebaran Nilai Masing{-}Masing Subtes SKD (Umum)"}\NormalTok{,}
+       \AttributeTok{subtitle =} 
+         \FunctionTok{paste0}\NormalTok{(}\StringTok{"Rekomendasi capaian nilai (Q3):}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
+           \StringTok{"TWK \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(hasil\_skd\_na2zero}\SpecialCharTok{$}\NormalTok{twk, .}\DecValTok{75}\NormalTok{)), }\StringTok{"; "}\NormalTok{,}
+           \StringTok{"TIU \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(hasil\_skd\_na2zero}\SpecialCharTok{$}\NormalTok{tiu, .}\DecValTok{75}\NormalTok{)), }\StringTok{"; "}\NormalTok{,}
+           \StringTok{"TKP \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(hasil\_skd\_na2zero}\SpecialCharTok{$}\NormalTok{tkp, .}\DecValTok{75}\NormalTok{)), }\StringTok{"; "}\NormalTok{,}
+           \StringTok{"SKD \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(hasil\_skd\_na2zero}\SpecialCharTok{$}\NormalTok{skd, .}\DecValTok{75}\NormalTok{))}
+\NormalTok{           ),}
+       \AttributeTok{x =} \StringTok{"skor"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"subtes"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/first-rq-1.pdf}}
+
+\subsubsection{2. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan
+FKIP untuk lolos ke tahap
+SKB}\label{skor-twk-tiu-tkp-dan-total-yang-aman-bagi-lulusan-fkip-untuk-lolos-ke-tahap-skb}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skd\_rumpun\_fkip }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd\_na2zero }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(last\_edu}\SpecialCharTok{:}\NormalTok{skd) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(last\_edu, }\StringTok{"PENDIDIKAN"}\NormalTok{))}
+
+\NormalTok{skd\_rumpun\_fkip }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{last\_edu) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ twk}\SpecialCharTok{:}\NormalTok{skd,}
+               \AttributeTok{names\_to =} \StringTok{"subtes"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"skor"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{subtes =} \FunctionTok{factor}\NormalTok{(subtes, }
+                         \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"skd"}\NormalTok{, }\StringTok{"tkp"}\NormalTok{, }\StringTok{"tiu"}\NormalTok{, }\StringTok{"twk"}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skor, }\AttributeTok{y =}\NormalTok{ subtes, }\AttributeTok{fill =}\NormalTok{ subtes)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{outliers =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{size =}\NormalTok{ .}\DecValTok{02}\NormalTok{,}
+              \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{05}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Sebaran Nilai SKD rumpun FKIP"}\NormalTok{,}
+       \AttributeTok{subtitle =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Rekomendasi capaian nilai (Q3):}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
+           \StringTok{"TWK \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(skd\_rumpun\_fkip}\SpecialCharTok{$}\NormalTok{twk, .}\DecValTok{75}\NormalTok{)), }\StringTok{"; "}\NormalTok{,}
+           \StringTok{"TIU \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(skd\_rumpun\_fkip}\SpecialCharTok{$}\NormalTok{tiu, .}\DecValTok{75}\NormalTok{)), }\StringTok{"; "}\NormalTok{,}
+           \StringTok{"TKP \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(skd\_rumpun\_fkip}\SpecialCharTok{$}\NormalTok{tkp, .}\DecValTok{75}\NormalTok{)), }\StringTok{"; "}\NormalTok{,}
+           \StringTok{"SKD \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(skd\_rumpun\_fkip}\SpecialCharTok{$}\NormalTok{skd, .}\DecValTok{75}\NormalTok{))}
+\NormalTok{           ),}
+       \AttributeTok{x =} \StringTok{"skor"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"subtes"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/second-rq-1.pdf}}
+
+\subsubsection{3. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan
+non-FKIP untuk lolos ke tahap
+SKB}\label{skor-twk-tiu-tkp-dan-total-yang-aman-bagi-lulusan-non-fkip-untuk-lolos-ke-tahap-skb}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skd\_rumpun\_non\_fkip }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd\_na2zero }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(last\_edu}\SpecialCharTok{:}\NormalTok{skd)}
+
+\NormalTok{skd\_rumpun\_non\_fkip }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{last\_edu) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ twk}\SpecialCharTok{:}\NormalTok{skd,}
+               \AttributeTok{names\_to =} \StringTok{"subtes"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"skor"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{subtes =} \FunctionTok{factor}\NormalTok{(subtes, }
+                         \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"skd"}\NormalTok{, }\StringTok{"tkp"}\NormalTok{, }\StringTok{"tiu"}\NormalTok{, }\StringTok{"twk"}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skor, }\AttributeTok{y =}\NormalTok{ subtes, }\AttributeTok{fill =}\NormalTok{ subtes)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{outliers =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{size =}\NormalTok{ .}\DecValTok{02}\NormalTok{,}
+              \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{03}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Sebaran Nilai SKD rumpun non{-}FKIP"}\NormalTok{,}
+       \AttributeTok{subtitle =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Rekomendasi capaian nilai (Q3):}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
+           \StringTok{"TWK \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(skd\_rumpun\_non\_fkip}\SpecialCharTok{$}\NormalTok{twk, .}\DecValTok{75}\NormalTok{)), }\StringTok{"; "}\NormalTok{,}
+           \StringTok{"TIU \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(skd\_rumpun\_non\_fkip}\SpecialCharTok{$}\NormalTok{tiu, .}\DecValTok{75}\NormalTok{)), }\StringTok{"; "}\NormalTok{,}
+           \StringTok{"TKP \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(skd\_rumpun\_non\_fkip}\SpecialCharTok{$}\NormalTok{tkp, .}\DecValTok{75}\NormalTok{)), }\StringTok{"; "}\NormalTok{,}
+           \StringTok{"SKD \textgreater{}= "}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(skd\_rumpun\_non\_fkip}\SpecialCharTok{$}\NormalTok{skd, .}\DecValTok{75}\NormalTok{))}
+\NormalTok{           ),}
+       \AttributeTok{x =} \StringTok{"skor"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"subtes"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/third-question-1.pdf}}
+
+\subsubsection{4. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan
+jurusan ``Inggris'' untuk lolos ke tahap SKB di jabatan formasi yang
+tersedia}\label{skor-twk-tiu-tkp-dan-total-yang-aman-bagi-lulusan-jurusan-inggris-untuk-lolos-ke-tahap-skb-di-jabatan-formasi-yang-tersedia}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skd\_jf\_ing }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd\_na2zero }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(last\_edu, }\StringTok{"INGGRIS"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(jp\_code, twk}\SpecialCharTok{:}\NormalTok{skd) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(jabatan\_formasi, }\AttributeTok{by =} \StringTok{"jp\_code"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{replace\_na}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{job\_position =} \StringTok{"PENERJEMAH BAHASA INGGRIS"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{jp\_code)}
+
+\NormalTok{median\_twk\_ing }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(skd\_jf\_ing}\SpecialCharTok{$}\NormalTok{twk, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{median\_tiu\_ing }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(skd\_jf\_ing}\SpecialCharTok{$}\NormalTok{tiu, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{median\_tkp\_ing }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(skd\_jf\_ing}\SpecialCharTok{$}\NormalTok{tkp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{median\_skd\_ing }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(skd\_jf\_ing}\SpecialCharTok{$}\NormalTok{skd, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{n\_skd\_ing }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(skd\_jf\_ing)}
+
+\NormalTok{font\_family }\OtherTok{\textless{}{-}} \StringTok{"Fira Sans"}
+
+\NormalTok{plot\_subtitle\_skd\_ing }\OtherTok{\textless{}{-}} \FunctionTok{glue}\NormalTok{(}\StringTok{"Komparasi dari berbagai Jabatan Formasi yang}
+\StringTok{                      tersedia untuk kualifikasi pendidikan yang berkaitan}
+\StringTok{                      dengan \textquotesingle{}Inggris\textquotesingle{}. (n = \{scales::number(n\_skd\_ing, big.mark = \textquotesingle{},\textquotesingle{})\})"}\NormalTok{)}
+
+\CommentTok{\# TWK}
+\NormalTok{skd\_jf\_ing }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ twk, }\AttributeTok{y =}\NormalTok{ job\_position, }\AttributeTok{fill =}\NormalTok{ ..x..)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{option =} \StringTok{"E"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ median\_twk\_ing,}
+             \AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{,}
+             \AttributeTok{col =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }
+           \AttributeTok{x =}\NormalTok{ median\_twk\_ing }\SpecialCharTok{+} \DecValTok{16}\NormalTok{,}
+           \AttributeTok{y =} \FloatTok{10.2}\NormalTok{,}
+           \AttributeTok{label =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Median TWK}
+\StringTok{                        \{scales::number(median\_twk\_ing)\}"}\NormalTok{),}
+           \CommentTok{\#family = font\_family,}
+           \AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Sebaran Nilai TWK"}\NormalTok{),}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_ing,}
+    \AttributeTok{x =} \StringTok{"Skor TWK"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Jabatan Formasi"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: The dot-dot notation (`..x..`) was deprecated in ggplot2 3.4.0.
+## i Please use `after_stat(x)` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{verbatim}
+## Picking joint bandwidth of 7.24
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/fourth-question-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# TIU}
+\NormalTok{skd\_jf\_ing }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tiu, }\AttributeTok{y =}\NormalTok{ job\_position, }\AttributeTok{fill =}\NormalTok{ ..x..)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{option =} \StringTok{"E"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ median\_tiu\_ing,}
+             \AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{,}
+             \AttributeTok{col =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }
+           \AttributeTok{x =}\NormalTok{ median\_tiu\_ing }\SpecialCharTok{+} \DecValTok{20}\NormalTok{,}
+           \AttributeTok{y =} \FloatTok{10.2}\NormalTok{,}
+           \AttributeTok{label =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Median TIU}
+\StringTok{                        \{scales::number(median\_tiu\_ing)\}"}\NormalTok{),}
+           \CommentTok{\#family = font\_family,}
+           \AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Sebaran Nilai TIU"}\NormalTok{),}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_ing,}
+    \AttributeTok{x =} \StringTok{"Skor TIU"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Jabatan Formasi"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Picking joint bandwidth of 10.7
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/fourth-question-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# TKP}
+\NormalTok{skd\_jf\_ing }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tkp, }\AttributeTok{y =}\NormalTok{ job\_position, }\AttributeTok{fill =}\NormalTok{ ..x..)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{option =} \StringTok{"E"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ median\_tkp\_ing,}
+             \AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{,}
+             \AttributeTok{col =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }
+           \AttributeTok{x =}\NormalTok{ median\_tkp\_ing }\SpecialCharTok{+} \DecValTok{20}\NormalTok{,}
+           \AttributeTok{y =} \FloatTok{10.2}\NormalTok{,}
+           \AttributeTok{label =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Median TKP}
+\StringTok{                        \{scales::number(median\_tkp\_ing)\}"}\NormalTok{),}
+           \CommentTok{\#family = font\_family,}
+           \AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Sebaran Nilai TKP"}\NormalTok{),}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_ing,}
+    \AttributeTok{x =} \StringTok{"Skor TKP"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Jabatan Formasi"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Picking joint bandwidth of 4.5
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/fourth-question-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Skor Total SKD}
+\NormalTok{skd\_jf\_ing }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skd, }\AttributeTok{y =}\NormalTok{ job\_position, }\AttributeTok{fill =}\NormalTok{ ..x..)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{option =} \StringTok{"E"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ median\_skd\_ing,}
+             \AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{,}
+             \AttributeTok{col =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }
+           \AttributeTok{x =}\NormalTok{ median\_skd\_ing }\SpecialCharTok{+} \DecValTok{80}\NormalTok{,}
+           \AttributeTok{y =} \FloatTok{10.2}\NormalTok{,}
+           \AttributeTok{label =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Median Skor Total }
+\StringTok{                        \{scales::number(median\_skd\_ing)\}"}\NormalTok{),}
+           \CommentTok{\#family = font\_family,}
+           \AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Sebaran Nilai Skor Total"}\NormalTok{),}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_ing,}
+    \AttributeTok{x =} \StringTok{"Skor Total"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Jabatan Formasi"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Picking joint bandwidth of 16.9
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/fourth-question-4.pdf}}
+
+\subsubsection{5. Skor TWK, TIU, TKP, dan Total yang aman bagi pelamar
+Dosen jurusan ``Pendidikan Bahasa Inggris'' untuk lolos ke tahap
+SKB}\label{skor-twk-tiu-tkp-dan-total-yang-aman-bagi-pelamar-dosen-jurusan-pendidikan-bahasa-inggris-untuk-lolos-ke-tahap-skb}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skd\_dosen\_ing }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd\_na2zero }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(last\_edu}\SpecialCharTok{:}\NormalTok{skd, jp\_code) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(jabatan\_formasi, }\AttributeTok{by =} \StringTok{"jp\_code"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(job\_position, }\StringTok{"DOSEN"}\NormalTok{),}
+         \FunctionTok{str\_detect}\NormalTok{(last\_edu, }\StringTok{"PENDIDIKAN BAHASA INGGRIS"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{last\_edu, }\SpecialCharTok{{-}}\NormalTok{jp\_code)}
+
+
+\NormalTok{n\_skd\_dosen\_ing }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(skd\_dosen\_ing)}
+
+\NormalTok{skd\_dosen\_ing\_long }\OtherTok{\textless{}{-}}\NormalTok{ skd\_dosen\_ing }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ twk}\SpecialCharTok{:}\NormalTok{skd,}
+               \AttributeTok{values\_to =} \StringTok{"skor"}\NormalTok{,}
+               \AttributeTok{names\_to =} \StringTok{"subtes"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{subtes =} \FunctionTok{factor}\NormalTok{(subtes, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"twk"}\NormalTok{, }\StringTok{"tiu"}\NormalTok{, }\StringTok{"tkp"}\NormalTok{, }\StringTok{"skd"}\NormalTok{)))}
+
+\NormalTok{plot\_subtitle\_skd\_ing }\OtherTok{\textless{}{-}} \FunctionTok{glue}\NormalTok{(}\StringTok{"Komparasi nilai untuk Jabatan Formasi Dosen (Asisten Ahli, Lektor) bagi pelamar }
+\StringTok{                              dengan latar belakang Pendidikan Bahasa Inggris. (n = \{scales::number(n\_skd\_dosen\_ing, big.mark = \textquotesingle{},\textquotesingle{})\})}
+\StringTok{                              Rekomendasi Analis (Q3):}
+\StringTok{                              TWK \textgreater{}= \{round(quantile(skd\_dosen\_ing$twk, 0.75))\}; TIU \textgreater{}= \{round(quantile(skd\_dosen\_ing$tiu, 0.75))\}; TKP \textgreater{}= \{round(quantile(skd\_dosen\_ing$tkp, 0.75))\}; SKD \textgreater{}= \{round(quantile(skd\_dosen\_ing$skd, 0.75))\}"}\NormalTok{)}
+
+\CommentTok{\# Histogram faceted}
+\NormalTok{skd\_dosen\_ing\_long }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skor, }\AttributeTok{fill =}\NormalTok{ job\_position)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{10}\NormalTok{, }\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{50}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(job\_position }\SpecialCharTok{\textasciitilde{}}\NormalTok{ subtes, }\AttributeTok{scale =} \StringTok{"free\_y"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Sebaran nilai TWK, TIU, TKP"}\NormalTok{,}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_ing,}
+    \AttributeTok{fill =} \StringTok{"Jabatan Formasi"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/fifth-question-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Density overlap}
+\NormalTok{skd\_dosen\_ing\_long }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skor, }\AttributeTok{fill =}\NormalTok{ job\_position)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{50}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{subtes) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Sebaran nilai TWK, TIU, TKP"}\NormalTok{,}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_ing,}
+    \AttributeTok{fill =} \StringTok{"Jabatan Formasi"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/fifth-question-2.pdf}}
+
+\subsubsection{6. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan
+jurusan ``Fisika'' untuk lolos ke tahap SKB di jabatan formasi yang
+tersedia}\label{skor-twk-tiu-tkp-dan-total-yang-aman-bagi-lulusan-jurusan-fisika-untuk-lolos-ke-tahap-skb-di-jabatan-formasi-yang-tersedia}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skd\_jf\_fis }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd\_na2zero }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(last\_edu, }\StringTok{"FISIKA"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(jp\_code, twk}\SpecialCharTok{:}\NormalTok{skd) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(jabatan\_formasi, }\AttributeTok{by =} \StringTok{"jp\_code"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \CommentTok{\#replace\_na(list(job\_position = "PENERJEMAH BAHASA INGGRIS")) \%\textgreater{}\% }
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{jp\_code)}
+
+\NormalTok{median\_twk\_fis }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(skd\_jf\_fis}\SpecialCharTok{$}\NormalTok{twk, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{median\_tiu\_fis }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(skd\_jf\_fis}\SpecialCharTok{$}\NormalTok{tiu, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{median\_tkp\_fis }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(skd\_jf\_fis}\SpecialCharTok{$}\NormalTok{tkp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{median\_skd\_fis }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(skd\_jf\_fis}\SpecialCharTok{$}\NormalTok{skd, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{n\_skd\_fis }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(skd\_jf\_fis)}
+
+\NormalTok{font\_family }\OtherTok{\textless{}{-}} \StringTok{"Fira Sans"}
+
+\NormalTok{plot\_subtitle\_skd\_fis }\OtherTok{\textless{}{-}} \FunctionTok{glue}\NormalTok{(}\StringTok{"Komparasi dari berbagai Jabatan Formasi yang}
+\StringTok{                      tersedia untuk kualifikasi pendidikan yang berkaitan}
+\StringTok{                      dengan \textquotesingle{}Fisika\textquotesingle{}. (n = \{scales::number(n\_skd\_fis, big.mark = \textquotesingle{},\textquotesingle{})\})"}\NormalTok{)}
+
+\CommentTok{\# TWK}
+\NormalTok{skd\_jf\_fis }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ twk, }\AttributeTok{y =}\NormalTok{ job\_position, }\AttributeTok{fill =}\NormalTok{ ..x..)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{option =} \StringTok{"E"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ median\_twk\_fis,}
+             \AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{,}
+             \AttributeTok{col =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }
+           \AttributeTok{x =}\NormalTok{ median\_twk\_fis }\SpecialCharTok{+} \DecValTok{16}\NormalTok{,}
+           \AttributeTok{y =} \DecValTok{8}\NormalTok{,}
+           \AttributeTok{label =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Median TWK}
+\StringTok{                        \{scales::number(median\_twk\_fis)\}"}\NormalTok{),}
+           \CommentTok{\#family = font\_family,}
+           \AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Sebaran Nilai TWK"}\NormalTok{),}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_fis,}
+    \AttributeTok{x =} \StringTok{"Skor TWK"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Jabatan Formasi"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Picking joint bandwidth of 6.02
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/sixth-question-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# TIU}
+\NormalTok{skd\_jf\_fis }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tiu, }\AttributeTok{y =}\NormalTok{ job\_position, }\AttributeTok{fill =}\NormalTok{ ..x..)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{option =} \StringTok{"E"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ median\_tiu\_fis,}
+             \AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{,}
+             \AttributeTok{col =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }
+           \AttributeTok{x =}\NormalTok{ median\_tiu\_fis }\SpecialCharTok{+} \DecValTok{20}\NormalTok{,}
+           \AttributeTok{y =} \DecValTok{8}\NormalTok{,}
+           \AttributeTok{label =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Median TIU}
+\StringTok{                        \{scales::number(median\_tiu\_fis)\}"}\NormalTok{),}
+           \CommentTok{\#family = font\_family,}
+           \AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Sebaran Nilai TIU"}\NormalTok{),}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_fis,}
+    \AttributeTok{x =} \StringTok{"Skor TIU"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Jabatan Formasi"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Picking joint bandwidth of 10.4
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/sixth-question-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# TKP}
+\NormalTok{skd\_jf\_fis }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tkp, }\AttributeTok{y =}\NormalTok{ job\_position, }\AttributeTok{fill =}\NormalTok{ ..x..)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{option =} \StringTok{"E"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ median\_tkp\_fis,}
+             \AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{,}
+             \AttributeTok{col =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }
+           \AttributeTok{x =}\NormalTok{ median\_tkp\_fis }\SpecialCharTok{+} \DecValTok{20}\NormalTok{,}
+           \AttributeTok{y =} \DecValTok{8}\NormalTok{,}
+           \AttributeTok{label =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Median TKP}
+\StringTok{                        \{scales::number(median\_tkp\_fis)\}"}\NormalTok{),}
+           \CommentTok{\#family = font\_family,}
+           \AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Sebaran Nilai TKP"}\NormalTok{),}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_fis,}
+    \AttributeTok{x =} \StringTok{"Skor TKP"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Jabatan Formasi"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Picking joint bandwidth of 4.14
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/sixth-question-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Skor Total SKD}
+\NormalTok{skd\_jf\_fis }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skd, }\AttributeTok{y =}\NormalTok{ job\_position, }\AttributeTok{fill =}\NormalTok{ ..x..)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{option =} \StringTok{"E"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ median\_skd\_fis,}
+             \AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{,}
+             \AttributeTok{col =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }
+           \AttributeTok{x =}\NormalTok{ median\_skd\_fis }\SpecialCharTok{+} \DecValTok{80}\NormalTok{,}
+           \AttributeTok{y =} \DecValTok{8}\NormalTok{,}
+           \AttributeTok{label =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Median Skor Total }
+\StringTok{                        \{scales::number(median\_skd\_fis)\}"}\NormalTok{),}
+           \CommentTok{\#family = font\_family,}
+           \AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Sebaran Nilai Skor Total"}\NormalTok{),}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_skd\_fis,}
+    \AttributeTok{x =} \StringTok{"Skor Total SKD"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Jabatan Formasi"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Picking joint bandwidth of 13.8
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/sixth-question-4.pdf}}
+
+\subsubsection{7. Skor TWK, TIU, TKP, dan Total yang aman bagi pelamar
+Widyaiswara untuk lolos ke tahap
+SKB}\label{skor-twk-tiu-tkp-dan-total-yang-aman-bagi-pelamar-widyaiswara-untuk-lolos-ke-tahap-skb}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skd\_wi }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skd\_na2zero }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(last\_edu}\SpecialCharTok{:}\NormalTok{skd, jp\_code) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(jabatan\_formasi, }\AttributeTok{by =} \StringTok{"jp\_code"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(job\_position, }\StringTok{"WIDYAISWARA"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{last\_edu, }\SpecialCharTok{{-}}\NormalTok{jp\_code)}
+
+
+\NormalTok{n\_skd\_wi }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(skd\_wi)}
+
+\NormalTok{skd\_wi\_long }\OtherTok{\textless{}{-}}\NormalTok{ skd\_wi }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ twk}\SpecialCharTok{:}\NormalTok{skd,}
+               \AttributeTok{values\_to =} \StringTok{"skor"}\NormalTok{,}
+               \AttributeTok{names\_to =} \StringTok{"subtes"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{subtes =} \FunctionTok{factor}\NormalTok{(subtes, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"twk"}\NormalTok{, }\StringTok{"tiu"}\NormalTok{, }\StringTok{"tkp"}\NormalTok{, }\StringTok{"skd"}\NormalTok{)))}
+
+\NormalTok{plot\_subtitle\_wi }\OtherTok{\textless{}{-}} \FunctionTok{glue}\NormalTok{(}\StringTok{"Komparasi nilai untuk Jabatan Formasi Widyaiswara (n = \{scales::number(n\_skd\_dosen\_ing, big.mark = \textquotesingle{},\textquotesingle{})\})}
+\StringTok{                              Rekomendasi Analis (Q3):}
+\StringTok{                              TWK \textgreater{}= \{round(quantile(skd\_wi$twk, 0.75))\}; TIU \textgreater{}= \{round(quantile(skd\_wi$tiu, 0.75))\}; TKP \textgreater{}= \{round(quantile(skd\_wi$tkp, 0.75))\}; SKD \textgreater{}= \{round(quantile(skd\_wi$skd, 0.75))\}"}\NormalTok{)}
+
+\NormalTok{skd\_wi\_long }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skor, }\AttributeTok{fill =}\NormalTok{ job\_position)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{50}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ subtes) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Sebaran nilai TWK, TIU, TKP"}\NormalTok{,}
+    \AttributeTok{subtitle =}\NormalTok{ plot\_subtitle\_wi}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/seventh-question-1.pdf}}
+
+\subsubsection{8. Skor SKB yang aman untuk lolos
+SKB}\label{skor-skb-yang-aman-untuk-lolos-skb}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skb\_forward\_fill }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{str\_detect}\NormalTok{(decl\_code, }\StringTok{"T"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skb, }\AttributeTok{y =}\NormalTok{ decl\_code, }\AttributeTok{fill =}\NormalTok{ ..x..)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{option =} \StringTok{"G"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribusi Nilai SKB Umum"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"SKB"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Status Kelulusan"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"n"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Picking joint bandwidth of 1.74
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/eighth-question-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skb\_forward\_fill }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(skb, decl\_code) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{status =} \FunctionTok{case\_when}\NormalTok{(decl\_code }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"TMS{-}1"}\NormalTok{, }\StringTok{"TMS"}\NormalTok{, }\StringTok{"TL"}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Gugur"}\NormalTok{,}
+\NormalTok{                            decl\_code }\SpecialCharTok{==} \StringTok{"TH"} \SpecialCharTok{\textasciitilde{}} \StringTok{"Absen"}\NormalTok{,}
+                            \CommentTok{\#decl\_code == "APS" \textasciitilde{} "Undur Diri",}
+                            \AttributeTok{.default =} \StringTok{"Lulus"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ skb, }\AttributeTok{y =}\NormalTok{ status, }\AttributeTok{fill =}\NormalTok{ status)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{outliers =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{shape =} \DecValTok{1}\NormalTok{,}
+              \AttributeTok{size =}\NormalTok{ .}\DecValTok{1}\NormalTok{,}
+              \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Sebaran Nilai SKB Umum"}\NormalTok{,}
+       \AttributeTok{subtitle =} \FunctionTok{glue}\NormalTok{(}\StringTok{"Gugur = Tidak memenuhi syarat/nilai tidak mencapai KKM}
+\StringTok{                       Absen = Tidak hadir}
+\StringTok{                       Lulus = Lulus (termasuk peserta lulus tapi undur diri)"}\NormalTok{),}
+       \AttributeTok{x =} \StringTok{"SKB"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Status Kelulusan"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/eighth-question-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <theme> List of 144
+##  $ line                            : <ggplot2::element_line>
+##   ..@ colour       : chr "black"
+##   ..@ linewidth    : num 0.5
+##   ..@ linetype     : num 1
+##   ..@ lineend      : chr "butt"
+##   ..@ linejoin     : chr "round"
+##   ..@ arrow        : logi FALSE
+##   ..@ arrow.fill   : chr "black"
+##   ..@ inherit.blank: logi TRUE
+##  $ rect                            : <ggplot2::element_rect>
+##   ..@ fill         : chr "white"
+##   ..@ colour       : chr "black"
+##   ..@ linewidth    : num 0.5
+##   ..@ linetype     : num 1
+##   ..@ linejoin     : chr "round"
+##   ..@ inherit.blank: logi TRUE
+##  $ text                            : <ggplot2::element_text>
+##   ..@ family       : chr ""
+##   ..@ face         : chr "plain"
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : chr "black"
+##   ..@ size         : num 11
+##   ..@ hjust        : num 0.5
+##   ..@ vjust        : num 0.5
+##   ..@ angle        : num 0
+##   ..@ lineheight   : num 0.9
+##   ..@ margin       : <ggplot2::margin> num [1:4] 0 0 0 0
+##   ..@ debug        : logi FALSE
+##   ..@ inherit.blank: logi TRUE
+##  $ title                           : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : NULL
+##   ..@ vjust        : NULL
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : NULL
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ point                           : <ggplot2::element_point>
+##   ..@ colour       : chr "black"
+##   ..@ shape        : num 19
+##   ..@ size         : num 1.5
+##   ..@ fill         : chr "white"
+##   ..@ stroke       : num 0.5
+##   ..@ inherit.blank: logi TRUE
+##  $ polygon                         : <ggplot2::element_polygon>
+##   ..@ fill         : chr "white"
+##   ..@ colour       : chr "black"
+##   ..@ linewidth    : num 0.5
+##   ..@ linetype     : num 1
+##   ..@ linejoin     : chr "round"
+##   ..@ inherit.blank: logi TRUE
+##  $ geom                            : <ggplot2::element_geom>
+##   ..@ ink        : chr "black"
+##   ..@ paper      : chr "white"
+##   ..@ accent     : chr "#3366FF"
+##   ..@ linewidth  : num 0.5
+##   ..@ borderwidth: num 0.5
+##   ..@ linetype   : int 1
+##   ..@ bordertype : int 1
+##   ..@ family     : chr ""
+##   ..@ fontsize   : num 3.87
+##   ..@ pointsize  : num 1.5
+##   ..@ pointshape : num 19
+##   ..@ colour     : NULL
+##   ..@ fill       : NULL
+##  $ spacing                         : 'simpleUnit' num 5.5points
+##   ..- attr(*, "unit")= int 8
+##  $ margins                         : <ggplot2::margin> num [1:4] 5.5 5.5 5.5 5.5
+##  $ aspect.ratio                    : NULL
+##  $ axis.title                      : NULL
+##  $ axis.title.x                    : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : NULL
+##   ..@ vjust        : num 1
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : <ggplot2::margin> num [1:4] 2.75 0 0 0
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.title.x.top                : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : NULL
+##   ..@ vjust        : num 0
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : <ggplot2::margin> num [1:4] 0 0 2.75 0
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.title.x.bottom             : NULL
+##  $ axis.title.y                    : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : NULL
+##   ..@ vjust        : num 1
+##   ..@ angle        : num 90
+##   ..@ lineheight   : NULL
+##   ..@ margin       : <ggplot2::margin> num [1:4] 0 2.75 0 0
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.title.y.left               : NULL
+##  $ axis.title.y.right              : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : NULL
+##   ..@ vjust        : num 1
+##   ..@ angle        : num -90
+##   ..@ lineheight   : NULL
+##   ..@ margin       : <ggplot2::margin> num [1:4] 0 0 0 2.75
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.text                       : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : chr "#4D4D4DFF"
+##   ..@ size         : 'rel' num 0.8
+##   ..@ hjust        : NULL
+##   ..@ vjust        : NULL
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : NULL
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.text.x                     : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : NULL
+##   ..@ vjust        : num 1
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : <ggplot2::margin> num [1:4] 2.2 0 0 0
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.text.x.top                 : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : NULL
+##   ..@ vjust        : num 0
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : <ggplot2::margin> num [1:4] 0 0 2.2 0
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.text.x.bottom              : NULL
+##  $ axis.text.y                     : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : num 1
+##   ..@ vjust        : NULL
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : <ggplot2::margin> num [1:4] 0 2.2 0 0
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.text.y.left                : NULL
+##  $ axis.text.y.right               : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : num 0
+##   ..@ vjust        : NULL
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : <ggplot2::margin> num [1:4] 0 0 0 2.2
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.text.theta                 : NULL
+##  $ axis.text.r                     : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : num 0.5
+##   ..@ vjust        : NULL
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : <ggplot2::margin> num [1:4] 0 2.2 0 2.2
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.ticks                      : <ggplot2::element_line>
+##   ..@ colour       : chr "#333333FF"
+##   ..@ linewidth    : NULL
+##   ..@ linetype     : NULL
+##   ..@ lineend      : NULL
+##   ..@ linejoin     : NULL
+##   ..@ arrow        : logi FALSE
+##   ..@ arrow.fill   : chr "#333333FF"
+##   ..@ inherit.blank: logi TRUE
+##  $ axis.ticks.x                    : NULL
+##  $ axis.ticks.x.top                : NULL
+##  $ axis.ticks.x.bottom             : NULL
+##  $ axis.ticks.y                    : NULL
+##  $ axis.ticks.y.left               : NULL
+##  $ axis.ticks.y.right              : NULL
+##  $ axis.ticks.theta                : NULL
+##  $ axis.ticks.r                    : NULL
+##  $ axis.minor.ticks.x.top          : NULL
+##  $ axis.minor.ticks.x.bottom       : NULL
+##  $ axis.minor.ticks.y.left         : NULL
+##  $ axis.minor.ticks.y.right        : NULL
+##  $ axis.minor.ticks.theta          : NULL
+##  $ axis.minor.ticks.r              : NULL
+##  $ axis.ticks.length               : 'rel' num 0.5
+##  $ axis.ticks.length.x             : NULL
+##  $ axis.ticks.length.x.top         : NULL
+##  $ axis.ticks.length.x.bottom      : NULL
+##  $ axis.ticks.length.y             : NULL
+##  $ axis.ticks.length.y.left        : NULL
+##  $ axis.ticks.length.y.right       : NULL
+##  $ axis.ticks.length.theta         : NULL
+##  $ axis.ticks.length.r             : NULL
+##  $ axis.minor.ticks.length         : 'rel' num 0.75
+##  $ axis.minor.ticks.length.x       : NULL
+##  $ axis.minor.ticks.length.x.top   : NULL
+##  $ axis.minor.ticks.length.x.bottom: NULL
+##  $ axis.minor.ticks.length.y       : NULL
+##  $ axis.minor.ticks.length.y.left  : NULL
+##  $ axis.minor.ticks.length.y.right : NULL
+##  $ axis.minor.ticks.length.theta   : NULL
+##  $ axis.minor.ticks.length.r       : NULL
+##  $ axis.line                       : <ggplot2::element_blank>
+##  $ axis.line.x                     : NULL
+##  $ axis.line.x.top                 : NULL
+##  $ axis.line.x.bottom              : NULL
+##  $ axis.line.y                     : NULL
+##  $ axis.line.y.left                : NULL
+##  $ axis.line.y.right               : NULL
+##  $ axis.line.theta                 : NULL
+##  $ axis.line.r                     : NULL
+##  $ legend.background               : <ggplot2::element_rect>
+##   ..@ fill         : NULL
+##   ..@ colour       : logi NA
+##   ..@ linewidth    : NULL
+##   ..@ linetype     : NULL
+##   ..@ linejoin     : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ legend.margin                   : NULL
+##  $ legend.spacing                  : 'rel' num 2
+##  $ legend.spacing.x                : NULL
+##  $ legend.spacing.y                : NULL
+##  $ legend.key                      : NULL
+##  $ legend.key.size                 : 'simpleUnit' num 1.2lines
+##   ..- attr(*, "unit")= int 3
+##  $ legend.key.height               : NULL
+##  $ legend.key.width                : NULL
+##  $ legend.key.spacing              : NULL
+##  $ legend.key.spacing.x            : NULL
+##  $ legend.key.spacing.y            : NULL
+##  $ legend.key.justification        : NULL
+##  $ legend.frame                    : NULL
+##  $ legend.ticks                    : NULL
+##  $ legend.ticks.length             : 'rel' num 0.2
+##  $ legend.axis.line                : NULL
+##  $ legend.text                     : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : 'rel' num 0.8
+##   ..@ hjust        : NULL
+##   ..@ vjust        : NULL
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : NULL
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ legend.text.position            : NULL
+##  $ legend.title                    : <ggplot2::element_text>
+##   ..@ family       : NULL
+##   ..@ face         : NULL
+##   ..@ italic       : chr NA
+##   ..@ fontweight   : num NA
+##   ..@ fontwidth    : num NA
+##   ..@ colour       : NULL
+##   ..@ size         : NULL
+##   ..@ hjust        : num 0
+##   ..@ vjust        : NULL
+##   ..@ angle        : NULL
+##   ..@ lineheight   : NULL
+##   ..@ margin       : NULL
+##   ..@ debug        : NULL
+##   ..@ inherit.blank: logi TRUE
+##  $ legend.title.position           : NULL
+##  $ legend.position                 : chr "right"
+##  $ legend.position.inside          : NULL
+##  $ legend.direction                : NULL
+##  $ legend.byrow                    : NULL
+##  $ legend.justification            : chr "center"
+##  $ legend.justification.top        : NULL
+##  $ legend.justification.bottom     : NULL
+##  $ legend.justification.left       : NULL
+##  $ legend.justification.right      : NULL
+##  $ legend.justification.inside     : NULL
+##   [list output truncated]
+##  @ complete: logi TRUE
+##  @ validate: logi TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{target\_codes }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"TMS"}\NormalTok{, }\StringTok{"TMS{-}1"}\NormalTok{, }\StringTok{"TH"}\NormalTok{, }\StringTok{"TL"}\NormalTok{)}
+
+\FunctionTok{max}\NormalTok{(hasil\_skb\_forward\_fill}\SpecialCharTok{$}\NormalTok{skb[hasil\_skb\_forward\_fill}\SpecialCharTok{$}\NormalTok{decl\_code }\SpecialCharTok{\%in\%}\NormalTok{ target\_codes])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 83
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{min}\NormalTok{(hasil\_skb\_forward\_fill}\SpecialCharTok{$}\NormalTok{skb[}\SpecialCharTok{!}\NormalTok{hasil\_skb\_forward\_fill}\SpecialCharTok{$}\NormalTok{decl\_code }\SpecialCharTok{\%in\%}\NormalTok{ target\_codes])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 22
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(hasil\_skb\_forward\_fill}\SpecialCharTok{$}\NormalTok{final\_score[}\SpecialCharTok{!}\NormalTok{hasil\_skb\_forward\_fill}\SpecialCharTok{$}\NormalTok{decl\_code }\SpecialCharTok{\%in\%}\NormalTok{ target\_codes])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 66.49385
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(hasil\_skb\_forward\_fill}\SpecialCharTok{$}\NormalTok{final\_score[}\SpecialCharTok{!}\NormalTok{hasil\_skb\_forward\_fill}\SpecialCharTok{$}\NormalTok{decl\_code }\SpecialCharTok{\%in\%}\NormalTok{ target\_codes])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 66.589
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inspect\_lulus }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skb\_forward\_fill }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(skd }\SpecialCharTok{\textgreater{}=} \DecValTok{400}\NormalTok{,}
+         \SpecialCharTok{!}\FunctionTok{str\_detect}\NormalTok{(decl\_code, }\StringTok{"T"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(last\_edu, skd, skb, final\_score, decl\_code, jp\_code, loc\_code) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(jabatan\_formasi, }\AttributeTok{by =} \StringTok{"jp\_code"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(lokasi\_formasi, }\AttributeTok{by =} \StringTok{"loc\_code"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{jp\_code, }\SpecialCharTok{{-}}\NormalTok{loc\_code)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in left_join(., lokasi_formasi, by = "loc_code"): Detected an unexpected many-to-many relationship between `x` and `y`.
+## i Row 39 of `x` matches multiple rows in `y`.
+## i Row 7 of `y` matches multiple rows in `x`.
+## i If a many-to-many relationship is expected, set `relationship =
+##   "many-to-many"` to silence this warning.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inspect\_tidak\_lulus }\OtherTok{\textless{}{-}}\NormalTok{hasil\_skb\_forward\_fill }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(skd }\SpecialCharTok{\textgreater{}=} \DecValTok{400}\NormalTok{,}
+         \SpecialCharTok{!}\FunctionTok{str\_detect}\NormalTok{(decl\_code, }\StringTok{"P"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(id, last\_edu, skd, skb, final\_score, decl\_code, jp\_code, loc\_code) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(jabatan\_formasi, }\AttributeTok{by =} \StringTok{"jp\_code"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(lokasi\_formasi, }\AttributeTok{by =} \StringTok{"loc\_code"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{jp\_code, }\SpecialCharTok{{-}}\NormalTok{loc\_code) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in left_join(., lokasi_formasi, by = "loc_code"): Detected an unexpected many-to-many relationship between `x` and `y`.
+## i Row 88 of `x` matches multiple rows in `y`.
+## i Row 7 of `y` matches multiple rows in `x`.
+## i If a many-to-many relationship is expected, set `relationship =
+##   "many-to-many"` to silence this warning.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inspect\_tidak\_lulus }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(final\_score)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{id)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,870 x 9
+##    last_edu     skd   skb final_score decl_code job_position inst  faculty dept 
+##    <chr>      <dbl> <dbl>       <dbl> <chr>     <chr>        <chr> <chr>   <chr>
+##  1 S-2 PENDI~   439  76.4        77.8 TL        DOSEN ASIST~ <NA>  <NA>    <NA> 
+##  2 S-2 SISTE~   458  73.8        77.6 TMS-1     DOSEN ASIST~ <NA>  <NA>    <NA> 
+##  3 D-III TEK~   461  73          77.3 TL        PAMONG BUDA~ <NA>  <NA>    <NA> 
+##  4 S-2 PENDI~   427  76.2        76.8 TL        DOSEN ASIST~ Univ~ Fakult~ Faku~
+##  5 D-III TEK~   412  78          76.8 TL        PAMONG BUDA~ <NA>  <NA>    <NA> 
+##  6 S-2 FISIKA   439  74.6        76.7 TL        DOSEN ASIST~ Poli~ Jurusa~ D4 T~
+##  7 S-2 PENDI~   430  75.6        76.6 TL        DOSEN ASIST~ Univ~ Fakult~ Prod~
+##  8 S-2 PENDI~   454  72.4        76.5 TL        DOSEN ASIST~ <NA>  <NA>    <NA> 
+##  9 S-2 ARSIT~   460  71.4        76.3 TMS-1     DOSEN ASIST~ <NA>  <NA>    <NA> 
+## 10 S-2 AKUNT~   451  72.4        76.2 TMS-1     DOSEN ASIST~ <NA>  <NA>    <NA> 
+## # i 1,860 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inspect\_lulus }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(final\_score)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3,537 x 9
+##    last_edu     skd   skb final_score decl_code job_position inst  faculty dept 
+##    <chr>      <dbl> <dbl>       <dbl> <chr>     <chr>        <chr> <chr>   <chr>
+##  1 S-1 PERPU~   410  31          48.4 APS       PUSTAKAWAN ~ <NA>  <NA>    <NA> 
+##  2 S-1 ADMIN~   403  40          53.3 P/L       ANALIS ANGG~ <NA>  <NA>    <NA> 
+##  3 S-1 EKONO~   410  40          53.8 P/L-U3    ANALIS ANGG~ <NA>  <NA>    <NA> 
+##  4 S-1 KEHUT~   411  40          53.9 P/L       PRANATA LAB~ <NA>  <NA>    <NA> 
+##  5 D-III ADM~   403  41          53.9 P/L-U3    PENATA LAKS~ <NA>  <NA>    <NA> 
+##  6 S-1 ADMIN~   404  41          54.0 P/L       ARSIPARIS A~ <NA>  <NA>    <NA> 
+##  7 S-1 AKUNT~   401  43          55.0 P/L       ARSIPARIS A~ <NA>  <NA>    <NA> 
+##  8 S-1 HUKUM    412  42          55.2 P/L       ANALIS ANGG~ <NA>  <NA>    <NA> 
+##  9 S-2 TEKNI~   441  39          55.5 P/L       WIDYAISWARA~ <NA>  <NA>    <NA> 
+## 10 S-2 PERUM~   456  37.8        55.8 P/L-U3    DOSEN ASIST~ <NA>  <NA>    <NA> 
+## # i 3,527 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#select({-}id)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{jabatan\_terisi }\OtherTok{\textless{}{-}}\NormalTok{ hasil\_skb\_forward\_fill }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(jabatan\_formasi, }\AttributeTok{by =} \StringTok{"jp\_code"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{str\_detect}\NormalTok{(decl\_code, }\StringTok{"T"}\NormalTok{),}
+         \SpecialCharTok{!}\FunctionTok{str\_detect}\NormalTok{(decl\_code, }\StringTok{"APS"}\NormalTok{),}
+         \FunctionTok{str\_detect}\NormalTok{(job\_position, }\StringTok{"DOSEN"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{nrow}\NormalTok{() }\SpecialCharTok{/} \DecValTok{9333} \SpecialCharTok{*} \DecValTok{100}
+
+\FunctionTok{glue}\NormalTok{(}\StringTok{"\{round(jabatan\_terisi, 2)\}\% jabatan Dosen Asisten Ahli di CPNS 2024 Kemendik terisi}
+\StringTok{     Ada sekitar \{9333 * (100 {-} jabatan\_terisi)\} jabatan Dosen Asisten Ahli yang masih kosong"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 69% jabatan Dosen Asisten Ahli di CPNS 2024 Kemendik terisi
+## Ada sekitar 289300 jabatan Dosen Asisten Ahli yang masih kosong
+\end{verbatim}
+
+\subsubsection{9. Skor SKB yang aman bagi lulusan FKIP untuk lolos
+SKB}\label{skor-skb-yang-aman-bagi-lulusan-fkip-untuk-lolos-skb}
+
+\subsubsection{10. SKor SKB yang aman bagi lulusan non-FKIP untuk lolos
+SKB}\label{skor-skb-yang-aman-bagi-lulusan-non-fkip-untuk-lolos-skb}
+
+\subsubsection{11. Skor SKB yang aman yang aman bagi lulusan jurusan
+``Inggris'' untuk lolos tahap SKB di jabatan formasi yang
+tersedia}\label{skor-skb-yang-aman-yang-aman-bagi-lulusan-jurusan-inggris-untuk-lolos-tahap-skb-di-jabatan-formasi-yang-tersedia}
+
+\subsubsection{12. Skor SKB yang aman bagi pelamar Dosen AA jurusan
+``Inggris'' untuk lolos tahap
+SKB}\label{skor-skb-yang-aman-bagi-pelamar-dosen-aa-jurusan-inggris-untuk-lolos-tahap-skb}
+
+\subsubsection{13. Skor SKB yang aman yang aman bagi lulusan jurusan
+``Fisika'' untuk lolos tahap SKB di jabatan formasi yang
+tersedia}\label{skor-skb-yang-aman-yang-aman-bagi-lulusan-jurusan-fisika-untuk-lolos-tahap-skb-di-jabatan-formasi-yang-tersedia}
+
+\subsubsection{14. Skor SKB yang aman bagi pelamar Widyaiswara untuk
+lolos tahap
+SKB}\label{skor-skb-yang-aman-bagi-pelamar-widyaiswara-untuk-lolos-tahap-skb}
+
+\subsubsection{15. Probabilitas pelamar S-2 Pendidikan Bahasa Inggris
+untuk lolos SKD di masing-masing jabatan formasi yang
+tersesia}\label{probabilitas-pelamar-s-2-pendidikan-bahasa-inggris-untuk-lolos-skd-di-masing-masing-jabatan-formasi-yang-tersesia}
+
+Given the SKD score more than mean + 1 sd, how many passed to SKB? Given
+the skd score more than Q3, how many passed to SKB?
+
+\subsubsection{16. Probabilitas pelamar S-2 Pendidikan Fisika untuk
+lolos SKD di masing-masing jabatan formasi yang
+tersesia}\label{probabilitas-pelamar-s-2-pendidikan-fisika-untuk-lolos-skd-di-masing-masing-jabatan-formasi-yang-tersesia}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hasil\_skd\_na2zero }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(twk}\SpecialCharTok{:}\NormalTok{decl\_code) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ twk}\SpecialCharTok{:}\NormalTok{skd,}
+               \AttributeTok{values\_to =} \StringTok{"skor"}\NormalTok{,}
+               \AttributeTok{names\_to =} \StringTok{"subtes"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ skor, }\AttributeTok{color =}\NormalTok{ decl\_code)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_qq}\NormalTok{(}\AttributeTok{distribution =}\NormalTok{ stats}\SpecialCharTok{::}\NormalTok{qunif,}
+          \AttributeTok{size =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{subtes)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{laporan2024_files/figure-latex/unnamed-chunk-3-1.pdf}}
+
+\end{document}

@@ -1,9 +1,9 @@
 ---
-title: "Analisis Hasil CPNS 2024 Kemendikdasmen"
+title: "Analisis Hasil CPNS 2024 Kemendik"
 subtitle: "Spesifik Formasi Dosen Asisten Ahli Pendidikan Bahasa Inggris dan Pendidikan Fisika (atau yang serumpun/sejenis)"
 author: "Zelvy Fauzan"
-date: "TBA"
-output: html_document
+date: "Last Edited: 2026-27-03 (Ongoing)"
+output: pdf_document
 ---
 
 # Pendahuluan
@@ -60,8 +60,39 @@ Investigasi ini memiliki beberapa pertanyaan yang akan memandu proses analisis, 
 
 ---
 
-15. Berapa probabilitas pelamar S-2 Pendidikan Bahasa Inggris untuk lolos SKD di masing-masing formasi yang tersedia?
-16. Berapa probabilitas pelamar S-2 Pendidikan Fisika untuk lolos SKD di masing-masing formasi yang tersedia?
+> Last edit here
+> To do:
+> 1. Proportion
+> 2. EDA
+> 3. Import detail_lokasi.csv -> tidy
+> 4. Lookup institutional geospatial data for each loc in detail_lokasi.csv
+
+15. Di masing-masing formasi jabatan CPNS 2024 Kemendik, berapa proporsi kelulusan SKD-nya?
+16. Di masing-masing formasi jabatan CPNS 2024 Kemendik, berapa proporsi kelulusan SKB-nya?
+
+---
+
+17. Jabatan formasi di instansi mana yang paling banyak peminatnya?
+18. Jabatan formasi di instansi mana yang paling sedikit peminatnya?
+
+---
+
+19. Daerah mana yang paling banyak diminati oleh pelamar CPNS 2024 Kemendik?
+20. Daerah mana yang paling sedikit diminati oleh pelamar CPNS 2024 Kemendik?
+
+---
+
+21. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan posisi yang dilamar adalah Dosen Asisten Ahli?
+22. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-3 Pendidikan Bahasa Inggris dan posisi yang dilamar adalah Dosen Lektor?
+23. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan posisi yang dilamar adalah Widyaiswara?
+24. Berapa probabilitas lulus menjadi PNS di setiap formasi yang ada jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris?
+
+---
+
+25. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Fisika dan posisi yang dilamar adalah Dosen Asisten Ahli?
+26. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-3 Pendidikan Fisika dan posisi yang dilamar adalah Dosen Lektor?
+27. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Fisika dan posisi yang dilamar adalah Widyaiswara?
+28. Berapa probabilitas lulus menjadi PNS di setiap formasi yang ada jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Fisika?
 
 ## Tujuan Riset
 
@@ -149,11 +180,21 @@ hasil_skb
 
 ### Jabatan Formasi
 
-```{r import-data-job-position}
+```{r import-data-jabatan-formasi}
 jabatan_formasi <- read_csv("2024/jabatan_formasi.csv") %>% 
   rename(jp_code = parent)
 
 jabatan_formasi
+```
+
+### Lokasi Formasi
+
+```{r import-data-lokasi-formasi}
+lokasi_formasi <- read_csv("2024/lokasi_formasi.csv",
+                           col_types = cols(lc_code = col_character())) %>% 
+  rename(loc_code = lc_code)
+
+lokasi_formasi
 ```
 
 ## Pembersihan Data
@@ -422,7 +463,9 @@ skd_jf_ing %>%
            size = 3) +
   labs(
     title = glue("Sebaran Nilai TWK"),
-    subtitle = plot_subtitle_skd_ing) +
+    subtitle = plot_subtitle_skd_ing,
+    x = "Skor TWK",
+    y = "Jabatan Formasi") +
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
@@ -444,7 +487,9 @@ skd_jf_ing %>%
            size = 3) +
   labs(
     title = glue("Sebaran Nilai TIU"),
-    subtitle = plot_subtitle_skd_ing) +
+    subtitle = plot_subtitle_skd_ing,
+    x = "Skor TIU",
+    y = "Jabatan Formasi") +
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
@@ -466,7 +511,9 @@ skd_jf_ing %>%
            size = 3) +
   labs(
     title = glue("Sebaran Nilai TKP"),
-    subtitle = plot_subtitle_skd_ing) +
+    subtitle = plot_subtitle_skd_ing,
+    x = "Skor TKP",
+    y = "Jabatan Formasi") +
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
@@ -488,7 +535,9 @@ skd_jf_ing %>%
            size = 3) +
   labs(
     title = glue("Sebaran Nilai Skor Total"),
-    subtitle = plot_subtitle_skd_ing) +
+    subtitle = plot_subtitle_skd_ing,
+    x = "Skor Total",
+    y = "Jabatan Formasi") +
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
@@ -518,13 +567,28 @@ plot_subtitle_skd_ing <- glue("Komparasi nilai untuk Jabatan Formasi Dosen (Asis
                               Rekomendasi Analis (Q3):
                               TWK >= {round(quantile(skd_dosen_ing$twk, 0.75))}; TIU >= {round(quantile(skd_dosen_ing$tiu, 0.75))}; TKP >= {round(quantile(skd_dosen_ing$tkp, 0.75))}; SKD >= {round(quantile(skd_dosen_ing$skd, 0.75))}")
 
+# Histogram faceted
+skd_dosen_ing_long %>% 
+  ggplot(aes(x = skor, fill = job_position)) +
+  geom_histogram(binwidth = 10, alpha = .50) +
+  facet_grid(job_position ~ subtes, scale = "free_y") +
+  labs(
+    title = "Sebaran nilai TWK, TIU, TKP",
+    subtitle = plot_subtitle_skd_ing,
+    fill = "Jabatan Formasi"
+  ) +
+  theme_bw() +
+  theme(legend.position = "none")
+
+# Density overlap
 skd_dosen_ing_long %>% 
   ggplot(aes(x = skor, fill = job_position)) +
   geom_density(alpha = .50) +
-  facet_wrap(~ subtes) +
+  facet_wrap(~subtes) +
   labs(
     title = "Sebaran nilai TWK, TIU, TKP",
-    subtitle = plot_subtitle_skd_ing
+    subtitle = plot_subtitle_skd_ing,
+    fill = "Jabatan Formasi"
   ) +
   theme_bw()
 ```
@@ -532,7 +596,7 @@ skd_dosen_ing_long %>%
 
 ### 6. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan jurusan "Fisika" untuk lolos ke tahap SKB di jabatan formasi yang tersedia
 
-```{r sixth-question}
+```{r sixth-question-step1}
 skd_jf_fis <- hasil_skd_na2zero %>% 
   filter(str_detect(last_edu, "FISIKA")) %>% 
   select(jp_code, twk:skd) %>% 
@@ -544,32 +608,47 @@ median_twk_fis <- median(skd_jf_fis$twk, na.rm = TRUE)
 median_tiu_fis <- median(skd_jf_fis$tiu, na.rm = TRUE)
 median_tkp_fis <- median(skd_jf_fis$tkp, na.rm = TRUE)
 median_skd_fis <- median(skd_jf_fis$skd, na.rm = TRUE)
+q3_twk_fis <- quantile(skd_jf_fis$twk, 3/4)
+q3_tiu_fis <- quantile(skd_jf_fis$tiu, 3/4)
+q3_tkp_fis <- quantile(skd_jf_fis$tkp, 3/4)
+q3_skd_fis <- quantile(skd_jf_fis$skd, 3/4)
 n_skd_fis <- nrow(skd_jf_fis)
-
-font_family <- "Fira Sans"
-
 plot_subtitle_skd_fis <- glue("Komparasi dari berbagai Jabatan Formasi yang
                       tersedia untuk kualifikasi pendidikan yang berkaitan
                       dengan 'Fisika'. (n = {scales::number(n_skd_fis, big.mark = ',')})")
 
+```
+
+```{r sixth-question-step2}
 # TWK
 skd_jf_fis %>% 
   ggplot(aes(x = twk, y = job_position, fill = ..x..)) +
   geom_density_ridges_gradient() +
-  scale_fill_viridis(option = "E") +
+  scale_fill_viridis(option = "G") +
   geom_vline(xintercept = median_twk_fis,
              lty = "dashed",
              col = "black") +
   annotate("text", 
-           x = median_twk_fis + 16,
-           y = 10.2,
+           x = median_twk_fis - 2,
+           y = 5,
            label = glue("Median TWK
                         {scales::number(median_twk_fis)}"),
-           #family = font_family,
+           hjust = 1,
+           size = 3) +
+  geom_vline(xintercept = q3_twk_fis,
+             col = "red") +
+  annotate("text", 
+           x = q3_twk_fis + 2,
+           y = 6,
+           label = glue("Q3 TWK
+                        {scales::number(q3_twk_fis)}"),
+           hjust = 0,
            size = 3) +
   labs(
     title = glue("Sebaran Nilai TWK"),
-    subtitle = plot_subtitle_skd_fis) +
+    subtitle = plot_subtitle_skd_fis,
+    x = "Skor TWK",
+    y = "Jabatan Formasi") +
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
@@ -578,20 +657,31 @@ skd_jf_fis %>%
 skd_jf_fis %>% 
   ggplot(aes(x = tiu, y = job_position, fill = ..x..)) +
   geom_density_ridges_gradient() +
-  scale_fill_viridis(option = "E") +
+  scale_fill_viridis(option = "G") +
   geom_vline(xintercept = median_tiu_fis,
              lty = "dashed",
              col = "black") +
   annotate("text", 
-           x = median_tiu_fis + 20,
-           y = 10.2,
+           x = median_tiu_fis - 2,
+           y = 5,
            label = glue("Median TIU
                         {scales::number(median_tiu_fis)}"),
-           #family = font_family,
+           hjust = 1,
+           size = 3) +
+  geom_vline(xintercept = q3_tiu_fis,
+             col = "red") +
+  annotate("text", 
+           x = q3_tiu_fis + 2,
+           y = 6,
+           label = glue("Q3 TIU
+                        {scales::number(q3_tiu_fis)}"),
+           hjust = 0,
            size = 3) +
   labs(
     title = glue("Sebaran Nilai TIU"),
-    subtitle = plot_subtitle_skd_fis) +
+    subtitle = plot_subtitle_skd_fis,
+    x = "Skor TIU",
+    y = "Jabatan Formasi") +
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
@@ -605,15 +695,26 @@ skd_jf_fis %>%
              lty = "dashed",
              col = "black") +
   annotate("text", 
-           x = median_tkp_fis + 20,
-           y = 10.2,
+           x = median_tkp_fis - 5,
+           y = 5,
            label = glue("Median TKP
                         {scales::number(median_tkp_fis)}"),
-           #family = font_family,
+           hjust = 1,
+           size = 3) +
+  geom_vline(xintercept = q3_tkp_fis,
+             col = "red") +
+  annotate("text", 
+           x = q3_tkp_fis + 5,
+           y = 6,
+           label = glue("Q3 TKP
+                        {scales::number(q3_tkp_fis)}"),
+           hjust = 0,
            size = 3) +
   labs(
     title = glue("Sebaran Nilai TKP"),
-    subtitle = plot_subtitle_skd_fis) +
+    subtitle = plot_subtitle_skd_fis,
+    x = "Skor TKP",
+    y = "Jabatan Formasi") +
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
@@ -627,15 +728,26 @@ skd_jf_fis %>%
              lty = "dashed",
              col = "black") +
   annotate("text", 
-           x = median_skd_fis + 80,
-           y = 10.2,
+           x = median_skd_fis - 10,
+           y = 5,
            label = glue("Median Skor Total 
                         {scales::number(median_skd_fis)}"),
-           #family = font_family,
+           hjust = 1,
+           size = 3) +
+  geom_vline(xintercept = q3_skd_fis,
+             col = "red") +
+  annotate("text", 
+           x = q3_skd_fis + 10,
+           y = 6,
+           label = glue("Q3 Skor Total
+                        {scales::number(q3_skd_fis)}"),
+           hjust = 0,
            size = 3) +
   labs(
     title = glue("Sebaran Nilai Skor Total"),
-    subtitle = plot_subtitle_skd_fis) +
+    subtitle = plot_subtitle_skd_fis,
+    x = "Skor Total SKD",
+    y = "Jabatan Formasi") +
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
@@ -672,34 +784,638 @@ skd_wi_long %>%
     title = "Sebaran nilai TWK, TIU, TKP",
     subtitle = plot_subtitle_wi
   ) +
+  theme(legend.position = "none") +
+  guides(fill = "none") +
   theme_bw()
 ```
 
 ### 8. Skor SKB yang aman untuk lolos SKB
 
-```{r eighth-question}
+```{r eighth-question-step1}
+qs8_skb <- hasil_skb_forward_fill %>% 
+  select(skb, decl_code) %>% 
+  mutate(decl_code = factor(decl_code, levels = c("TH", "TMS-1", "TMS", "TL", "APS", "P/L-U3", "P/L-U1", "P/L-E3", "P/L-E2", "P/L-E1", "P/L")))
 
+qs8_filtered_data <- hasil_skb_forward_fill %>% 
+  filter(decl_code != "TH") %>% 
+  select(skb)
+
+median_skb <- median(qs8_filtered_data$skb)
+q3_skb <- quantile(qs8_filtered_data$skb, 3/4)
+
+n_skb_all <- qs8_skb %>% 
+  nrow()
+
+qs8_subtitile_plot <- glue("Komparasi skor SKB Umum (n = {scales::number(n_skb_all, big.mark = ',')})")
+```
+
+```{r eighth-question-step2}
+# Ridgeline Plot
+qs8_skb %>% 
+  ggplot(aes(x = skb, y = decl_code, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "G") +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb,
+             color = "black",
+             lty = "dashed") +
+  annotate("text", 
+           x = median_skb - 2,
+           y = 5,
+           label = glue("Median SKB\n {scales::number(median_skb)}"),
+           hjust = 1) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = skb_q3,
+             color = "red") +
+  annotate("text",
+           x = skb_q3 + 2,
+           y = 6,
+           label = glue("Q3 SKB\n {scales::number(skb_q3)}"),
+           hjust = 0) +
+  labs(title = "Distribusi Nilai SKB Umum",
+       subtitle = qs8_subtitile_plot,
+       x = "SKB",
+       y = "Status Kelulusan",
+       fill = "n") +
+  theme_bw()
+
+# Boxplot + Jitter Plot
+qs8_skb %>% 
+  ggplot(aes(x = skb, y = decl_code, fill = decl_code)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(shape = 1,
+              size = .1,
+              alpha = .2) +
+  theme(legend.position = "none") +
+  labs(title = "Sebaran Nilai SKB Umum",
+       subtitle = qs8_subtitile_plot,
+       x = "SKB",
+       y = "Status Kelulusan") +
+  guides(fill = "none") +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb,
+             color = "black") +
+  annotate("text", 
+           x = median_skb - 2, 
+           y = 7,
+           label = glue("Median SKB\n {scales::number(median_skb)}"),
+           hjust = 1) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb + 2, 
+           y = 9,
+           label = glue("Q3 SKB\n {scales::number(q3_skb)}"),
+           hjust = 0) +
+  theme_bw()
 ```
 
 ### 9. Skor SKB yang aman bagi lulusan FKIP untuk lolos SKB
 
+```{r ninth-question-step1}
+skb_fkip <- hasil_skb_forward_fill %>% # Filterisasi lulusan FKIP
+  filter(str_detect(last_edu, "PENDIDIKAN")) %>% 
+  select(skb, decl_code) %>% 
+  mutate(decl_code = factor(decl_code, levels = c("TH", "TMS-1", "TMS", "TL", "APS", "P/L-U3", "P/L-U1", "P/L-E3", "P/L-E2", "P/L-E1", "P/L")))
+
+median_skb_fkip <- median(skb_fkip$skb)
+q3_skb_fkip <- quantile(skb_fkip$skb, 3/4)
+
+n_skb_fkip <- skb_fkip %>% 
+  nrow()
+
+q9_subtitile_plot <- glue("Komparasi skor SKB lulusan FKIP (n = {scales::number(n_skb_fkip, big.mark = ',')})")
+```
+
+```{r ninth-question-step2}
+# Ridgeline Plot
+ggplot(skb_fkip, aes(x = skb, 
+                     y = decl_code, 
+                     fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "G") +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_fkip,
+             color = "black",
+             lty = "dashed") + 
+  annotate("text", 
+           x = median_skb_fkip - 2, 
+           y = 5,
+           hjust = 1, 
+           label = glue("Median SKB\n {scales::number(median_skb_fkip)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_fkip,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_fkip + 2, 
+           y = 6, 
+           hjust = 0,
+           label = glue("Q3 SKB\n {scales::number(q3_skb_fkip)}")) +
+  labs(title = "Sebaran Nilai SKB lulusan FKIP",
+       subtitle = q9_subtitile_plot,
+       x = "Skor SKB",
+       y = "Status Kelulusan") +
+  theme_bw()
+
+# Boxplot + Jitter Plot
+ggplot(skb_fkip, aes(x = skb, 
+                     y = decl_code, 
+                     fill = decl_code)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(size = .1,
+              alpha = .2) +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_fkip,
+             color = "black") + 
+  annotate("text", 
+           x = median_skb_fkip - 2, 
+           y = 5,
+           hjust = 1, 
+           label = glue("Median SKB\n {scales::number(median_skb_fkip)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_fkip,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_fkip + 2, 
+           y = 6, 
+           hjust = 0,
+           label = glue("Q3 SKB\n {scales::number(q3_skb_fkip)}")) +
+  labs(title = "Sebaran Nilai SKB lulusan FKIP",
+       subtitle = q9_subtitile_plot,
+       x = "Skor SKB",
+       y = "Status Kelulusan") +
+  guides(fill = "none") +
+  theme_bw()
+```
+
 ### 10. SKor SKB yang aman bagi lulusan non-FKIP untuk lolos SKB
+
+```{r tenth-question-step1}
+skb_nonfkip <- hasil_skb_forward_fill %>% # Filterisasi lulusan FKIP
+  filter(!str_detect(last_edu, "PENDIDIKAN")) %>% 
+  select(skb, decl_code) %>% 
+  mutate(decl_code = factor(decl_code, levels = c("TH", "TMS-1", "TMS", "TL", "APS", "P/L-U3", "P/L-U1", "P/L-E3", "P/L-E2", "P/L-E1", "P/L")))
+
+median_skb_nonfkip <- median(skb_nonfkip$skb)
+q3_skb_nonfkip <- quantile(skb_nonfkip$skb, 3/4)
+
+n_skb_nonfkip <- skb_nonfkip %>% 
+  nrow()
+
+q10_subtitle_plot <- glue("Komparasi skor SKB lulusan non-FKIP (n = {scales::number(n_skb_nonfkip, big.mark = ',')})")
+```
+
+```{r tenth-question-step2}
+# Ridgeline Plot
+ggplot(skb_nonfkip, aes(x = skb, 
+                     y = decl_code, 
+                     fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "G") +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_nonfkip,
+             color = "black",
+             lty = "dashed") + 
+  annotate("text", 
+           x = median_skb_nonfkip - 2, 
+           y = 5,
+           hjust = 1, 
+           label = glue("Median SKB\n {scales::number(median_skb_nonfkip)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_nonfkip,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_fkip + 2, 
+           y = 6, 
+           hjust = 0,
+           label = glue("Q3 SKB\n {scales::number(q3_skb_nonfkip)}")) +
+  labs(title = "Sebaran Nilai SKB lulusan non-FKIP",
+       subtitle = q10_subtitle_plot,
+       x = "Skor SKB",
+       y = "Status Kelulusan") +
+  theme_bw()
+
+# Boxplot + Jitter Plot
+ggplot(skb_nonfkip, aes(x = skb, 
+                     y = decl_code, 
+                     fill = decl_code)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(size = .1,
+              alpha = .2) +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_nonfkip,
+             color = "black") + 
+  annotate("text", 
+           x = median_skb_nonfkip - 2, 
+           y = 7,
+           hjust = 1, 
+           label = glue("Median SKB\n {scales::number(median_skb_fkip)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_nonfkip,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_nonfkip + 2, 
+           y = 8, 
+           hjust = 0,
+           label = glue("Q3 SKB\n {scales::number(q3_skb_nonfkip)}")) +
+  labs(title = "Sebaran Nilai SKB lulusan non-FKIP",
+       subtitle = q10_subtitle_plot,
+       x = "Skor SKB",
+       y = "Status Kelulusan") +
+  guides(fill = "none") +
+  theme_bw()
+```
 
 ### 11. Skor SKB yang aman yang aman bagi lulusan jurusan "Inggris" untuk lolos tahap SKB di jabatan formasi yang tersedia
 
-### 12. Skor SKB yang aman bagi pelamar Dosen AA jurusan "Inggris" untuk lolos tahap SKB
+```{r eleventh-question-step1}
+q11_skb_ing <- hasil_skb_forward_fill %>% 
+  filter(str_detect(last_edu, "INGGRIS")) %>% 
+  select(skb, decl_code, jp_code) %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  select(-jp_code) %>% 
+  replace_na(list(job_position = "PENERJEMAH BAHASA INGGRIS")) %>% 
+  mutate(decl_code = factor(decl_code, levels = c("TH", "TMS-1", "TMS", "TL", "APS", "P/L-U3", "P/L-U1", "P/L-E3", "P/L-E2", "P/L-E1", "P/L")))
+
+median_skb_ing <- median(q11_skb_ing$skb)
+q3_skb_ing <- quantile(q11_skb_ing$skb, 3/4)
+
+n_q11_skb_ing <- nrow(q11_skb_ing)
+
+q11_subtitle_plot <- glue("Komparasi nilai SKB lulusan terkait 'Inggris' (n = {scales::number(n_q11_skb_ing, big.mark = ',')})")
+```
+
+```{r eleventh-question-step2}
+# Ridgeline Plot
+q11_skb_ing %>% 
+  ggplot(aes(x = skb, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "G") +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_ing,
+             color = "black") +
+  annotate("text",
+           x = median_skb_ing - 2,
+           y = 5,
+           hjust = 1,
+           label = glue("Median SKB\n {scales::number(median_skb_ing)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_ing,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_ing + 2,
+           y = 6,
+           hjust = 0,
+           label= glue("Q3 SKB\n {scales::number(q3_skb_ing)}")) +
+  labs(title = "Distribusi Skor SKB Lulusan Terkait 'Inggris'",
+       subtitle = q11_subtitle_plot,
+       x = "Skor SKB",
+       y = "Jabatan Formasi") +
+  theme_bw()
+
+# Boxplot + Jitter Plot
+q11_skb_ing %>% 
+  ggplot(aes(x = skb, y = job_position, fill = job_position)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(size = 1,
+              alpha = .5,
+              shape = 1) +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_ing,
+             color = "black") +
+  annotate("text",
+           x = median_skb_ing - 2,
+           y = 7,
+           hjust = 1,
+           label = glue("Median SKB\n {scales::number(median_skb_ing)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_ing,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_ing + 2,
+           y = 8,
+           hjust = 0,
+           label= glue("Q3 SKB\n {scales::number(q3_skb_ing)}")) +
+  labs(title = "Distribusi Skor SKB Lulusan Terkait 'Inggris'",
+       subtitle = q11_subtitle_plot,
+       x = "Skor SKB",
+       y = "Jabatan Formasi") +
+  guides(fill = "none") +
+  theme_bw()
+```
+
+### 12. Skor SKB yang aman bagi pelamar Dosen jurusan "Inggris" untuk lolos tahap SKB
+
+```{r twelveth-question-step1}
+# Filter hanya posisi dosen lulusan Pendidikan Bahasa Inggris
+q12_skb_dosen_ing <- hasil_skb_forward_fill %>% 
+  filter(str_detect(last_edu, "INGGRIS")) %>% 
+  select(skb, decl_code, jp_code) %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(job_position, "DOSEN")) %>% 
+  select(-jp_code) %>% 
+  replace_na(list(job_position = "PENERJEMAH BAHASA INGGRIS")) %>% 
+  mutate(decl_code = factor(decl_code, levels = c("TH", "TMS-1", "TMS", "TL", "APS", "P/L-U3", "P/L-U1", "P/L-E3", "P/L-E2", "P/L-E1", "P/L")))
+
+# Filter Dosen Asisten Ahli Pendidikan Bahasa Inggris
+q12_skb_dosenaa_ing <- q12_skb_dosen_ing %>% 
+  filter(str_detect(job_position, "ASISTEN")) %>%
+  select(skb)
+median_skb_dosenaa_ing <- median(q12_skb_dosenaa_ing$skb)
+q3_skb_dosenaa_ing <- quantile(q12_skb_dosenaa_ing$skb, 3/4)
+
+# Filter Dosen Lektor Pendidikan Bahasa Inggris
+q12_skb_dosenl_ing <- q12_skb_dosen_ing %>% 
+  filter(str_detect(job_position, "LEKTOR")) %>%
+  select(skb)
+median_skb_dosenl_ing <- median(q12_skb_dosenl_ing$skb)
+q3_skb_dosenl_ing <- quantile(q12_skb_dosenl_ing$skb, 3/4)
+
+n_q12_skb_dosenaa_ing <- nrow(q12_skb_dosenaa_ing)
+n_q12_skb_dosenl_ing <- nrow(q12_skb_dosenl_ing)
+
+q12_subtitle_plot_dosenaa <- glue("Komparasi nilai SKB (n = {scales::number(n_q12_skb_dosenaa_ing, big.mark = ',')})")
+q12_subtitle_plot_dosenl <- glue("Komparasi nilai SKB (n = {scales::number(n_q12_skb_dosenl_ing, big.mark = ',')})")
+```
+
+```{r twelveth-question-step2}
+# Ridgeline Plot Dosen Asisten Ahli
+q12_skb_dosen_ing %>% 
+  filter(str_detect(job_position, "ASISTEN")) %>%
+  ggplot(aes(x = skb, y = decl_code, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "G") +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_dosenaa_ing,
+             color = "black") +
+  annotate("text",
+           x = median_skb_dosenaa_ing - 2,
+           y = 5,
+           hjust = 1,
+           label = glue("Median SKB\n {scales::number(median_skb_dosenaa_ing)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_dosenaa_ing,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_dosenaa_ing + 2,
+           y = 6,
+           hjust = 0,
+           label= glue("Q3 SKB\n {scales::number(q3_skb_dosenaa_ing)}")) +
+  labs(title = glue("Distribusi Skor SKB Jabatan Formasi Dosen Asisten Ahli 
+       Lulusan Pendidikan Bahasa Inggris"),
+       subtitle = q12_subtitle_plot_dosenaa,
+       x = "Skor SKB",
+       y = "Jabatan Formasi") +
+  theme_bw()
+
+# Boxplot + Jitter Plot
+q12_skb_dosen_ing %>% 
+  filter(str_detect(job_position, "ASISTEN")) %>%
+  ggplot(aes(x = skb, y = decl_code, fill = decl_code)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(size = 1,
+              alpha = .5,
+              shape = 1) +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_dosenaa_ing,
+             color = "black") +
+  annotate("text",
+           x = median_skb_dosenaa_ing - 2,
+           y = 7,
+           hjust = 1,
+           label = glue("Median SKB\n {scales::number(median_skb_dosenaa_ing)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_dosenaa_ing,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_dosenaa_ing + 2,
+           y = 8,
+           hjust = 0,
+           label= glue("Q3 SKB\n {scales::number(q3_skb_dosenaa_ing)}")) +
+  labs(title = glue("Distribusi Skor SKB Jabatan Formasi Dosen Asisten Ahli 
+       Lulusan Pendidikan Bahasa Inggris"),
+       subtitle = q12_subtitle_plot_dosenaa,
+       x = "Skor SKB",
+       y = "Jabatan Formasi") +
+  theme_bw()
+```
+
+```{r twelveth-question-step3}
+# Ridgeline Plot Dosen Lektor
+q12_skb_dosen_ing %>% 
+  filter(str_detect(job_position, "LEKTOR")) %>%
+  ggplot(aes(x = skb, y = decl_code, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "G") +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_dosenl_ing,
+             color = "black") +
+  annotate("text",
+           x = median_skb_dosenl_ing - 1,
+           y = 1,
+           hjust = 1,
+           label = glue("Median SKB\n {scales::number(median_skb_dosenl_ing)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_dosenl_ing,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_dosenl_ing + 1,
+           y = 1,
+           hjust = 0,
+           label= glue("Q3 SKB\n {scales::number(q3_skb_dosenl_ing)}")) +
+  labs(title = glue("Distribusi Skor SKB Jabatan Formasi Dosen Lektor 
+       Lulusan Pendidikan Bahasa Inggris"),
+       subtitle = q12_subtitle_plot_dosenl,
+       x = "Skor SKB",
+       y = "Jabatan Formasi") +
+  theme_bw()
+
+# Boxplot + Jitter Plot
+q12_skb_dosen_ing %>% 
+  filter(str_detect(job_position, "LEKTOR")) %>%
+  ggplot(aes(x = skb, y = decl_code, fill = decl_code)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(size = 2) +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_dosenl_ing,
+             color = "black") +
+  annotate("text",
+           x = median_skb_dosenl_ing - .5,
+           y = 1,
+           hjust = 1,
+           label = glue("Median SKB\n {scales::number(median_skb_dosenl_ing)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_dosenl_ing,
+             color = "red") +
+  annotate("text", 
+           x = q3_skb_dosenl_ing + .5,
+           y = 1,
+           hjust = 0,
+           label= glue("Q3 SKB\n {scales::number(q3_skb_dosenl_ing)}")) +
+  labs(title = glue("Distribusi Skor SKB Jabatan Formasi Dosen Lektor 
+       Lulusan Pendidikan Bahasa Inggris"),
+       subtitle = q12_subtitle_plot_dosenl,
+       x = "Skor SKB",
+       y = "Jabatan Formasi") +
+  guides(fill = "none") +
+  theme_bw()
+```
 
 ### 13. Skor SKB yang aman yang aman bagi lulusan jurusan "Fisika" untuk lolos tahap SKB di jabatan formasi yang tersedia
 
+```{r thirteenth-question-step1}
+q13_skb_fis <- hasil_skb_forward_fill %>% 
+  filter(str_detect(last_edu, "FISIKA")) %>% 
+  select(last_edu, skb, decl_code, jp_code) %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  select(-jp_code) %>% 
+  mutate(decl_code = factor(decl_code, levels = c("TH", "TMS-1", "TMS", "TL", "APS", "P/L-U3", "P/L-U1", "P/L-E3", "P/L-E2", "P/L-E1", "P/L")))
+
+median_skb_fis <- median(q13_skb_fis$skb)
+q3_skb_fis <- quantile(q13_skb_fis$skb, 3/4)
+
+n_skb_fis <- nrow(q13_skb_fis)
+
+q13_subtitile_plot <- glue("Komparasi skor SKB Lulusan 'Fisika' (n = {scales::number(n_skb_fis)})")
+```
+
+```{r thirteenth-question-step2}
+# Density Plot
+q13_skb_fis %>% 
+  ggplot(aes(x = skb, y = job_position, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis(option = "G") +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_fis,
+             color = "black") +
+  annotate("text", 
+           x = median_skb_fis - 2,
+           y = 5,
+           hjust = 1,
+           label = glue("Median SKB\n {scales::number(median_skb_fis)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_fis,
+             color = "red") +
+  annotate("text",
+           x = q3_skb_fis + 2,
+           y = 6,
+           hjust = 0,
+           label = glue("Q3 SKB\n {scales::number(q3_skb_fis)}")) +
+  labs(title = "Distribusi skor SKB Lulusan 'Fisika'",
+       subtitle = q13_subtitile_plot,
+       x = "Skor SKB",
+       y = "Jabatan Formasi") +
+  theme_bw()
+
+# Boxplot + Jitter Plot
+q13_skb_fis %>% 
+  ggplot(aes(x = skb, y = job_position, fill = job_position)) +
+  geom_boxplot(outliers = FALSE) + 
+  geom_jitter(size = .5,
+              alpha = .4) +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_fis,
+             color = "black") +
+  annotate("text", 
+           x = median_skb_fis - 2,
+           y = 7,
+           hjust = 1,
+           label = glue("Median SKB\n {scales::number(median_skb_fis)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_fis,
+             color = "red") +
+  annotate("text",
+           x = q3_skb_fis + 2,
+           y = 6,
+           hjust = 0,
+           label = glue("Q3 SKB\n {scales::number(q3_skb_fis)}")) +
+  labs(title = "Distribusi skor SKB Lulusan 'Fisika'",
+       subtitle = q13_subtitile_plot,
+       x = "Skor SKB",
+       y = "Jabatan Formasi") +
+  guides(fill = "none") +
+  theme_bw()
+```
+
 ### 14. Skor SKB yang aman bagi pelamar Widyaiswara untuk lolos tahap SKB
+
+```{r fourteenth-question-step1}
+q14_skb_wi <- hasil_skb_forward_fill %>% 
+  select(skb, decl_code, jp_code) %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(job_position, "WIDYAISWARA")) %>% 
+  select(-jp_code) %>%
+  mutate(decl_code = factor(decl_code, levels = c("TH", "TMS-1", "TMS", "TL", "APS", "P/L-U3", "P/L-U1", "P/L-E3", "P/L-E2", "P/L-E1", "P/L")))
+
+median_skb_wi <- median(q14_skb_wi$skb)
+q3_skb_wi <- quantile(q14_skb_wi$skb, 3/4)
+
+n_skb_wi <- nrow(q14_skb_wi)
+
+q14_subtitle_plot <- glue("Komparasi skor SKB berdasarkan Status Kelulusan (n = {scales::number(n_skb_wi)})")
+```
+
+```{r fourteenth-question-step2}
+# Ridgeline Plot
+q14_skb_wi %>% 
+  ggplot(aes(x = skb,y = decl_code, fill = ..x..)) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis() +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_wi,
+             color = "black") +
+  annotate("text",
+           x = median_skb_wi - 1,
+           y = 1,
+           hjust = 1,
+           label = glue("Median\n {scales::number(median_skb_wi)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_wi,
+             color = "red") +
+  annotate("text",
+           x = q3_skb_wi + 1,
+           y = 3,
+           hjust = 0,
+           label = glue("Q3\n {scales::number(q3_skb_wi)}")) +
+  labs(title = "Distribusi Skor SKB Widyaiswara",
+       subtitle = q14_subtitle_plot,
+       x = "Skor SKB",
+       y = "Status Kelulusan") +
+  theme_bw()
+
+# Boxplot + Jitter Plot
+q14_skb_wi %>% 
+  ggplot(aes(x = skb,y = decl_code, fill = decl_code)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_jitter(size = 1,
+              alpha = .75,
+              shape = 1) +
+  # Garis vertikal median
+  geom_vline(xintercept = median_skb_wi,
+             color = "black") +
+  annotate("text",
+           x = median_skb_wi - 1,
+           y = 1,
+           hjust = 1,
+           label = glue("Median\n {scales::number(median_skb_wi)}")) +
+  # Garis vertikal Q3
+  geom_vline(xintercept = q3_skb_wi,
+             color = "red") +
+  annotate("text",
+           x = q3_skb_wi + 1,
+           y = 3,
+           hjust = 0,
+           label = glue("Q3\n {scales::number(q3_skb_wi)}")) +
+  labs(title = glue("Distribusi Skor SKB Widyaiswara"),
+       subtitle = q14_subtitle_plot,
+       x = "Skor SKB",
+       y = "Status Kelulusan") +
+  guides(fill = "none") +
+  theme_bw()
+```
 
 ### 15. Probabilitas pelamar S-2 Pendidikan Bahasa Inggris untuk lolos SKD di masing-masing jabatan formasi yang tersesia
 
 ### 16. Probabilitas pelamar S-2 Pendidikan Fisika untuk lolos SKD di masing-masing jabatan formasi yang tersesia
-
-
-
-
-
-
 
