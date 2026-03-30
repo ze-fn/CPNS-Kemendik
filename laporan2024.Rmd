@@ -1415,7 +1415,57 @@ q14_skb_wi %>%
   theme_bw()
 ```
 
-### 15. Probabilitas pelamar S-2 Pendidikan Bahasa Inggris untuk lolos SKD di masing-masing jabatan formasi yang tersesia
+### 15. Proporsi Kelulusan SKD masing-masing jabatan formasi
 
-### 16. Probabilitas pelamar S-2 Pendidikan Fisika untuk lolos SKD di masing-masing jabatan formasi yang tersesia
+```{r fifteenth-question-step1}
+# Tabel untuk proporsi berdasarkan decl_code (status kelulusan)
+proporsi_status_kelulusan <- hasil_skd_na2zero %>% 
+  select(decl_code, loc_code, jp_code) %>% 
+  group_by(loc_code, jp_code, decl_code) %>% 
+  mutate(decl_code = factor(as.factor(decl_code),  levels = c("P/L", "P", "TL", "TH"))) %>% 
+  summarize(count = n()) %>% 
+  arrange(loc_code, jp_code, decl_code) %>% 
+  pivot_wider(names_from = decl_code,
+              values_from = count)
+unique(as.factor(hasil_skd_na2zero$decl_code))
 
+# Inspect kolom NA dari tabel proporsi
+proporsi_status_kelulusan %>% 
+  filter(`NA` == is.na(`NA`))
+
+# Inspect NA di decl_code
+hasil_skd_na2zero %>% 
+  filter(decl_code == is.na(decl_code))
+
+proporsi_status_kelulusan
+
+vis_miss(proporsi_status_kelulusan)
+
+proporsi_status_kelulusan
+```
+
+### 16. Proporsi Kelulusan SKB masing-masing jabatan formasi
+
+### 17. Jabatan formasi dengan peminat paling banyak
+
+### 18. Jabatan formasi dengan peminat paling sedikit
+
+### 19. Daerah yang paling banyak diminati
+
+### 20. Daerah yang paling sedikit diminati
+
+### 21. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Bahasa Inggris dan jabatan formasi adalah Dosen Asisten Ahli
+
+### 22. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-3 Pendidikan Bahasa Inggris dan jabatan formasi adalah Dosen Lektor
+
+### 23. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Bahasa Inggris dan jabatan formasi Widyaiswara
+
+### 24. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Bahasa Inggris
+
+### 25. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika dan jabatan formasi adalah Dosen Asisten Ahli
+
+### 26. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-3 Pendidikan Fisika dan jabatan formasi adalah Dosen Lektor
+
+### 27. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika dan jabatan formasi adalah Widyaiswara
+
+### 28. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika
