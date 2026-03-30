@@ -1419,7 +1419,7 @@ q14_skb_wi %>%
 
 ```{r fifteenth-question-step1}
 # Tabel untuk proporsi berdasarkan decl_code (status kelulusan)
-proporsi_status_kelulusan <- hasil_skd_na2zero %>% 
+piv_wider_decl_code <- hasil_skd_na2zero %>% 
   select(decl_code, loc_code, jp_code) %>% 
   group_by(loc_code, jp_code, decl_code) %>% 
   mutate(decl_code = factor(as.factor(decl_code),  levels = c("P/L", "P", "TL", "TH"))) %>% 
@@ -1427,11 +1427,14 @@ proporsi_status_kelulusan <- hasil_skd_na2zero %>%
   arrange(loc_code, jp_code, decl_code) %>% 
   pivot_wider(names_from = decl_code,
               values_from = count)
-unique(as.factor(hasil_skd_na2zero$decl_code))
 
-# Inspect kolom NA dari tabel proporsi
-proporsi_status_kelulusan %>% 
-  filter(`NA` == is.na(`NA`))
+# Replace NA values dengan 0 (integer)
+proporsi_status_kelulusan <- piv_wider_decl_code %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
+
+proportions(proporsi_status_kelulusan)
+
+?prop.table
 
 # Inspect NA di decl_code
 hasil_skd_na2zero %>% 
