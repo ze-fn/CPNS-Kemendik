@@ -190,11 +190,7 @@ jabatan_formasi
 ### Lokasi Formasi
 
 ```{r import-data-lokasi-formasi}
-lokasi_formasi <- read_csv("2024/lokasi_formasi.csv",
-                           col_types = cols(lc_code = col_character())) %>% 
-  rename(loc_code = lc_code)
-
-lokasi_formasi
+lokasi_formasi <- read_csv("2024/lokasi_formasi_cleaning1.csv")
 ```
 
 ## Pembersihan Data
@@ -313,6 +309,84 @@ hasil_skb_forward_fill <- hasil_skb_standardized_nulls %>%
   select(-breakk, -group_id)
 
 hasil_skb_forward_fill
+```
+
+### Dataset Lokasi Formasi
+
+```{r lokasi-formasi}
+lokasi_cleaning1 <- lokasi_formasi %>% 
+  # Hapus noise "... KEMENTERIAN ..." di dalam data
+  mutate(across(c(data1:data6), ~ str_remove(.x, "\\s\\d+\\sKEMENTERIAN.*")))
+
+# Locate data point berdasarkan keywords lalu salin ke kolom baru "instansi"
+keywords_instansi <- c("Universitas", "Sekretariat", 
+                       "Direktorat", "Institut", 
+                       "Politeknik", "Kantor", 
+                       "Balai Bahasa Provinsi", "Pusat",
+                       "Akademi", "Inspektorat")
+pattern_instansi <- paste0("^(", paste(keywords_instansi, collapse = "|"), ")")
+
+lokasi_cleaning1$instansi <- apply(lokasi_cleaning1[c("data1", "data2", "data3", "data4", "data5", "data6")],
+                                   1, 
+                                   function(row) {
+                                     match <- grep(pattern_instansi, 
+                                                   row, 
+                                                   value = TRUE,
+                                                   ignore.case = TRUE)
+                                     if (length(match) > 0) match[1] 
+                                     else NA})
+
+# Locate data point berdasarkan keywords lalu salin ke kolom baru "fa_bag" (fakultas atau bagian)
+keywords_fa_bag <- c("Fakultas", "Badan", "Lembaga",
+                     "Balai", "Program Pascasarjana",
+                     "Pascasarjana", "Bagian",
+                     "Wakil", "UPT", "UPA", "Biro", 
+                     "Pusat Layana", "Pusat Prestasi",
+                     "Pusat Data", "Unit Penunjang")
+pattern_fa_bag <- paste0("^(", paste(keywords_fa_bag, collapse = "|"), ")")
+
+lokasi_cleaning1$fa_bag <- apply(lokasi_cleaning1[c("data1", "data2", "data3", "data4", "data5", "data6")],
+                                   1, 
+                                   function(row) {
+                                     match <- grep(pattern_fa_bag, 
+                                                   row, 
+                                                   value = TRUE,
+                                                   ignore.case = TRUE)
+                                     if (length(match) > 0) match[1] 
+                                     else NA})
+
+# Locate data point berdasarkan keywords lalu salin ke kolom baru "prodi_subbag" (program studi atau subbagian)
+keywords_prodi_subbag <- c("Program Studi", "Prodi",
+                           "S-1", "S1", "S2", "S-2", "S3", "S-3",
+                           "D1", "D-1", "D-I", "D2", "D-2", "D-II",
+                           "D3", "D-3", "D-III", "D4", "D-4", "D-IV",
+                           "Jurusan S1", "Jurusan S2", "Jurusan S3",
+                           "Program Studi S1", "Program Studi S2",
+                           "Jurusan", "Bagian Nutrisi", "Profesi",
+                           "Bagian S1", "Bagian S2", 
+                           "Balai Guru Penggerak",
+                           "Subbagian", "Biro Umum", "Bagian Umum",
+                           "Fakultas Program Studi S1", "Biro Kepegawaian",
+                           "Biro Keuangan", "Wakil Direktur", "Biro Perencanaan",
+                           "Bagian Akademik", "Bagian Ilmu Hukum",
+                           "Biro Sumber Daya", "Biro Hukum", "Bagian Hukum Keperdataan",
+                           "Balai Pelestarian")
+pattern_prodi_subbag <- paste0("^(", paste(keywords_prodi_subbag, collapse = "|"), ")")
+
+lokasi_cleaning1$prodi_subbag <- apply(lokasi_cleaning1[c("data1", "data2", "data3", "data4", "data5", "data6")],
+                                   1, 
+                                   function(row) {
+                                     match <- grep(pattern_prodi_subbag, 
+                                                   row, 
+                                                   value = TRUE,
+                                                   ignore.case = TRUE)
+                                     if (length(match) > 0) match[1] 
+                                     else NA})
+
+# Check here
+sum(is.na(lokasi_cleaning1$prodi_subbag))
+lokasi_cleaning1 %>% 
+  filter(is.na(prodi_subbag))
 ```
 
 ## Hasil Pembersihan Data
