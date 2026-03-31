@@ -370,7 +370,8 @@ keywords_prodi_subbag <- c("Program Studi", "Prodi",
                            "Biro Keuangan", "Wakil Direktur", "Biro Perencanaan",
                            "Bagian Akademik", "Bagian Ilmu Hukum",
                            "Biro Sumber Daya", "Biro Hukum", "Bagian Hukum Keperdataan",
-                           "Balai Pelestarian")
+                           "Balai Pelestarian", "Penyakit Jantung",
+                           "Bagian Hukum", "Bagian Produksi")
 pattern_prodi_subbag <- paste0("^(", paste(keywords_prodi_subbag, collapse = "|"), ")")
 
 lokasi_cleaning1$prodi_subbag <- apply(lokasi_cleaning1[c("data1", "data2", "data3", "data4", "data5", "data6")],
@@ -387,6 +388,19 @@ lokasi_cleaning1$prodi_subbag <- apply(lokasi_cleaning1[c("data1", "data2", "dat
 sum(is.na(lokasi_cleaning1$prodi_subbag))
 lokasi_cleaning1 %>% 
   filter(is.na(prodi_subbag))
+
+# Return necessary columns
+lokasi_cleaning2 <- lokasi_cleaning1 %>% 
+  select(loc_code, instansi:prodi_subbag)
+
+# Remove noise dari kolom "fa_bag"
+lokasi_cleaning3 <- lokasi_cleaning2 %>% 
+  # Hapus noise "\\s\\d+\\d+\\s/*" di dalam data
+  mutate(across(c(instansi:prodi_subbag), ~ str_remove(.x, "\\s\\d+\\d+\\s.*"))) %>% 
+  distinct(loc_code, .keep_all = TRUE) %>% 
+  arrange(loc_code)
+
+lokasi_cleaning3
 ```
 
 ## Hasil Pembersihan Data
@@ -396,6 +410,8 @@ Data SKD dan SKB yang sudah bersih dan siap untuk dianalisa sudah direkam dan bi
 `hasil_skd_na2zero` *untuk data SKD*
 
 `hasil_skb_forward_fill` *untuk data SKB*
+
+`lokasi_cleaning3` *untuk data lokasi formasi (prototype)*
 
 # Analisis Data
 
@@ -866,26 +882,26 @@ skd_wi_long %>%
 ### 8. Skor SKB yang aman untuk lolos SKB
 
 ```{r eighth-question-step1}
-qs8_skb <- hasil_skb_forward_fill %>% 
+q8_skb <- hasil_skb_forward_fill %>% 
   select(skb, decl_code) %>% 
   mutate(decl_code = factor(decl_code, levels = c("TH", "TMS-1", "TMS", "TL", "APS", "P/L-U3", "P/L-U1", "P/L-E3", "P/L-E2", "P/L-E1", "P/L")))
 
-qs8_filtered_data <- hasil_skb_forward_fill %>% 
+q8_filtered_data <- hasil_skb_forward_fill %>% 
   filter(decl_code != "TH") %>% 
   select(skb)
 
-median_skb <- median(qs8_filtered_data$skb)
-q3_skb <- quantile(qs8_filtered_data$skb, 3/4)
+median_skb <- median(q8_filtered_data$skb)
+q3_skb <- quantile(q8_filtered_data$skb, 3/4)
 
-n_skb_all <- qs8_skb %>% 
+n_skb_all <- q8_skb %>% 
   nrow()
 
-qs8_subtitile_plot <- glue("Komparasi skor SKB Umum (n = {scales::number(n_skb_all, big.mark = ',')})")
+q8_subtitile_plot <- glue("Komparasi skor SKB Umum (n = {scales::number(n_skb_all, big.mark = ',')})")
 ```
 
 ```{r eighth-question-step2}
 # Ridgeline Plot
-qs8_skb %>% 
+q8_skb %>% 
   ggplot(aes(x = skb, y = decl_code, fill = ..x..)) +
   geom_density_ridges_gradient() +
   scale_fill_viridis(option = "G") +
@@ -899,22 +915,22 @@ qs8_skb %>%
            label = glue("Median SKB\n {scales::number(median_skb)}"),
            hjust = 1) +
   # Garis vertikal Q3
-  geom_vline(xintercept = skb_q3,
+  geom_vline(xintercept = q3_skb,
              color = "red") +
   annotate("text",
-           x = skb_q3 + 2,
+           x = q3_skb + 2,
            y = 6,
-           label = glue("Q3 SKB\n {scales::number(skb_q3)}"),
+           label = glue("Q3 SKB\n {scales::number(q3_skb)}"),
            hjust = 0) +
   labs(title = "Distribusi Nilai SKB Umum",
-       subtitle = qs8_subtitile_plot,
+       subtitle = q8_subtitile_plot,
        x = "SKB",
        y = "Status Kelulusan",
        fill = "n") +
   theme_bw()
 
 # Boxplot + Jitter Plot
-qs8_skb %>% 
+q8_skb %>% 
   ggplot(aes(x = skb, y = decl_code, fill = decl_code)) +
   geom_boxplot(outliers = FALSE) +
   geom_jitter(shape = 1,
@@ -922,7 +938,7 @@ qs8_skb %>%
               alpha = .2) +
   theme(legend.position = "none") +
   labs(title = "Sebaran Nilai SKB Umum",
-       subtitle = qs8_subtitile_plot,
+       subtitle = q8_subtitile_plot,
        x = "SKB",
        y = "Status Kelulusan") +
   guides(fill = "none") +
@@ -1493,7 +1509,7 @@ q14_skb_wi %>%
 
 ```{r fifteenth-question-step1}
 # Tabel untuk proporsi berdasarkan decl_code (status kelulusan)
-piv_wider_decl_code <- hasil_skd_na2zero %>% 
+piv_wider_decl_code_skd <- hasil_skd_na2zero %>% 
   select(decl_code, loc_code, jp_code) %>% 
   group_by(loc_code, jp_code, decl_code) %>% 
   mutate(decl_code = factor(as.factor(decl_code),  levels = c("P/L", "P", "TL", "TH"))) %>% 
@@ -1502,29 +1518,34 @@ piv_wider_decl_code <- hasil_skd_na2zero %>%
   pivot_wider(names_from = decl_code,
               values_from = count)
 
-# Replace NA values dengan 0 (integer)
-proporsi_status_kelulusan <- piv_wider_decl_code %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
+# Replace NA values dengan 0 (integer) dan buat kolom baru "total"
+n_status_kelulusan_skd <- piv_wider_decl_code_skd %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) %>% 
+  mutate(n_total = rowSums(across(c("P/L", "TL", "TH", "P")))) %>% 
+  select(-`NA`) %>% 
+  ungroup() %>% 
+  left_join(lokasi_cleaning3, by = "loc_code") %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  select(-jp_code, -loc_code)
 
-proportions(proporsi_status_kelulusan)
+proporsi_status_kelulusan_skd <- n_status_kelulusan_skd %>% 
+  mutate(`P/L` = round(`P/L` / n_total * 100, 2),
+         TL = round(TL / n_total * 100, 2),
+         TH = round(TH / n_total * 100, 2),
+         P = round(P / n_total * 100, 2)) %>% 
+  arrange(desc(n_total))
 
-?prop.table
-
-# Inspect NA di decl_code
-hasil_skd_na2zero %>% 
-  filter(decl_code == is.na(decl_code))
-
-proporsi_status_kelulusan
-
-vis_miss(proporsi_status_kelulusan)
-
-proporsi_status_kelulusan
+n_status_kelulusan_skd
+proporsi_status_kelulusan_skd
 ```
 
 ### 16. Proporsi Kelulusan SKB masing-masing jabatan formasi
 
 ### 17. Jabatan formasi dengan peminat paling banyak
 
+```{r seventeenth-question}
+
+```
 ### 18. Jabatan formasi dengan peminat paling sedikit
 
 ### 19. Daerah yang paling banyak diminati
@@ -1546,3 +1567,6 @@ proporsi_status_kelulusan
 ### 27. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika dan jabatan formasi adalah Widyaiswara
 
 ### 28. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika
+
+
+
