@@ -385,9 +385,9 @@ lokasi_cleaning1$prodi_subbag <- apply(lokasi_cleaning1[c("data1", "data2", "dat
                                      else NA})
 
 # Check here
-sum(is.na(lokasi_cleaning1$prodi_subbag))
-lokasi_cleaning1 %>% 
-  filter(is.na(prodi_subbag))
+# sum(is.na(lokasi_cleaning1$prodi_subbag))
+# lokasi_cleaning1 %>% 
+#  filter(is.na(prodi_subbag))
 
 # Return necessary columns
 lokasi_cleaning2 <- lokasi_cleaning1 %>% 
@@ -1544,29 +1544,318 @@ proporsi_status_kelulusan_skd
 ### 17. Jabatan formasi dengan peminat paling banyak
 
 ```{r seventeenth-question}
+jf_peminat_desc <- n_status_kelulusan_skd %>% 
+  select(-instansi, -fa_bag, -prodi_subbag) %>% 
+  group_by(job_position) %>% 
+  summarize(`P/L` = sum(`P/L`),
+            P = sum(P),
+            TL = sum(TL),
+            TH = sum(TH),
+            n_total = sum(n_total)) %>% 
+  arrange(desc(n_total))
 
+jf_peminat_desc
 ```
 ### 18. Jabatan formasi dengan peminat paling sedikit
 
-### 19. Daerah yang paling banyak diminati
+```{r eighteenth-question}
+jf_peminat_asc <- n_status_kelulusan_skd %>% 
+  select(-instansi, -fa_bag, -prodi_subbag) %>% 
+  group_by(job_position) %>% 
+  summarize(`P/L` = sum(`P/L`),
+            P = sum(P),
+            TL = sum(TL),
+            TH = sum(TH),
+            n_total = sum(n_total)) %>% 
+  arrange(n_total)
 
-### 20. Daerah yang paling sedikit diminati
+jf_peminat_asc
+```
+
+### 19. Instansi yang paling banyak diminati
+
+```{r}
+instansi_peminat_desc <- n_status_kelulusan_skd %>% 
+  select(-job_position, -fa_bag, -prodi_subbag) %>% 
+  group_by(instansi) %>% 
+  summarize(`P/L` = sum(`P/L`),
+            P = sum(P),
+            TL = sum(TL),
+            TH = sum(TH),
+            n_total = sum(n_total)) %>% 
+  arrange(desc(n_total))
+
+instansi_peminat_desc
+```
+
+### 20. Instansi yang paling sedikit diminati
+
+```{r twentieth-question}
+instansi_peminat_asc <- n_status_kelulusan_skd %>% 
+  select(-job_position, -fa_bag, -prodi_subbag) %>% 
+  group_by(instansi) %>% 
+  summarize(`P/L` = sum(`P/L`),
+            P = sum(P),
+            TL = sum(TL),
+            TH = sum(TH),
+            n_total = sum(n_total)) %>% 
+  arrange(n_total)
+
+instansi_peminat_asc
+```
 
 ### 21. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Bahasa Inggris dan jabatan formasi adalah Dosen Asisten Ahli
 
+```{r twentyfirst-question}
+# Variabel untuk kondisi probabilitas
+lulusan_rq21 <- "S-2 PENDIDIKAN BAHASA INGGRIS"
+formasi_dilamar_rq21 <- "DOSEN ASISTEN AHLI"
+status_lulus <- c("P/L", "P/L-E1", "P/L-U1", "P/L-E2", "P/L-E3", "P/L-U3")
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Bahasa Inggris dan melamar pada jabatan formasi Dosen Asisten Ahli
+n_pbing_daa <- hasil_skd_na2zero %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>%
+  filter(str_detect(last_edu, lulusan_rq21),
+         job_position == formasi_dilamar) %>% 
+  nrow()
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Bahasa Inggris, melamar pada jabatan formasi Dosen Asisten Ahli, dan lulus CPNS
+n_pbing_daa_lulus <- hasil_skb_forward_fill %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(last_edu, lulusan_rq21),
+         job_position == formasi_dilamar,
+         decl_code %in% status_lulus) %>% 
+  nrow()
+
+# Probabilitas 
+rq21 <- glue("Peluang lulus CPNS bagi:
+     1. lulusan {lulusan_rq21}, dan
+     2. Melamar di jabatan formasi {formasi_dilamar}
+     adalah {round(n_pbing_daa_lulus / n_pbing_daa * 100, 2)} %")
+
+rq21
+```
+
 ### 22. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-3 Pendidikan Bahasa Inggris dan jabatan formasi adalah Dosen Lektor
+
+```{r twentysecond-question}
+# Variabel untuk kondisi probabilitas
+lulusan_rq22 <- "S-3 PENDIDIKAN BAHASA INGGRIS"
+formasi_dilamar_dl <- "DOSEN LEKTOR"
+
+# Pool peserta CPNS dengan kriteria S-3 Pendidikan Bahasa Inggris dan melamar pada jabatan formasi Dosen Lektor
+n_pbing_dl <- hasil_skd_na2zero %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>%
+  filter(str_detect(last_edu, lulusan_rq22),
+         job_position == formasi_dilamar_dl) %>% 
+  nrow()
+
+# Pool peserta CPNS dengan kriteria S-3 Pendidikan Bahasa Inggris, melamar pada jabatan formasi Dosen Lektor, dan lulus CPNS
+n_pbing_dl_lulus <- hasil_skb_forward_fill %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(last_edu, lulusan_rq22),
+         job_position == formasi_dilamar_dl,
+         decl_code %in% status_lulus) %>% 
+  nrow()
+
+# Probabilitas 
+rq22 <- glue("Peluang lulus CPNS bagi:
+     1. lulusan {lulusan_rq22}, dan
+     2. Melamar di jabatan formasi {formasi_dilamar_dl}
+     adalah {round(n_pbing_dl_lulus / n_pbing_dl * 100, 2)} %")
+
+rq22
+```
 
 ### 23. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Bahasa Inggris dan jabatan formasi Widyaiswara
 
+```{r twentythird-question}
+# Variabel untuk kondisi probabilitas
+lulusan_rq23 <- "S-2 PENDIDIKAN BAHASA INGGRIS"
+formasi_dilamar_rq23 <- "JF0010904"
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Bahasa Inggris dan melamar pada jabatan formasi Widyaiswara
+n_pbing_wi <- hasil_skd_na2zero %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>%
+  filter(str_detect(last_edu, lulusan_rq23),
+         jp_code == formasi_dilamar_rq23) %>% 
+  nrow()
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Bahasa Inggris, melamar pada jabatan formasi Dosen Asisten Ahli, dan lulus CPNS
+n_pbing_wi_lulus <- hasil_skb_forward_fill %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(last_edu, lulusan_rq23),
+         jp_code == formasi_dilamar_rq23,
+         decl_code %in% status_lulus) %>% 
+  nrow()
+
+# Probabilitas 
+rq23 <- glue("Peluang lulus CPNS bagi:
+     1. lulusan {lulusan_rq23}, dan
+     2. Melamar di jabatan formasi WIDYAISWARA AHLI PERTAMA
+     adalah {round(n_pbing_wi_lulus / n_pbing_wi * 100, 2)} %")
+
+rq23
+```
+
 ### 24. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Bahasa Inggris
+
+```{r twentyfourth-question}
+# Variabel untuk kondisi probabilitas
+lulusan_rq24 <- "S-2 PENDIDIKAN BAHASA INGGRIS"
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Bahasa Inggris
+n_pbing_all <- hasil_skd_na2zero %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>%
+  filter(str_detect(last_edu, lulusan_rq24)) %>% 
+  nrow()
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Bahasa Inggris dan lulus CPNS
+n_pbing_all_lulus <- hasil_skb_forward_fill %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(last_edu, lulusan_rq24),
+         decl_code %in% status_lulus) %>% 
+  nrow()
+
+# Probabilitas 
+rq24 <- glue("Peluang lulus CPNS bagi:
+     1. lulusan {lulusan_rq24}
+     adalah {round(n_pbing_all_lulus / n_pbing_all * 100, 2)} %")
+
+rq24
+```
 
 ### 25. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika dan jabatan formasi adalah Dosen Asisten Ahli
 
+```{r twentyfifth-question}
+# Variabel untuk kondisi probabilitas
+lulusan_rq25 <- "S-2 PENDIDIKAN FISIKA"
+formasi_dilamar_rq25 <- "DOSEN ASISTEN AHLI"
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Fisika dan melamar pada jabatan formasi Dosen Asisten Ahli
+n_pfis_daa <- hasil_skd_na2zero %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>%
+  filter(str_detect(last_edu, lulusan_rq25),
+         job_position == formasi_dilamar_rq25) %>% 
+  nrow()
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Fisika, melamar pada jabatan formasi Dosen Asisten Ahli, dan lulus CPNS
+n_pfis_daa_lulus <- hasil_skb_forward_fill %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(last_edu, lulusan_rq25),
+         job_position == formasi_dilamar_rq25,
+         decl_code %in% status_lulus) %>% 
+  nrow()
+
+# Probabilitas 
+rq25 <- glue("Peluang lulus CPNS bagi:
+     1. lulusan {lulusan_rq25}, dan
+     2. Melamar di jabatan formasi {formasi_dilamar_rq25}
+     adalah {round(n_pfis_daa_lulus / n_pfis_daa * 100, 2)} %")
+
+rq25
+```
+
 ### 26. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-3 Pendidikan Fisika dan jabatan formasi adalah Dosen Lektor
+
+```{r twentysixth-question}
+# Variabel untuk kondisi probabilitas
+lulusan_rq26 <- "S-3 PENDIDIKAN FISIKA"
+formasi_dilamar_rq26 <- "DOSEN LEKTOR"
+
+# Pool peserta CPNS dengan kriteria S-3 Pendidikan Fisika dan melamar pada jabatan formasi Dosen Lektor
+n_pfis_dl <- hasil_skd_na2zero %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>%
+  filter(str_detect(last_edu, lulusan_rq26),
+         job_position == formasi_dilamar_rq26) %>% 
+  nrow()
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Fisika, melamar pada jabatan formasi Dosen Lektor, dan lulus CPNS
+n_pfis_dl_lulus <- hasil_skb_forward_fill %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(last_edu, lulusan_rq26),
+         job_position == formasi_dilamar_rq26,
+         decl_code %in% status_lulus) %>% 
+  nrow()
+
+# Probabilitas 
+rq26 <- glue("Peluang lulus CPNS bagi:
+     1. lulusan {lulusan_rq26}, dan
+     2. Melamar di jabatan formasi {formasi_dilamar_rq26}
+     adalah {round(n_pfis_dl_lulus / n_pfis_dl * 100, 2)} %")
+
+rq26
+```
 
 ### 27. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika dan jabatan formasi adalah Widyaiswara
 
+```{r twentyseventh-question}
+# Variabel untuk kondisi probabilitas
+lulusan_rq27 <- "S-2 PENDIDIKAN FISIKA"
+formasi_dilamar_rq27 <- "JF0010904"
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Fisika dan melamar pada jabatan formasi Widyaiswara
+n_pfis_wi <- hasil_skd_na2zero %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>%
+  filter(str_detect(last_edu, lulusan_rq27),
+         jp_code == formasi_dilamar_rq27) %>% 
+  nrow()
+
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Fisika, melamar pada jabatan formasi Widyaiswara, dan lulus CPNS
+n_pfis_wi_lulus <- hasil_skb_forward_fill %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(last_edu, lulusan_rq27),
+         jp_code == formasi_dilamar_rq27,
+         decl_code %in% status_lulus) %>% 
+  nrow()
+
+# Probabilitas 
+rq27 <- glue("Peluang lulus CPNS bagi:
+     1. lulusan {lulusan_rq27}, dan
+     2. Melamar di jabatan formasi {formasi_dilamar_rq27} / WIDYAISWARA AHLI PERTAMA
+     adalah {round(n_pfis_wi_lulus / n_pfis_wi * 100, 2)} %")
+
+rq27
+```
+
 ### 28. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika
 
+```{r twentyfourth-question}
+# Variabel untuk kondisi probabilitas
+lulusan_rq28 <- "S-2 PENDIDIKAN FISIKA"
 
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan FIsika
+n_pfis_all <- hasil_skd_na2zero %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>%
+  filter(str_detect(last_edu, lulusan_rq28)) %>% 
+  nrow()
 
+# Pool peserta CPNS dengan kriteria S-2 Pendidikan Fisika dan lulus CPNS
+n_pfis_all_lulus <- hasil_skb_forward_fill %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  filter(str_detect(last_edu, lulusan_rq28),
+         decl_code %in% status_lulus) %>% 
+  nrow()
+
+# Probabilitas 
+rq28 <- glue("Peluang lulus CPNS bagi:
+     1. lulusan {lulusan_rq28}
+     adalah {round(n_pfis_all_lulus / n_pfis_all * 100, 2)} %")
+
+rq28
+```
+```{r summary-prob-pbing}
+glue(rq21, "\n\n", rq22, "\n\n", rq23, "\n\n", rq24)
+```
+
+```{r summary-prob-pfis}
+glue(rq25, "\n\n", rq26, "\n\n", rq27, "\n\n", rq28)
+```
+
+# Kesimpulan
+
+Melihat kembali [Pertanyaan Riset] serta tujuan utama dari investigasi kali ini, sangat disarankan untuk mencapai skor sesuai dengan disarankan. Di investigasi kali ini, saya menyarankan untuk mencapai nilai **SKD** dan **SKB** minimal di batas **kuartal ke-3** dari masing-masing instansi, bagian/fakultas, dan subbagian/program studi yang dilamar, dengan penekanan tinggi pada nilai SKB karena bobotnya yang lebih besar daripada skor SKD. Sebagai tambahan, perlu diingat juga bahwa **CPNS ini menganut sistem ranking** di **level** kategorisasi terkecil, yaitu **subbagian/program studi**. Oleh karenanya, saya juga menyarankan untuk mencari dan melamar formasi jabatan program studi/subbagian di instansi dan fakultas/bagian dengan **peminat paling sedikit**. Hal ini dikarenakan **peluang** untuk lulus CPNS di kriteria tersebut **lebih tinggi** dibandingkan dengan jabatan formasi lain yang populer atau banyak peminat.
+
+# Ucapan Terima Kasih
+
+Dari proyek/investigasi data ini, banyak sekali pihak yang mendukung saya. Mulai dari orang tua saya yang mendukung penuh arah karir saya sebagai Data Analyst/Data Scientist, teman-teman saya yang antusias terhadap hasil analisis saya. Di samping itu, saya juga sangat berterima kasih kepada [DataCamp](https://datacamp.com/) atas materi kursus yang ditawarkannya. Investigasi ini tidak mungkin eksis tanpa kursus yang ditawarkan oleh [DataCamp](https://datacamp.com/). Satu lagi, saya juga mengucapkan terima kasih yang besar kepada [Alex The Analyst](https://youtube.com/@AlexTheAnalyst) karena kursus gratis beliau lah yang memercikkan api semangat analis dalam diri saya sehingga investigasi ini pun bisa terwujud. Akhir kata, saya mengucapkan banyak terima kasih kepada semua pihak yang terlibat secara aktif maupun pasif, karena dengan bantuan orang lain lah saya bisa menyelesaikan proyek/investigasi ini.
