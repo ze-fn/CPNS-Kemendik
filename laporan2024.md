@@ -1,130 +1,251 @@
----
-title: "Analisis Hasil CPNS 2024 Kemendik"
-subtitle: Spesifik Formasi Dosen Asisten Ahli Pendidikan Bahasa Inggris dan Pendidikan Fisika (atau yang serumpun/sejenis)
-author:
-  - name: "Zelvy Fauzan"
-    url: https://ze-fn.github.io/
-    orcid_id: 0000-0002-2011-8239
-    affiliation: Independent
-    affiliation_url: https://github.com/ze-fn/
-date: April 12, 2026
-abstract: "Persaingan dalam tes Calon Pegawai Negeri Sipil (CPNS) Negara Indonesia, utamanya pada Kementerian Pendidikan, sangatlah ketat. Hal ini disebabkan jumlah pelamar yang sangat banyak. Oleh karena itu, peserta CPNS perlu persiapan yang matang untuk menghadapi tes CPNS. Walau begitu, hal tersebut masih meninggalkan pertanyaan di dalam benak: seberapa banyak persiapan yang harus disiapkan untuk lulus tes CPNS? Investigasi kali ini menganalisa hasil tes CPNS di Kementerian Pendidikan yang diselenggarakan pada 2024 untuk mencari tahu seberapa banyak persiapan yang dibutuhkan oleh peserta CPNS untuk lulus di tes CPNS di periode mendatang. Dengan menggunakan pendekatan statistik deskriptif, studi ini menguak bahwa setiap jabatan formasi memiliki tren skor CPNS yang unik satu sama lain, dan bahwa peluang untuk lulus CPNS ditentukan dari banyaknya pelamar pada suatu jabatan formasi per sub bagian per bagian per institusi. Hal ini menekankan implikasi bahwa peserta CPNS di periode mendatang disarankan untuk memilah dan memilih jabatan formasi berdasarkan jumlah frekuensi pelamar di lokasi yang diminati."
-keywords: ["cpns", "kementerian pendidikan", "statistik deskriptif", "ministry of education", "descriptive statistics"]
-subject: Education
-description: "Investigasi ini menganalisa hasil tes CPNS Kementerian Pendidikan 2024 untuk menguak tren nilai yang muncul guna memberikan gambaran karakteristik umum peserta CPNS sehingga peserta CPNS periode selanjutnya dapat mempersiapkan diri dengan lebih baik ketika menghadapi tes."
-output:
-  distill::distill_article:
-    toc: true
-    toc_float: true
-    code_folding: true
-    highlight: tango
-    self_contained: false
-lang: "id-ID"
----
+Analisis Hasil CPNS 2024 Kemendik
+================
+true
+Last Edited: Sunday, 12 April 2026
 
 # Abstrak
 
-Persaingan dalam tes Calon Pegawai Negeri Sipil (CPNS) Negara Indonesia, utamanya pada Kementerian Pendidikan, sangatlah ketat. Hal ini disebabkan jumlah pelamar yang sangat banyak. Oleh karena itu, peserta CPNS perlu persiapan yang matang untuk menghadapi tes CPNS. Walau begitu, hal tersebut masih meninggalkan pertanyaan di dalam benak: seberapa banyak persiapan yang harus disiapkan untuk lulus tes CPNS? Investigasi kali ini menganalisa hasil tes CPNS di Kementerian Pendidikan yang diselenggarakan pada 2024 untuk mencari tahu seberapa banyak persiapan yang dibutuhkan oleh peserta CPNS untuk lulus di tes CPNS di periode mendatang. Dengan menggunakan pendekatan statistik deskriptif, studi ini menguak bahwa setiap jabatan formasi memiliki tren skor CPNS yang unik satu sama lain, dan bahwa peluang untuk lulus CPNS ditentukan dari banyaknya pelamar pada suatu jabatan formasi per sub bagian per bagian per institusi. Hal ini menekankan implikasi bahwa peserta CPNS di periode mendatang disarankan untuk memilah dan memilih jabatan formasi berdasarkan jumlah frekuensi pelamar di lokasi yang diminati.
+Persaingan dalam tes Calon Pegawai Negeri Sipil (CPNS) Negara Indonesia,
+utamanya pada Kementerian Pendidikan, sangatlah ketat. Hal ini
+disebabkan jumlah pelamar yang sangat banyak. Oleh karena itu, peserta
+CPNS perlu persiapan yang matang untuk menghadapi tes CPNS. Walau
+begitu, hal tersebut masih meninggalkan pertanyaan di dalam benak:
+seberapa banyak persiapan yang harus disiapkan untuk lulus tes CPNS?
+Investigasi kali ini menganalisa hasil tes CPNS di Kementerian
+Pendidikan yang diselenggarakan pada 2024 untuk mencari tahu seberapa
+banyak persiapan yang dibutuhkan oleh peserta CPNS untuk lulus di tes
+CPNS di periode mendatang. Dengan menggunakan pendekatan statistik
+deskriptif, studi ini menguak bahwa setiap jabatan formasi memiliki tren
+skor CPNS yang unik satu sama lain, dan bahwa peluang untuk lulus CPNS
+ditentukan dari banyaknya pelamar pada suatu jabatan formasi per sub
+bagian per bagian per institusi. Hal ini menekankan implikasi bahwa
+peserta CPNS di periode mendatang disarankan untuk memilah dan memilih
+jabatan formasi berdasarkan jumlah frekuensi pelamar di lokasi yang
+diminati.
 
 ***Kata Kunci:** CPNS, Kementerian Pendidikan, Statistik Deskriptif*
 
 # Pendahuluan
 
-Bagian ini memaparkan latar belakang, pertanyaan riset, tujuan riset, kontribusi riset, dan sumber data--secara berurutan.
+Bagian ini memaparkan latar belakang, pertanyaan riset, tujuan riset,
+kontribusi riset, dan sumber data–secara berurutan.
 
 ## Latar Belakang
 
-Berawal dari pengalaman kegagalan dalam menghadapi CPNS 2024, saya membuat analisis hasil CPNS (Calon Pegawai Negeri Sipil) untuk mengetahui lebih mendalam tentang kompetitor saya. Walau begitu, pengumuman hasil CPNS yang dipublikasikan oleh Kementerian sangat sulit untuk dianalisis mengingat jumlah halamannya yang banyak. Oleh karena itu, saya berinisiatif untuk melakukan analisis data hasil CPNS menggunakan teknik rekayasa informasi (*data engineerfing, data analysis*). Selain itu, mengingat banyak rekan saya yang memiliki cita-cita untuk menjadi ASN (Aparatur Sipil Negara), hasil analisis ini saya persembahkan untuk seluruh warga Indonesia yang hendak menjadi ASN di kemudian hari.
+Berawal dari pengalaman kegagalan dalam menghadapi CPNS 2024, saya
+membuat analisis hasil CPNS (Calon Pegawai Negeri Sipil) untuk
+mengetahui lebih mendalam tentang kompetitor saya. Walau begitu,
+pengumuman hasil CPNS yang dipublikasikan oleh Kementerian sangat sulit
+untuk dianalisis mengingat jumlah halamannya yang banyak. Oleh karena
+itu, saya berinisiatif untuk melakukan analisis data hasil CPNS
+menggunakan teknik rekayasa informasi (*data engineerfing, data
+analysis*). Selain itu, mengingat banyak rekan saya yang memiliki
+cita-cita untuk menjadi ASN (Aparatur Sipil Negara), hasil analisis ini
+saya persembahkan untuk seluruh warga Indonesia yang hendak menjadi ASN
+di kemudian hari.
 
-Mengingat pengumuman hasil CPNS yang disiarkan per instansi, akan sangat sulit bagi saya untuk mendapatkan semua data secara holistik. Selain itu, lingkungan sosial dimana saya tumbuh didominasi dengan (calon) pendidik sehingga saya tertarik dengan data yang lebih spesifik. Dengan pertimbangan ini, saya memutuskan untuk mengambil data dari Kementerian yang berhubungan dengan dunia pendidikan. Di sini saya tidak spesifik merujuk pada Kementerian Pendidikan Dasar dan Menengah (Kemendikdasmen) ataupun Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi (Kemendikbudristek) karena nama Kementerian cenderung berganti seiring dengan pergantian kepemimpinan negara. Dengan pertimbangan ini, saya memutuskan untuk menggunakan terminologi Kementerian Pendidikan (Kemendik) sebagai definisi payung untuk Kementerian yang bergerak secara khusus di bidang pendidikan.
+Mengingat pengumuman hasil CPNS yang disiarkan per instansi, akan sangat
+sulit bagi saya untuk mendapatkan semua data secara holistik. Selain
+itu, lingkungan sosial dimana saya tumbuh didominasi dengan (calon)
+pendidik sehingga saya tertarik dengan data yang lebih spesifik. Dengan
+pertimbangan ini, saya memutuskan untuk mengambil data dari Kementerian
+yang berhubungan dengan dunia pendidikan. Di sini saya tidak spesifik
+merujuk pada Kementerian Pendidikan Dasar dan Menengah (Kemendikdasmen)
+ataupun Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi
+(Kemendikbudristek) karena nama Kementerian cenderung berganti seiring
+dengan pergantian kepemimpinan negara. Dengan pertimbangan ini, saya
+memutuskan untuk menggunakan terminologi Kementerian Pendidikan
+(Kemendik) sebagai definisi payung untuk Kementerian yang bergerak
+secara khusus di bidang pendidikan.
 
-Proyek ini bersifat kontinyu/berkelanjutan. Pengumuman hasil CPNS 5 periode sebelum 2024 dan setelah periode 2024 (dan seterusnya) akan saya analisis.
+Proyek ini bersifat kontinyu/berkelanjutan. Pengumuman hasil CPNS 5
+periode sebelum 2024 dan setelah periode 2024 (dan seterusnya) akan saya
+analisis.
 
 ## Pertanyaan Riset
 
-Investigasi ini memiliki beberapa pertanyaan yang akan memandu proses analisis, diantaranya adalah:
+Investigasi ini memiliki beberapa pertanyaan yang akan memandu proses
+analisis, diantaranya adalah:
 
-1.  Secara umum, berapa skor TWK, TIU, TKP, dan total yang aman untuk lolos ke tahap SKB?
-2.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan dari rumpun keguruan dan ilmu pendidikan untuk lolos ke tahap SKB?
-3.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk lolos ke tahap SKB?
-4.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan dan tujuan jabatan formasi yang berkaitan dengan "Inggris" untuk lolos ke tahap SKB?
-5.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar Dosen Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan dengan "Inggris" untuk lolos ke tahap SKB?
-6.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan yang berkaitan dengan "Fisika" untuk lolos ke tahap SKB?
-7.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar Widyaiswara untuk lolos ke tahap SKB?
+1.  Secara umum, berapa skor TWK, TIU, TKP, dan total yang aman untuk
+    lolos ke tahap SKB?
+2.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan
+    latar pendidikan dari rumpun keguruan dan ilmu pendidikan untuk
+    lolos ke tahap SKB?
+3.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan
+    latar pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk
+    lolos ke tahap SKB?
+4.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan
+    latar pendidikan dan tujuan jabatan formasi yang berkaitan dengan
+    “Inggris” untuk lolos ke tahap SKB?
+5.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar Dosen
+    Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan dengan
+    “Inggris” untuk lolos ke tahap SKB?
+6.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan
+    latar pendidikan yang berkaitan dengan “Fisika” untuk lolos ke tahap
+    SKB?
+7.  Berapa skor TWK, TIU, TKP, dan total yang aman bagi pelamar
+    Widyaiswara untuk lolos ke tahap SKB?
 8.  Secara umum, berapa skor SKB yang aman untuk lolos tahap SKB?
-9.  Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan dari rumpun keguruan dan ilmu pendidikan untuk lolos tahap SKB?
-10. Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk lolos tahap SKB?
-11. Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan yang berkaitan dengan "Inggris" untuk lolos tahap SKB?
-12. Berapa skor SKB yang aman bagi pelamar Dosen Asisten Ahli untuk formasi yang berkaitan dengan "Inggris" untuk lolos tahap SKB?
-13. Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan yang berkaitan dengan "Fisika" untuk lolos tahap SKB?
-14. Berapa skor SKB yang aman bagi pelamar WIdyaiswara untuk lolos tahap SKB?
-15. Di masing-masing formasi jabatan CPNS 2024 Kemendik, berapa proporsi kelulusan SKD-nya?
-16. Di masing-masing formasi jabatan CPNS 2024 Kemendik, berapa proporsi kelulusan SKB-nya?
+9.  Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan dari
+    rumpun keguruan dan ilmu pendidikan untuk lolos tahap SKB?
+10. Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan dari
+    rumpun non keguruan dan ilmu pendidikan untuk lolos tahap SKB?
+11. Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan yang
+    berkaitan dengan “Inggris” untuk lolos tahap SKB?
+12. Berapa skor SKB yang aman bagi pelamar Dosen Asisten Ahli untuk
+    formasi yang berkaitan dengan “Inggris” untuk lolos tahap SKB?
+13. Berapa skor SKB yang aman bagi pelamar dengan latar pendidikan yang
+    berkaitan dengan “Fisika” untuk lolos tahap SKB?
+14. Berapa skor SKB yang aman bagi pelamar WIdyaiswara untuk lolos tahap
+    SKB?
+15. Di masing-masing formasi jabatan CPNS 2024 Kemendik, berapa proporsi
+    kelulusan SKD-nya?
+16. Di masing-masing formasi jabatan CPNS 2024 Kemendik, berapa proporsi
+    kelulusan SKB-nya?
 17. Jabatan formasi di instansi mana yang paling banyak peminatnya?
 18. Jabatan formasi di instansi mana yang paling sedikit peminatnya?
-19. Daerah mana yang paling banyak diminati oleh pelamar CPNS 2024 Kemendik?
-20. Daerah mana yang paling sedikit diminati oleh pelamar CPNS 2024 Kemendik?
-21. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan posisi yang dilamar adalah Dosen Asisten Ahli?
-22. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-3 Pendidikan Bahasa Inggris dan posisi yang dilamar adalah Dosen Lektor?
-23. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan posisi yang dilamar adalah Widyaiswara?
-24. Berapa probabilitas lulus menjadi PNS di setiap formasi yang ada jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris?
-25. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Fisika dan posisi yang dilamar adalah Dosen Asisten Ahli?
-26. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-3 Pendidikan Fisika dan posisi yang dilamar adalah Dosen Lektor?
-27. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Fisika dan posisi yang dilamar adalah Widyaiswara?
-28. Berapa probabilitas lulus menjadi PNS di setiap formasi yang ada jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Fisika?
+19. Daerah mana yang paling banyak diminati oleh pelamar CPNS 2024
+    Kemendik?
+20. Daerah mana yang paling sedikit diminati oleh pelamar CPNS 2024
+    Kemendik?
+21. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan
+    yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan posisi yang
+    dilamar adalah Dosen Asisten Ahli?
+22. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan
+    yang dimiliki adalah S-3 Pendidikan Bahasa Inggris dan posisi yang
+    dilamar adalah Dosen Lektor?
+23. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan
+    yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan posisi yang
+    dilamar adalah Widyaiswara?
+24. Berapa probabilitas lulus menjadi PNS di setiap formasi yang ada
+    jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan
+    Bahasa Inggris?
+25. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan
+    yang dimiliki adalah S-2 Pendidikan Fisika dan posisi yang dilamar
+    adalah Dosen Asisten Ahli?
+26. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan
+    yang dimiliki adalah S-3 Pendidikan Fisika dan posisi yang dilamar
+    adalah Dosen Lektor?
+27. Berapa probabilitas lulus menjadi PNS jika latar belakang pendidikan
+    yang dimiliki adalah S-2 Pendidikan Fisika dan posisi yang dilamar
+    adalah Widyaiswara?
+28. Berapa probabilitas lulus menjadi PNS di setiap formasi yang ada
+    jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan
+    Fisika?
 
 ## Tujuan Riset
 
-Secara umum, dilakukannya investigasi ini adalah untuk memberikan gambaran umum tentang kompetitor pada rekrutmen CPNS. Tujuan lebih spesifik tertera di bawah ini:
+Secara umum, dilakukannya investigasi ini adalah untuk memberikan
+gambaran umum tentang kompetitor pada rekrutmen CPNS. Tujuan lebih
+spesifik tertera di bawah ini:
 
-1.  Menentukan skor TWK, TIU, TKP, dan total yang aman secara umum untuk lolos ke tahap SKB.
-2.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan dari rumpun keguruan dan ilmu pendidikan untuk lolos ke tahap SKB.
-3.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk lolos ke tahap SKB.
-4.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan dan tujuan jabatan formasi yang berkaitan dengan "Inggris" untuk lolos ke tahap SKB.
-5.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar Dosen Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan dengan "Inggris" untuk lolos ke tahap SKB.
-6.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar dengan latar pendidikan yang berkaitan dengan "Fisika" untuk lolos ke tahap SKB.
-7.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar Widyaiswara untuk lolos ke tahap SKB.
+1.  Menentukan skor TWK, TIU, TKP, dan total yang aman secara umum untuk
+    lolos ke tahap SKB.
+2.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar
+    dengan latar pendidikan dari rumpun keguruan dan ilmu pendidikan
+    untuk lolos ke tahap SKB.
+3.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar
+    dengan latar pendidikan dari rumpun non keguruan dan ilmu pendidikan
+    untuk lolos ke tahap SKB.
+4.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar
+    dengan latar pendidikan dan tujuan jabatan formasi yang berkaitan
+    dengan “Inggris” untuk lolos ke tahap SKB.
+5.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar
+    Dosen Asisten Ahli dan kualifikasi latar pendidikan yang berkaitan
+    dengan “Inggris” untuk lolos ke tahap SKB.
+6.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar
+    dengan latar pendidikan yang berkaitan dengan “Fisika” untuk lolos
+    ke tahap SKB.
+7.  Menentukan skor TWK, TIU, TKP, dan total yang aman bagi pelamar
+    Widyaiswara untuk lolos ke tahap SKB.
 8.  Menentukan skor SKB yang aman secara umum untuk lolos tahap SKB.
-9.  Menentukan skor SKB yang aman bagi pelamar dengan latar pendidikan dari rumpun keguruan dan ilmu pendidikan untuk lolos tahap SKB.
-10. Menentukan skor SKB yang aman bagi pelamar dengan latar pendidikan dari rumpun non keguruan dan ilmu pendidikan untuk lolos tahap SKB.
-11. Menentukan skor SKB yang aman bagi pelamar dengan latar pendidikan yang berkaitan dengan "Inggris" untuk lolos tahap SKB.
-12. Menentukan skor SKB yang aman bagi pelamar Dosen Asisten Ahli untuk formasi yang berkaitan dengan "Inggris" untuk lolos tahap SKB.
-13. Menentukan skor SKB yang aman bagi pelamar dengan latar pendidikan yang berkaitan dengan "Fisika" untuk lolos tahap SKB.
-14. Menentukan skor SKB yang aman bagi pelamar Widyaiswara untuk lolos tahap SKB.
-15. Menghitung proporsi kelulusan SKD di masing-masing formasi jabatan CPNS 2024 Kemendik.
-16. Menghitung proporsi kelulusan SKB di masing-masing formasi jabatan CPNS 2024 Kemendik.
-17. Mengidentifikasi jabatan formasi di instansi yang paling banyak peminatnya.
-18. Mengidentifikasi jabatan formasi di instansi yang paling sedikit peminatnya.
-19. Mengidentifikasi daerah yang paling banyak diminati oleh pelamar CPNS 2024 Kemendik.
-20. Mengidentifikasi daerah yang paling sedikit diminati oleh pelamar CPNS 2024 Kemendik.
-21. Menghitung probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan posisi yang dilamar adalah Dosen Asisten Ahli.
-22. Menghitung probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-3 Pendidikan Bahasa Inggris dan posisi yang dilamar adalah Dosen Lektor.
-23. Menghitung probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan posisi yang dilamar adalah Widyaiswara.
-24. Menghitung probabilitas lulus menjadi PNS di setiap formasi yang ada jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris.
-25. Menghitung probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Fisika dan posisi yang dilamar adalah Dosen Asisten Ahli.
-26. Menghitung probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-3 Pendidikan Fisika dan posisi yang dilamar adalah Dosen Lektor.
-27. Menghitung probabilitas lulus menjadi PNS jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Fisika dan posisi yang dilamar adalah Widyaiswara.
-28. Menghitung probabilitas lulus menjadi PNS di setiap formasi yang ada jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan Fisika.
+9.  Menentukan skor SKB yang aman bagi pelamar dengan latar pendidikan
+    dari rumpun keguruan dan ilmu pendidikan untuk lolos tahap SKB.
+10. Menentukan skor SKB yang aman bagi pelamar dengan latar pendidikan
+    dari rumpun non keguruan dan ilmu pendidikan untuk lolos tahap SKB.
+11. Menentukan skor SKB yang aman bagi pelamar dengan latar pendidikan
+    yang berkaitan dengan “Inggris” untuk lolos tahap SKB.
+12. Menentukan skor SKB yang aman bagi pelamar Dosen Asisten Ahli untuk
+    formasi yang berkaitan dengan “Inggris” untuk lolos tahap SKB.
+13. Menentukan skor SKB yang aman bagi pelamar dengan latar pendidikan
+    yang berkaitan dengan “Fisika” untuk lolos tahap SKB.
+14. Menentukan skor SKB yang aman bagi pelamar Widyaiswara untuk lolos
+    tahap SKB.
+15. Menghitung proporsi kelulusan SKD di masing-masing formasi jabatan
+    CPNS 2024 Kemendik.
+16. Menghitung proporsi kelulusan SKB di masing-masing formasi jabatan
+    CPNS 2024 Kemendik.
+17. Mengidentifikasi jabatan formasi di instansi yang paling banyak
+    peminatnya.
+18. Mengidentifikasi jabatan formasi di instansi yang paling sedikit
+    peminatnya.
+19. Mengidentifikasi daerah yang paling banyak diminati oleh pelamar
+    CPNS 2024 Kemendik.
+20. Mengidentifikasi daerah yang paling sedikit diminati oleh pelamar
+    CPNS 2024 Kemendik.
+21. Menghitung probabilitas lulus menjadi PNS jika latar belakang
+    pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan
+    posisi yang dilamar adalah Dosen Asisten Ahli.
+22. Menghitung probabilitas lulus menjadi PNS jika latar belakang
+    pendidikan yang dimiliki adalah S-3 Pendidikan Bahasa Inggris dan
+    posisi yang dilamar adalah Dosen Lektor.
+23. Menghitung probabilitas lulus menjadi PNS jika latar belakang
+    pendidikan yang dimiliki adalah S-2 Pendidikan Bahasa Inggris dan
+    posisi yang dilamar adalah Widyaiswara.
+24. Menghitung probabilitas lulus menjadi PNS di setiap formasi yang ada
+    jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan
+    Bahasa Inggris.
+25. Menghitung probabilitas lulus menjadi PNS jika latar belakang
+    pendidikan yang dimiliki adalah S-2 Pendidikan Fisika dan posisi
+    yang dilamar adalah Dosen Asisten Ahli.
+26. Menghitung probabilitas lulus menjadi PNS jika latar belakang
+    pendidikan yang dimiliki adalah S-3 Pendidikan Fisika dan posisi
+    yang dilamar adalah Dosen Lektor.
+27. Menghitung probabilitas lulus menjadi PNS jika latar belakang
+    pendidikan yang dimiliki adalah S-2 Pendidikan Fisika dan posisi
+    yang dilamar adalah Widyaiswara.
+28. Menghitung probabilitas lulus menjadi PNS di setiap formasi yang ada
+    jika latar belakang pendidikan yang dimiliki adalah S-2 Pendidikan
+    Fisika.
 
 ## Kontribusi Riset
 
-Investigasi ini menitikberatkan kontribusi praktikal yang bisa digunakan oleh seluruh warga Indonesia yang memiliki motivasi untuk mengikuti CPNS, terutama bagi mereka yang menargetkan Kementerian Pendidikan. Dengan wawasan yang didapat dari hasil investigasi ini, saya berharap calon PNS dapat membuat rencana belajar yang efektif dan efisien, analisa kompetitor, dan peluang keberhasilan lolos di masing-masing tahap tes CPNS.
+Investigasi ini menitikberatkan kontribusi praktikal yang bisa digunakan
+oleh seluruh warga Indonesia yang memiliki motivasi untuk mengikuti
+CPNS, terutama bagi mereka yang menargetkan Kementerian Pendidikan.
+Dengan wawasan yang didapat dari hasil investigasi ini, saya berharap
+calon PNS dapat membuat rencana belajar yang efektif dan efisien,
+analisa kompetitor, dan peluang keberhasilan lolos di masing-masing
+tahap tes CPNS.
 
-Di samping kontribusi praktikal, hasil analisis ini juga menawarkan wawasan yang bersifat teoretis-eksploratif tentang karakteristik dari demografi calon PNS berdasarkan sudut pandang retrospektif. Analisis prediktif yang disajikan dalam hasil investigasi ini juga dapat dijadikan sebagai bahan dasar dalam perencanaan peningkatan mutu SDM (Sumber Daya Alam) PNS generasi yang akan datang.
+Di samping kontribusi praktikal, hasil analisis ini juga menawarkan
+wawasan yang bersifat teoretis-eksploratif tentang karakteristik dari
+demografi calon PNS berdasarkan sudut pandang retrospektif. Analisis
+prediktif yang disajikan dalam hasil investigasi ini juga dapat
+dijadikan sebagai bahan dasar dalam perencanaan peningkatan mutu SDM
+(Sumber Daya Alam) PNS generasi yang akan datang.
 
-Tidak terlewat juga kontribusi berupa data empiris yang ditawarkan dari hasil investigasi ini. Jumlah data yang masif ini memiliki nilai yang berharga untuk pengambilan keputusan baik di sektor formal atau informal, di level operasional maupun managerial, dan/atau di level eksekutif.
+Tidak terlewat juga kontribusi berupa data empiris yang ditawarkan dari
+hasil investigasi ini. Jumlah data yang masif ini memiliki nilai yang
+berharga untuk pengambilan keputusan baik di sektor formal atau
+informal, di level operasional maupun managerial, dan/atau di level
+eksekutif.
 
 ## Sumber Data
 
-Data diambil dari pengumuman hasil SKD dan SKB (dua pengumuman berbeda) CPNS 2024 spesifik pada Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi (Kemendikbudristek).
+Data diambil dari pengumuman hasil SKD dan SKB (dua pengumuman berbeda)
+CPNS 2024 spesifik pada Kementerian Pendidikan, Kebudayaan, Riset, dan
+Teknologi (Kemendikbudristek).
 
 # Persiapan Data
 
 ## Perkakas (Library)
 
-Kode di bawah ini akan mempersiapkan *library* yang diperlukan untuk menunjang analisis.
+Kode di bawah ini akan mempersiapkan *library* yang diperlukan untuk
+menunjang analisis.
 
-```{r libraries, results = 'hide', warning = FALSE, message = FALSE}
+``` r
 library(tidyverse)
 library(ggplot2)
 library(ggthemes)
@@ -142,11 +263,15 @@ library(MetBrewer)
 
 ## Impor Data
 
-Data sudah melalui tahap ekstraksi dari PDF ke CSV menggunakan Python. Setelah data diekstrak ke format CSV, data kemudian dibersihkan menggunakan PostgreSQL. Pada dokumen ini, impor data yang dimaksud adalah impor data dari CSV ke R. Kode di bawah ini akan mengimpor data dari CSV ke R.
+Data sudah melalui tahap ekstraksi dari PDF ke CSV menggunakan Python.
+Setelah data diekstrak ke format CSV, data kemudian dibersihkan
+menggunakan PostgreSQL. Pada dokumen ini, impor data yang dimaksud
+adalah impor data dari CSV ke R. Kode di bawah ini akan mengimpor data
+dari CSV ke R.
 
 ### Hasil SKD
 
-```{r import-data-skd}
+``` r
 hasil_skd <- read_csv("2024/test1v3.csv",
                       col_types = cols(rank = col_number(),
                                        twk = col_integer(),
@@ -156,52 +281,145 @@ hasil_skd <- read_csv("2024/test1v3.csv",
                                        allotment = col_integer(),
                                        page_num = col_integer()
                       ))
+```
+
+    ## Warning: One or more parsing issues, call `problems()` on your data frame for details,
+    ## e.g.:
+    ##   dat <- vroom(...)
+    ##   problems(dat)
+
+``` r
 hasil_skd
 ```
 
+    ## # A tibble: 99,547 × 14
+    ##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+    ##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+    ##  1     1 243010201… ANITA VE… S-1 HUK…   115   120   195   430 P/L       JF0000…
+    ##  2     2 243010201… AISYAH S… S-1 HUK…   100   120   196   416 P/L       JF0000…
+    ##  3     3 243010201… DYAH AYU… S-1 HUK…    85   135   191   411 P/L       JF0000…
+    ##  4     4 243010201… MUHAMMAD… S-1 HUK…    85   115   199   399 P/L       JF0000…
+    ##  5     5 243010201… EDO DWI … S-1 HUK…    90   115   193   398 P/L       JF0000…
+    ##  6     6 243010201… SILVIA M… S-1 HUK…    90   105   201   396 P/L       JF0000…
+    ##  7     7 243010201… WIDYA PU… S-1 HUK…    90   105   196   391 P/L       JF0000…
+    ##  8     8 243010201… RHEA ART… S-1 HUK…    95   110   184   389 P/L       JF0000…
+    ##  9     9 243010201… DICHO SI… S-1 HUK…    90   100   192   382 P/L       JF0000…
+    ## 10    10 243010201… FARADITA… S-1 HUK…    85   110   180   375 P/L       JF0000…
+    ## # ℹ 99,537 more rows
+    ## # ℹ 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+    ## #   page_num <int>
+
 ### Hasil SKB
 
-```{r import-data-skb}
+``` r
 hasil_skb <- read_csv("2024/test2v1.csv", 
                       col_types = cols(id = col_character())
                       )
 hasil_skb
 ```
 
+    ## # A tibble: 14,989 × 21
+    ##     rank id    birthdate  last_edu edu_group   gpa   twk   tiu   tkp   skd skd40
+    ##    <dbl> <chr> <date>     <chr>    <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+    ##  1     1 2430… 1997-05-26 S-1 HUK… Universi…  2.92    85   135   191   411  29.9
+    ##  2     2 2430… 1997-03-17 S-1 HUK… Universi…  3.87    95   110   184   389  28.3
+    ##  3     3 2430… 2003-04-20 S-1 HUK… Universi…  3.93   100   120   196   416  30.3
+    ##  4     4 2430… 2001-10-12 S-1 HUK… Universi…  3.78    90   105   201   396  28.8
+    ##  5     5 2430… 2001-07-26 S-1 HUK… Universi…  3.84    90   100   192   382  27.8
+    ##  6     6 2430… 1996-05-03 S-1 HUK… Universi…  3.26    70    90   178   338  24.6
+    ##  7     7 2430… 2000-01-01 S-1 HUK… Universi…  3.74    85   115   199   399  29.0
+    ##  8     8 2430… 2001-11-23 S-1 HUK… Universi…  3.84    80   100   182   362  26.3
+    ##  9     9 2430… 1993-03-29 S-1 HUK… Universi…  3.8     85   110   180   375  27.3
+    ## 10    10 2430… 1994-09-19 S-1 HUK… Universi…  3.66    80   100   177   357  26.0
+    ## # ℹ 14,979 more rows
+    ## # ℹ 10 more variables: skb <dbl>, skb60 <dbl>, final_score <dbl>,
+    ## #   decl_code <chr>, jp_code <chr>, loc_code <chr>, type_code <chr>,
+    ## #   edu_qual <chr>, num_edu_qual <chr>, page_num <dbl>
+
 ### Jabatan Formasi
 
-```{r import-data-jabatan-formasi}
+``` r
 jabatan_formasi <- read_csv("2024/jabatan_formasi.csv") %>% 
   rename(jp_code = parent)
+```
 
+    ## Rows: 51 Columns: 2
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): parent, job_position
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
 jabatan_formasi
 ```
 
+    ## # A tibble: 51 × 2
+    ##    jp_code   job_position                                    
+    ##    <chr>     <chr>                                           
+    ##  1 JF0000334 ANALIS HUKUM AHLI PERTAMA                       
+    ##  2 JF0000905 DOSEN LEKTOR                                    
+    ##  3 JF0000908 DOSEN ASISTEN AHLI                              
+    ##  4 JF0001001 PENGEMBANG TEKNOLOGI PEMBELAJARAN AHLI PERTAMA  
+    ##  5 JF0008014 ANALIS SUMBER DAYA MANUSIA APARATUR AHLI PERTAMA
+    ##  6 JF0008017 PRANATA SUMBER DAYA MANUSIA APARATUR TERAMPIL   
+    ##  7 JF0008403 PAMONG BUDAYA AHLI PERTAMA                      
+    ##  8 JF0008406 PAMONG BUDAYA TERAMPIL                          
+    ##  9 JF0008904 PERENCANA AHLI PERTAMA                          
+    ## 10 JF0010504 PRANATA KOMPUTER AHLI PERTAMA                   
+    ## # ℹ 41 more rows
+
 ### Lokasi Formasi
 
-```{r import-data-lokasi-formasi}
+``` r
 lokasi_formasi <- read_csv("2024/lokasi_formasi_cleaning1.csv")
 ```
+
+    ## Rows: 15814 Columns: 7
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (7): loc_code, data1, data2, data3, data4, data5, data6
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ## Pembersihan Data
 
 ### Dataset SKD
 
-Tahap ini akan memberikan ringkasan jumlah data duplikat. Di sini saya mengecek secara (1) keseluruhan, (2) variabel id, dan (3) variabel full_name.
+Tahap ini akan memberikan ringkasan jumlah data duplikat. Di sini saya
+mengecek secara (1) keseluruhan, (2) variabel id, dan (3) variabel
+full_name.
 
-```{r check-duplicate-skd}
+``` r
 chk_dupl_skd_all <- sum(duplicated(hasil_skd))
 chk_dupl_skd_id <- sum(duplicated(hasil_skd$id))
 chk_dupl_skd_full_name <- sum(duplicated(hasil_skd$full_name))
 
 chk_dupl_skd_all
+```
+
+    ## [1] 30885
+
+``` r
 chk_dupl_skd_id
+```
+
+    ## [1] 30885
+
+``` r
 chk_dupl_skd_full_name
 ```
 
-Ketika dicek berdasarkan variabel *id* dan *full_name*, ada `r chk_dupl_skd_id` dan `r chk_dupl_skd_full_name` data duplikat pada masing-masing variabel *id* dan *full_name*. Inkonsistensi data ini akan menyebabkan menurunnya keakuratan hasil analisis di tahap yang akan datang sehingga perlu didalami lebih lanjut.
+    ## [1] 33641
 
-```{r inspect-duplicate-skd}
+Ketika dicek berdasarkan variabel *id* dan *full_name*, ada 30885 dan
+33641 data duplikat pada masing-masing variabel *id* dan *full_name*.
+Inkonsistensi data ini akan menyebabkan menurunnya keakuratan hasil
+analisis di tahap yang akan datang sehingga perlu didalami lebih lanjut.
+
+``` r
 hasil_skd %>% 
   select(id, full_name, twk) %>% # tambah variabel full_name dan twk untuk V&V (verifikasi dan validasi)
   group_by(id) %>% 
@@ -209,18 +427,59 @@ hasil_skd %>%
   ungroup()
 ```
 
-Variabel `full_name` tampak memiliki duplikat untuk nama yang memiliki sedikit perbedaan. Dalam hal ini, data yang mengandung `\r`, `\n` atau `\r\n`akan dianggap data yang berbeda walaupun secara holistik tidak ada perbedaan. Untuk memperbaiki hal ini, menghapus lalu menyisakan satu data unik dari variabel `id` akan lebih tepat.
+    ## # A tibble: 61,770 × 3
+    ##    id                full_name                                     twk
+    ##    <chr>             <chr>                                       <int>
+    ##  1 24301020120017621 "LINGGOMI ADINDA TAMARADHINA\r\nNAPITUPULU"    80
+    ##  2 24301020120017621 "LINGGOMI ADINDA TAMARADHINA\r\nNAPITUPULU"    80
+    ##  3 24301020110021143 "MUH ANDRI ALVIAN RAMADHAN\r\nALPHAROEDI"      NA
+    ##  4 24301020110021143 "MUH ANDRI ALVIAN RAMADHAN\r\nALPHAROEDI"      NA
+    ##  5 24301020120001553 "DIAN ASWITA"                                  75
+    ##  6 24301020120001553 "DIAN ASWITA"                                  75
+    ##  7 24301020110008472 "RAHMAT SALEH"                                105
+    ##  8 24301020110008472 "RAHMAT SALEH"                                105
+    ##  9 24301020120023931 "ANDI ANDARIANA"                              100
+    ## 10 24301020120023931 "ANDI ANDARIANA"                              100
+    ## # ℹ 61,760 more rows
 
-```{r remove-duplicate-skd}
+Variabel `full_name` tampak memiliki duplikat untuk nama yang memiliki
+sedikit perbedaan. Dalam hal ini, data yang mengandung `\r`, `\n` atau
+`\r\n`akan dianggap data yang berbeda walaupun secara holistik tidak ada
+perbedaan. Untuk memperbaiki hal ini, menghapus lalu menyisakan satu
+data unik dari variabel `id` akan lebih tepat.
+
+``` r
 hasil_skd_no_dupl <- hasil_skd %>% 
   distinct(id, .keep_all = TRUE)
 
 hasil_skd_no_dupl
 ```
 
-Perlu dicatat bahwa kolom/variabel `full_name` tidak perlu dibersihkan lebih lanjut (terutama untuk menghapus `\r`, `\n`, atau `\r\n`) karena tidak ada sama sekali urgensi untuk menginvestigasi satu atau sekian nama secara spesifik. Walau begitu, kolom `last_edu` memiliki kendala *new rows* dan/atau *new lines* yang terpatri dalam datanya sehingga pembersihan lanjutan sangat diperlukan untuk tahap analisis.
+    ## # A tibble: 68,662 × 14
+    ##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+    ##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+    ##  1     1 243010201… ANITA VE… S-1 HUK…   115   120   195   430 P/L       JF0000…
+    ##  2     2 243010201… AISYAH S… S-1 HUK…   100   120   196   416 P/L       JF0000…
+    ##  3     3 243010201… DYAH AYU… S-1 HUK…    85   135   191   411 P/L       JF0000…
+    ##  4     4 243010201… MUHAMMAD… S-1 HUK…    85   115   199   399 P/L       JF0000…
+    ##  5     5 243010201… EDO DWI … S-1 HUK…    90   115   193   398 P/L       JF0000…
+    ##  6     6 243010201… SILVIA M… S-1 HUK…    90   105   201   396 P/L       JF0000…
+    ##  7     7 243010201… WIDYA PU… S-1 HUK…    90   105   196   391 P/L       JF0000…
+    ##  8     8 243010201… RHEA ART… S-1 HUK…    95   110   184   389 P/L       JF0000…
+    ##  9     9 243010201… DICHO SI… S-1 HUK…    90   100   192   382 P/L       JF0000…
+    ## 10    10 243010201… FARADITA… S-1 HUK…    85   110   180   375 P/L       JF0000…
+    ## # ℹ 68,652 more rows
+    ## # ℹ 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+    ## #   page_num <int>
 
-```{r clean-str-last-edu}
+Perlu dicatat bahwa kolom/variabel `full_name` tidak perlu dibersihkan
+lebih lanjut (terutama untuk menghapus `\r`, `\n`, atau `\r\n`) karena
+tidak ada sama sekali urgensi untuk menginvestigasi satu atau sekian
+nama secara spesifik. Walau begitu, kolom `last_edu` memiliki kendala
+*new rows* dan/atau *new lines* yang terpatri dalam datanya sehingga
+pembersihan lanjutan sangat diperlukan untuk tahap analisis.
+
+``` r
 hasil_skd_no_dupl$last_edu <- 
   str_replace_all(hasil_skd_no_dupl$last_edu, "[\\r\\n]", " ") %>%
   str_squish()
@@ -228,20 +487,63 @@ hasil_skd_no_dupl$last_edu <-
 hasil_skd_no_dupl
 ```
 
-Tahap pembersihan data selanjutnya adalah menyeregamkan data `NULL`. Di dataset ini, data kosong diisi dengan `NULL` atau `NA` (system default R). Data poin `NULL` harus diganti menjadi `NA` (system default R) sehingga menjadi seragam.
+    ## # A tibble: 68,662 × 14
+    ##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+    ##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+    ##  1     1 243010201… ANITA VE… S-1 HUK…   115   120   195   430 P/L       JF0000…
+    ##  2     2 243010201… AISYAH S… S-1 HUK…   100   120   196   416 P/L       JF0000…
+    ##  3     3 243010201… DYAH AYU… S-1 HUK…    85   135   191   411 P/L       JF0000…
+    ##  4     4 243010201… MUHAMMAD… S-1 HUK…    85   115   199   399 P/L       JF0000…
+    ##  5     5 243010201… EDO DWI … S-1 HUK…    90   115   193   398 P/L       JF0000…
+    ##  6     6 243010201… SILVIA M… S-1 HUK…    90   105   201   396 P/L       JF0000…
+    ##  7     7 243010201… WIDYA PU… S-1 HUK…    90   105   196   391 P/L       JF0000…
+    ##  8     8 243010201… RHEA ART… S-1 HUK…    95   110   184   389 P/L       JF0000…
+    ##  9     9 243010201… DICHO SI… S-1 HUK…    90   100   192   382 P/L       JF0000…
+    ## 10    10 243010201… FARADITA… S-1 HUK…    85   110   180   375 P/L       JF0000…
+    ## # ℹ 68,652 more rows
+    ## # ℹ 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+    ## #   page_num <int>
 
-```{r standardize-nulls-skd}
+Tahap pembersihan data selanjutnya adalah menyeregamkan data `NULL`. Di
+dataset ini, data kosong diisi dengan `NULL` atau `NA` (system default
+R). Data poin `NULL` harus diganti menjadi `NA` (system default R)
+sehingga menjadi seragam.
+
+``` r
 hasil_skd_standardized_null <- hasil_skd_no_dupl %>% 
   mutate(across(where(is.character), ~ str_replace_all(.x, "^NULL$", NA_character_)))
 
 hasil_skd_standardized_null
 ```
 
-Setelah standarisasi data kosong (NULL/NA), langkah selanjutnya adalah melakukan pengisian data kosong. Pada baris data ke 19 sampai 75, banyak data (`jp_code`, `loc_code`, `type_code`, `allotment`) yang kosong karena proses impor data yang kurang akurat dan presisi. Untuk mengisi kekosongan data ini, saya menggunakan *forward filling* dengan kondisi sebagai berikut:
+    ## # A tibble: 68,662 × 14
+    ##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+    ##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+    ##  1     1 243010201… ANITA VE… S-1 HUK…   115   120   195   430 P/L       JF0000…
+    ##  2     2 243010201… AISYAH S… S-1 HUK…   100   120   196   416 P/L       JF0000…
+    ##  3     3 243010201… DYAH AYU… S-1 HUK…    85   135   191   411 P/L       JF0000…
+    ##  4     4 243010201… MUHAMMAD… S-1 HUK…    85   115   199   399 P/L       JF0000…
+    ##  5     5 243010201… EDO DWI … S-1 HUK…    90   115   193   398 P/L       JF0000…
+    ##  6     6 243010201… SILVIA M… S-1 HUK…    90   105   201   396 P/L       JF0000…
+    ##  7     7 243010201… WIDYA PU… S-1 HUK…    90   105   196   391 P/L       JF0000…
+    ##  8     8 243010201… RHEA ART… S-1 HUK…    95   110   184   389 P/L       JF0000…
+    ##  9     9 243010201… DICHO SI… S-1 HUK…    90   100   192   382 P/L       JF0000…
+    ## 10    10 243010201… FARADITA… S-1 HUK…    85   110   180   375 P/L       JF0000…
+    ## # ℹ 68,652 more rows
+    ## # ℹ 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+    ## #   page_num <int>
 
-> *IF `page_num` == `page_num` \| `page_num` == `page_num` + 1 THEN forward fill ELSE do nothing*
+Setelah standarisasi data kosong (NULL/NA), langkah selanjutnya adalah
+melakukan pengisian data kosong. Pada baris data ke 19 sampai 75, banyak
+data (`jp_code`, `loc_code`, `type_code`, `allotment`) yang kosong
+karena proses impor data yang kurang akurat dan presisi. Untuk mengisi
+kekosongan data ini, saya menggunakan *forward filling* dengan kondisi
+sebagai berikut:
 
-```{r forward-fill-skd}
+> *IF `page_num` == `page_num` \| `page_num` == `page_num` + 1 THEN
+> forward fill ELSE do nothing*
+
+``` r
 hasil_skd_forward_fill <- hasil_skd_standardized_null %>% 
   mutate(breakk = !(page_num == lag(page_num) | page_num == lag(page_num) + 1),
          group_id = cumsum(replace_na(breakk, TRUE))) %>%
@@ -253,9 +555,30 @@ hasil_skd_forward_fill <- hasil_skd_standardized_null %>%
 hasil_skd_forward_fill
 ```
 
-Kolom `twk`, `tiu`, `tkp`, dan `skd` tidak diterapkan *forward filling* ini karena data kosong di kolom tersebut menandakan peserta yang tidak hadir dalam tes CPNS sehingga tidak ada nilai yang terekam. WAlau begitu, nilai `NA` pada 4 kolom tersebut akan digantikan dengan dengan nilai 0 alih-alih `NA`.
+    ## # A tibble: 68,662 × 14
+    ##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+    ##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+    ##  1     1 243010201… ANITA VE… S-1 HUK…   115   120   195   430 P/L       JF0000…
+    ##  2     2 243010201… AISYAH S… S-1 HUK…   100   120   196   416 P/L       JF0000…
+    ##  3     3 243010201… DYAH AYU… S-1 HUK…    85   135   191   411 P/L       JF0000…
+    ##  4     4 243010201… MUHAMMAD… S-1 HUK…    85   115   199   399 P/L       JF0000…
+    ##  5     5 243010201… EDO DWI … S-1 HUK…    90   115   193   398 P/L       JF0000…
+    ##  6     6 243010201… SILVIA M… S-1 HUK…    90   105   201   396 P/L       JF0000…
+    ##  7     7 243010201… WIDYA PU… S-1 HUK…    90   105   196   391 P/L       JF0000…
+    ##  8     8 243010201… RHEA ART… S-1 HUK…    95   110   184   389 P/L       JF0000…
+    ##  9     9 243010201… DICHO SI… S-1 HUK…    90   100   192   382 P/L       JF0000…
+    ## 10    10 243010201… FARADITA… S-1 HUK…    85   110   180   375 P/L       JF0000…
+    ## # ℹ 68,652 more rows
+    ## # ℹ 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+    ## #   page_num <int>
 
-```{r na-to-zero-skd}
+Kolom `twk`, `tiu`, `tkp`, dan `skd` tidak diterapkan *forward filling*
+ini karena data kosong di kolom tersebut menandakan peserta yang tidak
+hadir dalam tes CPNS sehingga tidak ada nilai yang terekam. WAlau
+begitu, nilai `NA` pada 4 kolom tersebut akan digantikan dengan dengan
+nilai 0 alih-alih `NA`.
+
+``` r
 hasil_skd_na2zero <- hasil_skd_forward_fill %>% 
   replace_na(list(twk = 0L,
                   tiu = 0L,
@@ -265,31 +588,133 @@ hasil_skd_na2zero <- hasil_skd_forward_fill %>%
 hasil_skd_na2zero
 ```
 
-```{r}
-summary(hasil_skd_na2zero)
+    ## # A tibble: 68,662 × 14
+    ##     rank id         full_name last_edu   twk   tiu   tkp   skd decl_code jp_code
+    ##    <dbl> <chr>      <chr>     <chr>    <int> <int> <int> <int> <chr>     <chr>  
+    ##  1     1 243010201… ANITA VE… S-1 HUK…   115   120   195   430 P/L       JF0000…
+    ##  2     2 243010201… AISYAH S… S-1 HUK…   100   120   196   416 P/L       JF0000…
+    ##  3     3 243010201… DYAH AYU… S-1 HUK…    85   135   191   411 P/L       JF0000…
+    ##  4     4 243010201… MUHAMMAD… S-1 HUK…    85   115   199   399 P/L       JF0000…
+    ##  5     5 243010201… EDO DWI … S-1 HUK…    90   115   193   398 P/L       JF0000…
+    ##  6     6 243010201… SILVIA M… S-1 HUK…    90   105   201   396 P/L       JF0000…
+    ##  7     7 243010201… WIDYA PU… S-1 HUK…    90   105   196   391 P/L       JF0000…
+    ##  8     8 243010201… RHEA ART… S-1 HUK…    95   110   184   389 P/L       JF0000…
+    ##  9     9 243010201… DICHO SI… S-1 HUK…    90   100   192   382 P/L       JF0000…
+    ## 10    10 243010201… FARADITA… S-1 HUK…    85   110   180   375 P/L       JF0000…
+    ## # ℹ 68,652 more rows
+    ## # ℹ 4 more variables: loc_code <chr>, type_code <chr>, allotment <int>,
+    ## #   page_num <int>
 
+``` r
+summary(hasil_skd_na2zero)
+```
+
+    ##       rank           id             full_name           last_edu        
+    ##  Min.   :   1   Length:68662       Length:68662       Length:68662      
+    ##  1st Qu.:   5   Class :character   Class :character   Class :character  
+    ##  Median :  18   Mode  :character   Mode  :character   Mode  :character  
+    ##  Mean   : 123                                                           
+    ##  3rd Qu.:  98                                                           
+    ##  Max.   :1879                                                           
+    ##  NA's   :1                                                              
+    ##       twk              tiu              tkp             skd       
+    ##  Min.   :  0.00   Min.   :  0.00   Min.   :  0.0   Min.   :  0.0  
+    ##  1st Qu.: 55.00   1st Qu.: 60.00   1st Qu.:172.0   1st Qu.:299.0  
+    ##  Median : 70.00   Median : 85.00   Median :183.0   Median :338.0  
+    ##  Mean   : 66.93   Mean   : 80.78   Mean   :167.6   Mean   :315.3  
+    ##  3rd Qu.: 85.00   3rd Qu.:105.00   3rd Qu.:190.0   3rd Qu.:372.0  
+    ##  Max.   :140.00   Max.   :175.00   Max.   :218.0   Max.   :499.0  
+    ##                                                                   
+    ##   decl_code           jp_code            loc_code          type_code        
+    ##  Length:68662       Length:68662       Length:68662       Length:68662      
+    ##  Class :character   Class :character   Class :character   Class :character  
+    ##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+    ##                                                                             
+    ##                                                                             
+    ##                                                                             
+    ##                                                                             
+    ##    allotment         page_num    
+    ##  Min.   : 1.000   Min.   :    4  
+    ##  1st Qu.: 2.000   1st Qu.: 8246  
+    ##  Median : 3.000   Median :13977  
+    ##  Mean   : 5.462   Mean   :12104  
+    ##  3rd Qu.: 5.000   3rd Qu.:16360  
+    ##  Max.   :91.000   Max.   :17798  
+    ##  NA's   :1        NA's   :1
+
+``` r
 which(is.na(hasil_skd_na2zero$rank))
 ```
 
+    ## [1] 68662
+
 ### Dataset SKB
 
-Setelah membersihkan dataset SKD, selanjutnya adalah pembersihan dataset SKB. Prosedur pembersihan ini mirip dengan prosedur pembersihan data SKD pada bagian sebelumnya. Diawali dengan pengecekan secara umum tentang dataset SKB.
+Setelah membersihkan dataset SKD, selanjutnya adalah pembersihan dataset
+SKB. Prosedur pembersihan ini mirip dengan prosedur pembersihan data SKD
+pada bagian sebelumnya. Diawali dengan pengecekan secara umum tentang
+dataset SKB.
 
-```{r check-duplicate-skb}
+``` r
 hasil_skb
+```
+
+    ## # A tibble: 14,989 × 21
+    ##     rank id    birthdate  last_edu edu_group   gpa   twk   tiu   tkp   skd skd40
+    ##    <dbl> <chr> <date>     <chr>    <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+    ##  1     1 2430… 1997-05-26 S-1 HUK… Universi…  2.92    85   135   191   411  29.9
+    ##  2     2 2430… 1997-03-17 S-1 HUK… Universi…  3.87    95   110   184   389  28.3
+    ##  3     3 2430… 2003-04-20 S-1 HUK… Universi…  3.93   100   120   196   416  30.3
+    ##  4     4 2430… 2001-10-12 S-1 HUK… Universi…  3.78    90   105   201   396  28.8
+    ##  5     5 2430… 2001-07-26 S-1 HUK… Universi…  3.84    90   100   192   382  27.8
+    ##  6     6 2430… 1996-05-03 S-1 HUK… Universi…  3.26    70    90   178   338  24.6
+    ##  7     7 2430… 2000-01-01 S-1 HUK… Universi…  3.74    85   115   199   399  29.0
+    ##  8     8 2430… 2001-11-23 S-1 HUK… Universi…  3.84    80   100   182   362  26.3
+    ##  9     9 2430… 1993-03-29 S-1 HUK… Universi…  3.8     85   110   180   375  27.3
+    ## 10    10 2430… 1994-09-19 S-1 HUK… Universi…  3.66    80   100   177   357  26.0
+    ## # ℹ 14,979 more rows
+    ## # ℹ 10 more variables: skb <dbl>, skb60 <dbl>, final_score <dbl>,
+    ## #   decl_code <chr>, jp_code <chr>, loc_code <chr>, type_code <chr>,
+    ## #   edu_qual <chr>, num_edu_qual <chr>, page_num <dbl>
+
+``` r
 sum(duplicated(hasil_skb$id))
 ```
 
-Tidak tampak data duplikat pada dataset SKB. Namun begitu, kolom `jp_code`, `loc_code`, `type_code`, `edu_qual`, dan `num_edu_qual` memiliki data *NULL* yang tidak konsisten dengan nilai kosong system default R. Maka dari itu, penyeragaman perlu dilakukan untuk standarisasi nilai kosong.
+    ## [1] 0
 
-```{r standardize-null-skb}
+Tidak tampak data duplikat pada dataset SKB. Namun begitu, kolom
+`jp_code`, `loc_code`, `type_code`, `edu_qual`, dan `num_edu_qual`
+memiliki data *NULL* yang tidak konsisten dengan nilai kosong system
+default R. Maka dari itu, penyeragaman perlu dilakukan untuk
+standarisasi nilai kosong.
+
+``` r
 hasil_skb_standardized_nulls <- hasil_skb %>% 
   mutate(across(where(is.character), ~ str_replace_all(.x, "^NULL$", NA_character_)))
 
 hasil_skb_standardized_nulls
 ```
 
-```{r forward-fill-skb}
+    ## # A tibble: 14,989 × 21
+    ##     rank id    birthdate  last_edu edu_group   gpa   twk   tiu   tkp   skd skd40
+    ##    <dbl> <chr> <date>     <chr>    <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+    ##  1     1 2430… 1997-05-26 S-1 HUK… Universi…  2.92    85   135   191   411  29.9
+    ##  2     2 2430… 1997-03-17 S-1 HUK… Universi…  3.87    95   110   184   389  28.3
+    ##  3     3 2430… 2003-04-20 S-1 HUK… Universi…  3.93   100   120   196   416  30.3
+    ##  4     4 2430… 2001-10-12 S-1 HUK… Universi…  3.78    90   105   201   396  28.8
+    ##  5     5 2430… 2001-07-26 S-1 HUK… Universi…  3.84    90   100   192   382  27.8
+    ##  6     6 2430… 1996-05-03 S-1 HUK… Universi…  3.26    70    90   178   338  24.6
+    ##  7     7 2430… 2000-01-01 S-1 HUK… Universi…  3.74    85   115   199   399  29.0
+    ##  8     8 2430… 2001-11-23 S-1 HUK… Universi…  3.84    80   100   182   362  26.3
+    ##  9     9 2430… 1993-03-29 S-1 HUK… Universi…  3.8     85   110   180   375  27.3
+    ## 10    10 2430… 1994-09-19 S-1 HUK… Universi…  3.66    80   100   177   357  26.0
+    ## # ℹ 14,979 more rows
+    ## # ℹ 10 more variables: skb <dbl>, skb60 <dbl>, final_score <dbl>,
+    ## #   decl_code <chr>, jp_code <chr>, loc_code <chr>, type_code <chr>,
+    ## #   edu_qual <chr>, num_edu_qual <chr>, page_num <dbl>
+
+``` r
 hasil_skb_forward_fill <- hasil_skb_standardized_nulls %>% 
   mutate(breakk = !(page_num == lag(page_num) | page_num == lag(page_num) + 1),
          group_id = cumsum(replace_na(breakk, TRUE))) %>%
@@ -301,9 +726,27 @@ hasil_skb_forward_fill <- hasil_skb_standardized_nulls %>%
 hasil_skb_forward_fill
 ```
 
+    ## # A tibble: 14,989 × 21
+    ##     rank id    birthdate  last_edu edu_group   gpa   twk   tiu   tkp   skd skd40
+    ##    <dbl> <chr> <date>     <chr>    <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+    ##  1     1 2430… 1997-05-26 S-1 HUK… Universi…  2.92    85   135   191   411  29.9
+    ##  2     2 2430… 1997-03-17 S-1 HUK… Universi…  3.87    95   110   184   389  28.3
+    ##  3     3 2430… 2003-04-20 S-1 HUK… Universi…  3.93   100   120   196   416  30.3
+    ##  4     4 2430… 2001-10-12 S-1 HUK… Universi…  3.78    90   105   201   396  28.8
+    ##  5     5 2430… 2001-07-26 S-1 HUK… Universi…  3.84    90   100   192   382  27.8
+    ##  6     6 2430… 1996-05-03 S-1 HUK… Universi…  3.26    70    90   178   338  24.6
+    ##  7     7 2430… 2000-01-01 S-1 HUK… Universi…  3.74    85   115   199   399  29.0
+    ##  8     8 2430… 2001-11-23 S-1 HUK… Universi…  3.84    80   100   182   362  26.3
+    ##  9     9 2430… 1993-03-29 S-1 HUK… Universi…  3.8     85   110   180   375  27.3
+    ## 10    10 2430… 1994-09-19 S-1 HUK… Universi…  3.66    80   100   177   357  26.0
+    ## # ℹ 14,979 more rows
+    ## # ℹ 10 more variables: skb <dbl>, skb60 <dbl>, final_score <dbl>,
+    ## #   decl_code <chr>, jp_code <chr>, loc_code <chr>, type_code <chr>,
+    ## #   edu_qual <chr>, num_edu_qual <chr>, page_num <dbl>
+
 ### Dataset Lokasi Formasi
 
-```{r lokasi-formasi}
+``` r
 lokasi_cleaning1 <- lokasi_formasi %>% 
   # Hapus noise "... KEMENTERIAN ..." di dalam data
   mutate(across(c(data1:data6), ~ str_remove(.x, "\\s\\d+\\sKEMENTERIAN.*")))
@@ -393,9 +836,25 @@ lokasi_cleaning3 <- lokasi_cleaning2 %>%
 lokasi_cleaning3
 ```
 
+    ## # A tibble: 3,362 × 4
+    ##    loc_code instansi                                  fa_bag        prodi_subbag
+    ##    <chr>    <chr>                                     <chr>         <chr>       
+    ##  1 30100001 Institut Seni Indonesia Denpasar          Fakultas Sen… Program Stu…
+    ##  2 30100004 Politeknik Perikanan Negeri Tual          <NA>          Jurusan Tek…
+    ##  3 30100005 Universitas Sembilanbelas November Kolaka Fakultas Sai… Prodi D3 Ke…
+    ##  4 30100006 Universitas Lampung                       Fakultas Per… Jurusan Pro…
+    ##  5 30100007 Politeknik Negeri Banyuwangi              <NA>          Jurusan Tek…
+    ##  6 30100008 Universitas Borneo Tarakan                Fakultas Per… Jurusan S1 …
+    ##  7 30100009 Universitas Jember                        Fakultas Per… Program Stu…
+    ##  8 30100010 Universitas Nusa Cendana                  Fakultas Ilm… Prodi S1 Il…
+    ##  9 30100015 Politeknik Negeri Ujung Pandang           <NA>          Jurusan Tek…
+    ## 10 30100016 Politeknik Negeri Ujung Pandang           <NA>          Jurusan Adm…
+    ## # ℹ 3,352 more rows
+
 ## Hasil Pembersihan Data
 
-Data SKD dan SKB yang sudah bersih dan siap untuk dianalisa sudah direkam dan bisa dipanggil menggunakan variabel berikut:
+Data SKD dan SKB yang sudah bersih dan siap untuk dianalisa sudah
+direkam dan bisa dipanggil menggunakan variabel berikut:
 
 `hasil_skd_na2zero` *untuk data SKD*
 
@@ -405,11 +864,18 @@ Data SKD dan SKB yang sudah bersih dan siap untuk dianalisa sudah direkam dan bi
 
 # Analisis Data
 
-Pada bagian ini, saya menjawab pertanyaan riset tidak secara berurutan seperti pada [Tujuan Riset] namun mengelompokkannya menjadi SKD dan SKB secara terpisah. Hal ini bertujuan untuk meningkatkan fokus bahasan dan diskusi data dan menghindari distraksi yang mungkin akan timbul apabila hasil analisis berpindah-pindah dari SKD ke SKB lalu kembali ke SKD dan diulangi terus menerus. Walau bahasan hasil tes CPNS ini tidak mengikuti kronologi di Tujuan Riset, alur analisis tetap sama dengan yang apa yang tertera.
+Pada bagian ini, saya menjawab pertanyaan riset tidak secara berurutan
+seperti pada [Tujuan Riset](#tujuan-riset) namun mengelompokkannya
+menjadi SKD dan SKB secara terpisah. Hal ini bertujuan untuk
+meningkatkan fokus bahasan dan diskusi data dan menghindari distraksi
+yang mungkin akan timbul apabila hasil analisis berpindah-pindah dari
+SKD ke SKB lalu kembali ke SKD dan diulangi terus menerus. Walau bahasan
+hasil tes CPNS ini tidak mengikuti kronologi di Tujuan Riset, alur
+analisis tetap sama dengan yang apa yang tertera.
 
 ### 1. Skor TWK, TIU, TKP, dan Total yang aman untuk lolos ke tahap SKB
 
-```{r first-question}
+``` r
 hasil_skd_na2zero %>% 
   select(twk, tiu, tkp, skd) %>% 
   pivot_longer(cols = twk:skd,
@@ -435,9 +901,11 @@ hasil_skd_na2zero %>%
   theme(legend.position = "none")
 ```
 
+![](laporan2024_files/figure-gfm/first-question-1.png)<!-- -->
+
 ### 2. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan FKIP untuk lolos ke tahap SKB
 
-```{r second-question}
+``` r
 skd_rumpun_fkip <- hasil_skd_na2zero %>% 
   select(last_edu:skd) %>% 
   filter(str_detect(last_edu, "PENDIDIKAN"))
@@ -467,9 +935,11 @@ skd_rumpun_fkip %>%
   theme(legend.position = "none")
 ```
 
+![](laporan2024_files/figure-gfm/second-question-1.png)<!-- -->
+
 ### 3. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan non-FKIP untuk lolos ke tahap SKB
 
-```{r third-question}
+``` r
 skd_rumpun_non_fkip <- hasil_skd_na2zero %>% 
   select(last_edu:skd)
 
@@ -498,9 +968,11 @@ skd_rumpun_non_fkip %>%
   theme(legend.position = "none")
 ```
 
-### 4. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan jurusan "Inggris" untuk lolos ke tahap SKB di jabatan formasi yang tersedia
+![](laporan2024_files/figure-gfm/third-question-1.png)<!-- -->
 
-```{r fourth-question}
+### 4. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan jurusan “Inggris” untuk lolos ke tahap SKB di jabatan formasi yang tersedia
+
+``` r
 skd_jf_ing <- hasil_skd_na2zero %>% 
   filter(str_detect(last_edu, "INGGRIS")) %>% 
   select(jp_code, twk:skd) %>% 
@@ -543,7 +1015,19 @@ skd_jf_ing %>%
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
+```
 
+    ## Warning: The dot-dot notation (`..x..`) was deprecated in ggplot2 3.4.0.
+    ## ℹ Please use `after_stat(x)` instead.
+    ## This warning is displayed once per session.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
+
+    ## Picking joint bandwidth of 7.24
+
+![](laporan2024_files/figure-gfm/fourth-question-1.png)<!-- -->
+
+``` r
 # TIU
 skd_jf_ing %>% 
   ggplot(aes(x = tiu, y = job_position, fill = ..x..)) +
@@ -567,7 +1051,13 @@ skd_jf_ing %>%
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
+```
 
+    ## Picking joint bandwidth of 10.7
+
+![](laporan2024_files/figure-gfm/fourth-question-2.png)<!-- -->
+
+``` r
 # TKP
 skd_jf_ing %>% 
   ggplot(aes(x = tkp, y = job_position, fill = ..x..)) +
@@ -591,7 +1081,13 @@ skd_jf_ing %>%
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
+```
 
+    ## Picking joint bandwidth of 4.5
+
+![](laporan2024_files/figure-gfm/fourth-question-3.png)<!-- -->
+
+``` r
 # Skor Total SKD
 skd_jf_ing %>% 
   ggplot(aes(x = skd, y = job_position, fill = ..x..)) +
@@ -617,9 +1113,13 @@ skd_jf_ing %>%
         legend.position = "none") 
 ```
 
-### 5. Skor TWK, TIU, TKP, dan Total yang aman bagi pelamar Dosen jurusan "Pendidikan Bahasa Inggris" untuk lolos ke tahap SKB
+    ## Picking joint bandwidth of 16.9
 
-```{r fifth-question}
+![](laporan2024_files/figure-gfm/fourth-question-4.png)<!-- -->
+
+### 5. Skor TWK, TIU, TKP, dan Total yang aman bagi pelamar Dosen jurusan “Pendidikan Bahasa Inggris” untuk lolos ke tahap SKB
+
+``` r
 skd_dosen_ing <- hasil_skd_na2zero %>% 
   select(last_edu:skd, jp_code) %>% 
   left_join(jabatan_formasi, by = "jp_code") %>% 
@@ -653,7 +1153,11 @@ skd_dosen_ing_long %>%
   ) +
   theme_bw() +
   theme(legend.position = "none")
+```
 
+![](laporan2024_files/figure-gfm/fifth-question-1.png)<!-- -->
+
+``` r
 # Density overlap
 skd_dosen_ing_long %>% 
   ggplot(aes(x = skor, fill = job_position)) +
@@ -667,9 +1171,11 @@ skd_dosen_ing_long %>%
   theme_bw()
 ```
 
-### 6. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan jurusan "Fisika" untuk lolos ke tahap SKB di jabatan formasi yang tersedia
+![](laporan2024_files/figure-gfm/fifth-question-2.png)<!-- -->
 
-```{r sixth-question-step1}
+### 6. Skor TWK, TIU, TKP, dan Total yang aman bagi lulusan jurusan “Fisika” untuk lolos ke tahap SKB di jabatan formasi yang tersedia
+
+``` r
 skd_jf_fis <- hasil_skd_na2zero %>% 
   filter(str_detect(last_edu, "FISIKA")) %>% 
   select(jp_code, twk:skd) %>% 
@@ -689,10 +1195,9 @@ n_skd_fis <- nrow(skd_jf_fis)
 plot_subtitle_skd_fis <- glue("Komparasi dari berbagai Jabatan Formasi yang
                       tersedia untuk kualifikasi pendidikan yang berkaitan
                       dengan 'Fisika'. (n = {scales::number(n_skd_fis, big.mark = ',')})")
-
 ```
 
-```{r sixth-question-step2}
+``` r
 # TWK
 skd_jf_fis %>% 
   ggplot(aes(x = twk, y = job_position, fill = ..x..)) +
@@ -725,7 +1230,13 @@ skd_jf_fis %>%
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
+```
 
+    ## Picking joint bandwidth of 6.02
+
+![](laporan2024_files/figure-gfm/sixth-question-step2-1.png)<!-- -->
+
+``` r
 # TIU
 skd_jf_fis %>% 
   ggplot(aes(x = tiu, y = job_position, fill = ..x..)) +
@@ -758,7 +1269,13 @@ skd_jf_fis %>%
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
+```
 
+    ## Picking joint bandwidth of 10.4
+
+![](laporan2024_files/figure-gfm/sixth-question-step2-2.png)<!-- -->
+
+``` r
 # TKP
 skd_jf_fis %>% 
   ggplot(aes(x = tkp, y = job_position, fill = ..x..)) +
@@ -791,7 +1308,13 @@ skd_jf_fis %>%
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
+```
 
+    ## Picking joint bandwidth of 4.14
+
+![](laporan2024_files/figure-gfm/sixth-question-step2-3.png)<!-- -->
+
+``` r
 # Skor Total SKD
 skd_jf_fis %>% 
   ggplot(aes(x = skd, y = job_position, fill = ..x..)) +
@@ -824,12 +1347,15 @@ skd_jf_fis %>%
   theme_bw() +
   theme(panel.spacing = unit(0.1, "lines"),
         legend.position = "none") 
-
 ```
+
+    ## Picking joint bandwidth of 13.8
+
+![](laporan2024_files/figure-gfm/sixth-question-step2-4.png)<!-- -->
 
 ### 7. Skor TWK, TIU, TKP, dan Total yang aman bagi pelamar Widyaiswara untuk lolos ke tahap SKB
 
-```{r seventh-question}
+``` r
 skd_wi <- hasil_skd_na2zero %>% 
   select(last_edu:skd, jp_code) %>% 
   left_join(jabatan_formasi, by = "jp_code") %>% 
@@ -862,9 +1388,11 @@ skd_wi_long %>%
   theme_bw()
 ```
 
+![](laporan2024_files/figure-gfm/seventh-question-1.png)<!-- -->
+
 ### 8. Skor SKB yang aman untuk lolos SKB
 
-```{r eighth-question-step1}
+``` r
 q8_skb <- hasil_skb_forward_fill %>% 
   select(skb, decl_code) %>% 
   mutate(decl_code = factor(decl_code, levels = c("TH", "TMS-1", "TMS", "TL", "APS", "P/L-U3", "P/L-U1", "P/L-E3", "P/L-E2", "P/L-E1", "P/L")))
@@ -882,7 +1410,7 @@ n_skb_all <- q8_skb %>%
 q8_subtitile_plot <- glue("Komparasi skor SKB Umum (n = {scales::number(n_skb_all, big.mark = ',')})")
 ```
 
-```{r eighth-question-step2}
+``` r
 # Ridgeline Plot
 q8_skb %>% 
   ggplot(aes(x = skb, y = decl_code, fill = ..x..)) +
@@ -911,7 +1439,13 @@ q8_skb %>%
        y = "Status Kelulusan",
        fill = "n") +
   theme_bw()
+```
 
+    ## Picking joint bandwidth of 2.09
+
+![](laporan2024_files/figure-gfm/eighth-question-step2-1.png)<!-- -->
+
+``` r
 # Boxplot + Jitter Plot
 q8_skb %>% 
   ggplot(aes(x = skb, y = decl_code, fill = decl_code)) +
@@ -944,9 +1478,11 @@ q8_skb %>%
   theme_bw()
 ```
 
+![](laporan2024_files/figure-gfm/eighth-question-step2-2.png)<!-- -->
+
 ### 9. Skor SKB yang aman bagi lulusan FKIP untuk lolos SKB
 
-```{r ninth-question-step1}
+``` r
 skb_fkip <- hasil_skb_forward_fill %>% # Filterisasi lulusan FKIP
   filter(str_detect(last_edu, "PENDIDIKAN")) %>% 
   select(skb, decl_code) %>% 
@@ -961,7 +1497,7 @@ n_skb_fkip <- skb_fkip %>%
 q9_subtitile_plot <- glue("Komparasi skor SKB lulusan FKIP (n = {scales::number(n_skb_fkip, big.mark = ',')})")
 ```
 
-```{r ninth-question-step2}
+``` r
 # Ridgeline Plot
 ggplot(skb_fkip, aes(x = skb, 
                      y = decl_code, 
@@ -990,7 +1526,13 @@ ggplot(skb_fkip, aes(x = skb,
        x = "Skor SKB",
        y = "Status Kelulusan") +
   theme_bw()
+```
 
+    ## Picking joint bandwidth of 2.68
+
+![](laporan2024_files/figure-gfm/ninth-question-step2-1.png)<!-- -->
+
+``` r
 # Boxplot + Jitter Plot
 ggplot(skb_fkip, aes(x = skb, 
                      y = decl_code, 
@@ -1022,9 +1564,11 @@ ggplot(skb_fkip, aes(x = skb,
   theme_bw()
 ```
 
+![](laporan2024_files/figure-gfm/ninth-question-step2-2.png)<!-- -->
+
 ### 10. SKor SKB yang aman bagi lulusan non-FKIP untuk lolos SKB
 
-```{r tenth-question-step1}
+``` r
 skb_nonfkip <- hasil_skb_forward_fill %>% # Filterisasi lulusan FKIP
   filter(!str_detect(last_edu, "PENDIDIKAN")) %>% 
   select(skb, decl_code) %>% 
@@ -1039,7 +1583,7 @@ n_skb_nonfkip <- skb_nonfkip %>%
 q10_subtitle_plot <- glue("Komparasi skor SKB lulusan non-FKIP (n = {scales::number(n_skb_nonfkip, big.mark = ',')})")
 ```
 
-```{r tenth-question-step2}
+``` r
 # Ridgeline Plot
 ggplot(skb_nonfkip, aes(x = skb, 
                      y = decl_code, 
@@ -1068,7 +1612,13 @@ ggplot(skb_nonfkip, aes(x = skb,
        x = "Skor SKB",
        y = "Status Kelulusan") +
   theme_bw()
+```
 
+    ## Picking joint bandwidth of 2.19
+
+![](laporan2024_files/figure-gfm/tenth-question-step2-1.png)<!-- -->
+
+``` r
 # Boxplot + Jitter Plot
 ggplot(skb_nonfkip, aes(x = skb, 
                      y = decl_code, 
@@ -1100,9 +1650,11 @@ ggplot(skb_nonfkip, aes(x = skb,
   theme_bw()
 ```
 
-### 11. Skor SKB yang aman yang aman bagi lulusan jurusan "Inggris" untuk lolos tahap SKB di jabatan formasi yang tersedia
+![](laporan2024_files/figure-gfm/tenth-question-step2-2.png)<!-- -->
 
-```{r eleventh-question-step1}
+### 11. Skor SKB yang aman yang aman bagi lulusan jurusan “Inggris” untuk lolos tahap SKB di jabatan formasi yang tersedia
+
+``` r
 q11_skb_ing <- hasil_skb_forward_fill %>% 
   filter(str_detect(last_edu, "INGGRIS")) %>% 
   select(skb, decl_code, jp_code) %>% 
@@ -1119,7 +1671,7 @@ n_q11_skb_ing <- nrow(q11_skb_ing)
 q11_subtitle_plot <- glue("Komparasi nilai SKB lulusan terkait 'Inggris' (n = {scales::number(n_q11_skb_ing, big.mark = ',')})")
 ```
 
-```{r eleventh-question-step2}
+``` r
 # Ridgeline Plot
 q11_skb_ing %>% 
   ggplot(aes(x = skb, y = job_position, fill = ..x..)) +
@@ -1146,7 +1698,13 @@ q11_skb_ing %>%
        x = "Skor SKB",
        y = "Jabatan Formasi") +
   theme_bw()
+```
 
+    ## Picking joint bandwidth of 3.6
+
+![](laporan2024_files/figure-gfm/eleventh-question-step2-1.png)<!-- -->
+
+``` r
 # Boxplot + Jitter Plot
 q11_skb_ing %>% 
   ggplot(aes(x = skb, y = job_position, fill = job_position)) +
@@ -1178,9 +1736,11 @@ q11_skb_ing %>%
   theme_bw()
 ```
 
-### 12. Skor SKB yang aman bagi pelamar Dosen jurusan "Inggris" untuk lolos tahap SKB
+![](laporan2024_files/figure-gfm/eleventh-question-step2-2.png)<!-- -->
 
-```{r twelveth-question-step1}
+### 12. Skor SKB yang aman bagi pelamar Dosen jurusan “Inggris” untuk lolos tahap SKB
+
+``` r
 # Filter hanya posisi dosen lulusan Pendidikan Bahasa Inggris
 q12_skb_dosen_ing <- hasil_skb_forward_fill %>% 
   filter(str_detect(last_edu, "INGGRIS")) %>% 
@@ -1212,7 +1772,7 @@ q12_subtitle_plot_dosenaa <- glue("Komparasi nilai SKB (n = {scales::number(n_q1
 q12_subtitle_plot_dosenl <- glue("Komparasi nilai SKB (n = {scales::number(n_q12_skb_dosenl_ing, big.mark = ',')})")
 ```
 
-```{r twelveth-question-step2}
+``` r
 # Ridgeline Plot Dosen Asisten Ahli
 q12_skb_dosen_ing %>% 
   filter(str_detect(job_position, "ASISTEN")) %>%
@@ -1241,7 +1801,13 @@ q12_skb_dosen_ing %>%
        x = "Skor SKB",
        y = "Jabatan Formasi") +
   theme_bw()
+```
 
+    ## Picking joint bandwidth of 3.78
+
+![](laporan2024_files/figure-gfm/twelveth-question-step2-1.png)<!-- -->
+
+``` r
 # Boxplot + Jitter Plot
 q12_skb_dosen_ing %>% 
   filter(str_detect(job_position, "ASISTEN")) %>%
@@ -1274,7 +1840,9 @@ q12_skb_dosen_ing %>%
   theme_bw()
 ```
 
-```{r twelveth-question-step3}
+![](laporan2024_files/figure-gfm/twelveth-question-step2-2.png)<!-- -->
+
+``` r
 # Ridgeline Plot Dosen Lektor
 q12_skb_dosen_ing %>% 
   filter(str_detect(job_position, "LEKTOR")) %>%
@@ -1303,7 +1871,13 @@ q12_skb_dosen_ing %>%
        x = "Skor SKB",
        y = "Jabatan Formasi") +
   theme_bw()
+```
 
+    ## Picking joint bandwidth of 3.6
+
+![](laporan2024_files/figure-gfm/twelveth-question-step3-1.png)<!-- -->
+
+``` r
 # Boxplot + Jitter Plot
 q12_skb_dosen_ing %>% 
   filter(str_detect(job_position, "LEKTOR")) %>%
@@ -1335,9 +1909,11 @@ q12_skb_dosen_ing %>%
   theme_bw()
 ```
 
-### 13. Skor SKB yang aman yang aman bagi lulusan jurusan "Fisika" untuk lolos tahap SKB di jabatan formasi yang tersedia
+![](laporan2024_files/figure-gfm/twelveth-question-step3-2.png)<!-- -->
 
-```{r thirteenth-question-step1}
+### 13. Skor SKB yang aman yang aman bagi lulusan jurusan “Fisika” untuk lolos tahap SKB di jabatan formasi yang tersedia
+
+``` r
 q13_skb_fis <- hasil_skb_forward_fill %>% 
   filter(str_detect(last_edu, "FISIKA")) %>% 
   select(last_edu, skb, decl_code, jp_code) %>% 
@@ -1353,7 +1929,7 @@ n_skb_fis <- nrow(q13_skb_fis)
 q13_subtitile_plot <- glue("Komparasi skor SKB Lulusan 'Fisika' (n = {scales::number(n_skb_fis)})")
 ```
 
-```{r thirteenth-question-step2}
+``` r
 # Density Plot
 q13_skb_fis %>% 
   ggplot(aes(x = skb, y = job_position, fill = ..x..)) +
@@ -1380,7 +1956,13 @@ q13_skb_fis %>%
        x = "Skor SKB",
        y = "Jabatan Formasi") +
   theme_bw()
+```
 
+    ## Picking joint bandwidth of 4.74
+
+![](laporan2024_files/figure-gfm/thirteenth-question-step2-1.png)<!-- -->
+
+``` r
 # Boxplot + Jitter Plot
 q13_skb_fis %>% 
   ggplot(aes(x = skb, y = job_position, fill = job_position)) +
@@ -1411,9 +1993,11 @@ q13_skb_fis %>%
   theme_bw()
 ```
 
+![](laporan2024_files/figure-gfm/thirteenth-question-step2-2.png)<!-- -->
+
 ### 14. Skor SKB yang aman bagi pelamar Widyaiswara untuk lolos tahap SKB
 
-```{r fourteenth-question-step1}
+``` r
 q14_skb_wi <- hasil_skb_forward_fill %>% 
   select(skb, decl_code, jp_code) %>% 
   left_join(jabatan_formasi, by = "jp_code") %>% 
@@ -1429,7 +2013,7 @@ n_skb_wi <- nrow(q14_skb_wi)
 q14_subtitle_plot <- glue("Komparasi skor SKB berdasarkan Status Kelulusan (n = {scales::number(n_skb_wi)})")
 ```
 
-```{r fourteenth-question-step2}
+``` r
 # Ridgeline Plot
 q14_skb_wi %>% 
   ggplot(aes(x = skb,y = decl_code, fill = ..x..)) +
@@ -1456,7 +2040,13 @@ q14_skb_wi %>%
        x = "Skor SKB",
        y = "Status Kelulusan") +
   theme_bw()
+```
 
+    ## Picking joint bandwidth of 1.63
+
+![](laporan2024_files/figure-gfm/fourteenth-question-step2-1.png)<!-- -->
+
+``` r
 # Boxplot + Jitter Plot
 q14_skb_wi %>% 
   ggplot(aes(x = skb,y = decl_code, fill = decl_code)) +
@@ -1488,9 +2078,11 @@ q14_skb_wi %>%
   theme_bw()
 ```
 
+![](laporan2024_files/figure-gfm/fourteenth-question-step2-2.png)<!-- -->
+
 ### 15. Proporsi Kelulusan SKD masing-masing jabatan formasi
 
-```{r fifteenth-question-step1}
+``` r
 # Tabel untuk proporsi berdasarkan decl_code (status kelulusan)
 piv_wider_decl_code_skd <- hasil_skd_na2zero %>% 
   select(decl_code, loc_code, jp_code) %>% 
@@ -1500,7 +2092,12 @@ piv_wider_decl_code_skd <- hasil_skd_na2zero %>%
   arrange(loc_code, jp_code, decl_code) %>% 
   pivot_wider(names_from = decl_code,
               values_from = count)
+```
 
+    ## `summarise()` has grouped output by 'loc_code', 'jp_code'. You can override
+    ## using the `.groups` argument.
+
+``` r
 # Replace NA values dengan 0 (integer) dan buat kolom baru "total"
 n_status_kelulusan_skd <- piv_wider_decl_code_skd %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0))) %>% 
@@ -1519,14 +2116,47 @@ proporsi_status_kelulusan_skd <- n_status_kelulusan_skd %>%
   arrange(desc(n_total))
 
 n_status_kelulusan_skd
+```
+
+    ## # A tibble: 3,421 × 9
+    ##    `P/L`    TL    TH     P n_total instansi     fa_bag prodi_subbag job_position
+    ##    <int> <int> <int> <int>   <dbl> <chr>        <chr>  <chr>        <chr>       
+    ##  1     3    10     0     0      13 Institut Se… Fakul… Program Stu… DOSEN ASIST…
+    ##  2     1     5     0     0       6 Politeknik … <NA>   Jurusan Tek… PRANATA LAB…
+    ##  3     0     1     0     0       1 Universitas… Fakul… Prodi D3 Ke… DOSEN ASIST…
+    ##  4     2     0     0     0       2 Universitas… Fakul… Jurusan Pro… DOSEN ASIST…
+    ##  5     1     2     1     0       4 Politeknik … <NA>   Jurusan Tek… DOSEN ASIST…
+    ##  6     3     2     0     0       5 Universitas… Fakul… Prodi S1 Il… DOSEN ASIST…
+    ##  7     1     1     0     0       2 Politeknik … <NA>   Jurusan Adm… DOSEN ASIST…
+    ##  8     2     1     0     0       3 Politeknik … <NA>   Jurusan Tek… PRANATA LAB…
+    ##  9     1     2     2     0       5 Politeknik … <NA>   Jurusan Tek… PRANATA LAB…
+    ## 10     3     2     0     0       5 Universitas… Unit … <NA>         PENATA KELO…
+    ## # ℹ 3,411 more rows
+
+``` r
 proporsi_status_kelulusan_skd
 ```
+
+    ## # A tibble: 3,421 × 9
+    ##    `P/L`    TL    TH     P n_total instansi     fa_bag prodi_subbag job_position
+    ##    <dbl> <dbl> <dbl> <dbl>   <dbl> <chr>        <chr>  <chr>        <chr>       
+    ##  1  0.48  59.7 14.6   25.3    1879 Direktorat … Balai… Balai Peles… POLISI KHUS…
+    ##  2  1     55.0 11.3   32.7    1198 PUSAT PERBU… Badan… SUBBAGIAN T… EDITOR BUKU 
+    ##  3  0.76  72.4 14.8   12.1    1186 Direktorat … Balai… Balai Peles… POLISI KHUS…
+    ##  4  0.83  50.0 11.7   37.5    1089 Universitas… Biro … Biro Umum d… ARSIPARIS A…
+    ##  5 10.1   48.2  9.46  32.2    1036 Inspektorat… <NA>   <NA>         AUDITOR AHL…
+    ##  6  1.24  63.5 16.0   19.3     964 Direktorat … Bagia… Bagian Umum  PENATA PAME…
+    ##  7  0.96  68.6 11.5   19.0     934 Direktorat … Balai… Balai Peles… POLISI KHUS…
+    ##  8  1.06  71.8 11.1   16.1     846 Direktorat … Balai… Balai Peles… POLISI KHUS…
+    ##  9  2.46  46.4 11.2   39.9     812 PUSAT KURIK… Badan… <NA>         PENGEMBANG …
+    ## 10  1.12  65.4 15.2   18.2     801 Direktorat … Balai… Balai Peles… POLISI KHUS…
+    ## # ℹ 3,411 more rows
 
 ### 16. Proporsi Kelulusan SKB masing-masing jabatan formasi
 
 ### 17. Jabatan formasi dengan peminat paling banyak
 
-```{r seventeenth-question}
+``` r
 jf_peminat_desc <- n_status_kelulusan_skd %>% 
   select(-instansi, -fa_bag, -prodi_subbag) %>% 
   group_by(job_position) %>% 
@@ -1540,9 +2170,24 @@ jf_peminat_desc <- n_status_kelulusan_skd %>%
 jf_peminat_desc
 ```
 
+    ## # A tibble: 47 × 6
+    ##    job_position                                 `P/L`     P    TL    TH n_total
+    ##    <chr>                                        <int> <int> <int> <int>   <dbl>
+    ##  1 DOSEN ASISTEN AHLI                           10444  5161 11189  1410   28204
+    ##  2 POLISI KHUSUS CAGAR BUDAYA                     129  1424  5227  1067    7847
+    ##  3 ARSIPARIS AHLI PERTAMA                         346  1928  3587   558    6419
+    ##  4 PRANATA LABORATORIUM PENDIDIKAN AHLI PERTAMA   837  1924  2477   438    5676
+    ##  5 PENYULUH BAHASA                                114   864  1786   215    2979
+    ##  6 PRANATA LABORATORIUM PENDIDIKAN TERAMPIL       621   601  1287   245    2754
+    ##  7 WIDYAISWARA AHLI PERTAMA                       201   833   774    83    1891
+    ##  8 EDITOR BUKU                                     15   460   702   146    1323
+    ##  9 <NA>                                            62   442   466    75    1045
+    ## 10 AUDITOR AHLI PERTAMA                           105   334   499    98    1036
+    ## # ℹ 37 more rows
+
 ### 18. Jabatan formasi dengan peminat paling sedikit
 
-```{r eighteenth-question}
+``` r
 jf_peminat_asc <- n_status_kelulusan_skd %>% 
   select(-instansi, -fa_bag, -prodi_subbag) %>% 
   group_by(job_position) %>% 
@@ -1556,9 +2201,24 @@ jf_peminat_asc <- n_status_kelulusan_skd %>%
 jf_peminat_asc
 ```
 
+    ## # A tibble: 47 × 6
+    ##    job_position                                  `P/L`     P    TL    TH n_total
+    ##    <chr>                                         <int> <int> <int> <int>   <dbl>
+    ##  1 DOKUMENTALIS HUKUM                                0     0     1     0       1
+    ##  2 PRANATA HUBUNGAN MASYARAKAT TERAMPIL              3     0     7     1      11
+    ##  3 PENATA KELOLA HUKUM DAN PERUNDANG-UNDANGAN        6     0     6     4      16
+    ##  4 PERANCANG PERATURAN PERUNDANG-UNDANGAN AHLI …    10     0     9     3      22
+    ##  5 STATISTISI AHLI PERTAMA                          13     7    14     4      38
+    ##  6 ANALIS PENGEMBANGAN KOMPETENSI ASN AHLI PERT…     9     9    30     6      54
+    ##  7 PENGEMBANG BUKU ELEKTRONIK                        6     8    35     6      55
+    ##  8 REGISTRAR                                        15     0    32     8      55
+    ##  9 EDUKATOR                                          6    16    27     8      57
+    ## 10 ASISTEN PERPUSTAKAAN TERAMPIL                    24     0    35     2      61
+    ## # ℹ 37 more rows
+
 ### 19. Instansi yang paling banyak diminati
 
-```{r}
+``` r
 instansi_peminat_desc <- n_status_kelulusan_skd %>% 
   select(-job_position, -fa_bag, -prodi_subbag) %>% 
   group_by(instansi) %>% 
@@ -1572,9 +2232,24 @@ instansi_peminat_desc <- n_status_kelulusan_skd %>%
 instansi_peminat_desc
 ```
 
+    ## # A tibble: 190 × 6
+    ##    instansi                                      `P/L`     P    TL    TH n_total
+    ##    <chr>                                         <int> <int> <int> <int>   <dbl>
+    ##  1 Direktorat Jenderal Kebudayaan                  471  1875  6514  1349   10209
+    ##  2 Universitas Negeri Jakarta                      434  1289  1719   395    3837
+    ##  3 Universitas Negeri Makassar                     874   621  1501   145    3141
+    ##  4 Universitas Sriwijaya                           639   653  1080   117    2489
+    ##  5 Universitas Jambi                               389   576  1233   120    2318
+    ##  6 Universitas Lampung                             392   712   877   104    2085
+    ##  7 Direktorat Jenderal Guru dan Tenaga Kependid…   216   766   874    81    1937
+    ##  8 PUSAT PERBUKUAN                                  34   519   909   179    1641
+    ##  9 Sekretariat Jenderal                            287   327   746   157    1517
+    ## 10 Universitas Riau                                446   335   548    72    1401
+    ## # ℹ 180 more rows
+
 ### 20. Instansi yang paling sedikit diminati
 
-```{r twentieth-question}
+``` r
 instansi_peminat_asc <- n_status_kelulusan_skd %>% 
   select(-job_position, -fa_bag, -prodi_subbag) %>% 
   group_by(instansi) %>% 
@@ -1588,11 +2263,26 @@ instansi_peminat_asc <- n_status_kelulusan_skd %>%
 instansi_peminat_asc
 ```
 
+    ## # A tibble: 190 × 6
+    ##    instansi                                      `P/L`     P    TL    TH n_total
+    ##    <chr>                                         <int> <int> <int> <int>   <dbl>
+    ##  1 Institut Seni Indonesia Padang Pariwisata Fa…     0     0     1     0       1
+    ##  2 Institut Seni Indonesia Padang Penjaminan Mu…     0     0     1     0       1
+    ##  3 Politeknik Elektronika Negeri dan Komputer        0     0     1     0       1
+    ##  4 Politeknik Manufaktur Negeri Manufaktur dan …     1     0     0     0       1
+    ##  5 Politeknik Pertanian Negeri Produksi Pertani…     0     0     1     0       1
+    ##  6 Universitas Sultan Ageng Bisnis                   0     0     1     0       1
+    ##  7 Institut Seni Indonesia Padang Komunikasi Vi…     1     0     1     0       2
+    ##  8 Institut Seni Indonesia Padang Masyarakat         0     0     2     0       2
+    ##  9 Institut Seni Indonesia Padang Seni Karawita…     0     0     2     0       2
+    ## 10 Politeknik Manufaktur Negeri Manufaktur           1     0     1     0       2
+    ## # ℹ 180 more rows
+
 ### 21. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Bahasa Inggris dan jabatan formasi adalah Dosen Asisten Ahli
 
 $P(Lulus \space CPNS \space | \space S-2 \space Pendidikan Bahasa Inggris \space \cap \space Dosen Asisten Ahli)$
 
-```{r twentyfirst-question}
+``` r
 # Variabel untuk kondisi probabilitas
 lulusan_rq21 <- "S-2 PENDIDIKAN BAHASA INGGRIS"
 formasi_dilamar_rq21 <- "DOSEN ASISTEN AHLI"
@@ -1622,11 +2312,16 @@ rq21 <- glue("Peluang lulus CPNS bagi:
 rq21
 ```
 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN BAHASA INGGRIS, dan
+    ## 2. Melamar di jabatan formasi DOSEN ASISTEN AHLI
+    ## adalah 5.51 %
+
 ### 22. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-3 Pendidikan Bahasa Inggris dan jabatan formasi adalah Dosen Lektor
 
 $P(Lulus \space CPNS \space | \space S-3 Pendidikan Bahasa Inggris \space \cap \space Dosen Lektor)$
 
-```{r twentysecond-question}
+``` r
 # Variabel untuk kondisi probabilitas
 lulusan_rq22 <- "S-3 PENDIDIKAN BAHASA INGGRIS"
 formasi_dilamar_dl <- "DOSEN LEKTOR"
@@ -1655,11 +2350,16 @@ rq22 <- glue("Peluang lulus CPNS bagi:
 rq22
 ```
 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-3 PENDIDIKAN BAHASA INGGRIS, dan
+    ## 2. Melamar di jabatan formasi DOSEN LEKTOR
+    ## adalah 55.56 %
+
 ### 23. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Bahasa Inggris dan jabatan formasi Widyaiswara
 
 $P(Lulus \space CPNS \space | \space S-2 Pendidikan Bahasa Inggris \space \cap \space Widyaiswara)$
 
-```{r twentythird-question}
+``` r
 # Variabel untuk kondisi probabilitas
 lulusan_rq23 <- "S-2 PENDIDIKAN BAHASA INGGRIS"
 formasi_dilamar_rq23 <- "JF0010904"
@@ -1688,11 +2388,16 @@ rq23 <- glue("Peluang lulus CPNS bagi:
 rq23
 ```
 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN BAHASA INGGRIS, dan
+    ## 2. Melamar di jabatan formasi WIDYAISWARA AHLI PERTAMA
+    ## adalah 3.06 %
+
 ### 24. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Bahasa Inggris
 
 $P(Lulus \space CPNS \space | \space S-2 Pendidikan Bahasa Inggris)$
 
-```{r twentyfourth-question}
+``` r
 # Variabel untuk kondisi probabilitas
 lulusan_rq24 <- "S-2 PENDIDIKAN BAHASA INGGRIS"
 
@@ -1717,11 +2422,15 @@ rq24 <- glue("Peluang lulus CPNS bagi:
 rq24
 ```
 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN BAHASA INGGRIS
+    ## adalah 5.21 %
+
 ### 25. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika dan jabatan formasi adalah Dosen Asisten Ahli
 
 $P(Lulus \space CPNS \space | \space S-2 Pendidikan Fisika \space \cap \space Dosen Asisten Ahli)$
 
-```{r twentyfifth-question}
+``` r
 # Variabel untuk kondisi probabilitas
 lulusan_rq25 <- "S-2 PENDIDIKAN FISIKA"
 formasi_dilamar_rq25 <- "DOSEN ASISTEN AHLI"
@@ -1750,11 +2459,16 @@ rq25 <- glue("Peluang lulus CPNS bagi:
 rq25
 ```
 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN FISIKA, dan
+    ## 2. Melamar di jabatan formasi DOSEN ASISTEN AHLI
+    ## adalah 9.58 %
+
 ### 26. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-3 Pendidikan Fisika dan jabatan formasi adalah Dosen Lektor
 
 $P(Lulus \space CPNS \space | \space S-3 Pendidikan Fisika \space \cap \space Dosen Lektor)$
 
-```{r twentysixth-question}
+``` r
 # Variabel untuk kondisi probabilitas
 lulusan_rq26 <- "S-3 PENDIDIKAN FISIKA"
 formasi_dilamar_rq26 <- "DOSEN LEKTOR"
@@ -1783,11 +2497,16 @@ rq26 <- glue("Peluang lulus CPNS bagi:
 rq26
 ```
 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-3 PENDIDIKAN FISIKA, dan
+    ## 2. Melamar di jabatan formasi DOSEN LEKTOR
+    ## adalah 66.67 %
+
 ### 27. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika dan jabatan formasi adalah Widyaiswara
 
 $P(Lulus \spcae CPNS \space | \space S-2 Pendidikan Fisika \space \cap \space Widyaiswara)$
 
-```{r twentyseventh-question}
+``` r
 # Variabel untuk kondisi probabilitas
 lulusan_rq27 <- "S-2 PENDIDIKAN FISIKA"
 formasi_dilamar_rq27 <- "JF0010904"
@@ -1816,11 +2535,16 @@ rq27 <- glue("Peluang lulus CPNS bagi:
 rq27
 ```
 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN FISIKA, dan
+    ## 2. Melamar di jabatan formasi JF0010904 / WIDYAISWARA AHLI PERTAMA
+    ## adalah 4.11 %
+
 ### 28. Probabilitas kelulusan PNS jika latar belakang pendidikan adalah S-2 Pendidikan Fisika
 
 $P(Lulus \space CPNS \space | \space S-2 Pendidikan Fisika)$
 
-```{r twentyeighth-question}
+``` r
 # Variabel untuk kondisi probabilitas
 lulusan_rq28 <- "S-2 PENDIDIKAN FISIKA"
 
@@ -1845,44 +2569,149 @@ rq28 <- glue("Peluang lulus CPNS bagi:
 rq28
 ```
 
-```{r summary-prob-pbing}
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN FISIKA
+    ## adalah 7.98 %
+
+``` r
 glue(rq21, "\n\n", rq22, "\n\n", rq23, "\n\n", rq24)
 ```
 
-```{r summary-prob-pfis}
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN BAHASA INGGRIS, dan
+    ## 2. Melamar di jabatan formasi DOSEN ASISTEN AHLI
+    ## adalah 5.51 %
+    ## 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-3 PENDIDIKAN BAHASA INGGRIS, dan
+    ## 2. Melamar di jabatan formasi DOSEN LEKTOR
+    ## adalah 55.56 %
+    ## 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN BAHASA INGGRIS, dan
+    ## 2. Melamar di jabatan formasi WIDYAISWARA AHLI PERTAMA
+    ## adalah 3.06 %
+    ## 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN BAHASA INGGRIS
+    ## adalah 5.21 %
+
+``` r
 glue(rq25, "\n\n", rq26, "\n\n", rq27, "\n\n", rq28)
 ```
+
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN FISIKA, dan
+    ## 2. Melamar di jabatan formasi DOSEN ASISTEN AHLI
+    ## adalah 9.58 %
+    ## 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-3 PENDIDIKAN FISIKA, dan
+    ## 2. Melamar di jabatan formasi DOSEN LEKTOR
+    ## adalah 66.67 %
+    ## 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN FISIKA, dan
+    ## 2. Melamar di jabatan formasi JF0010904 / WIDYAISWARA AHLI PERTAMA
+    ## adalah 4.11 %
+    ## 
+    ## Peluang lulus CPNS bagi:
+    ## 1. lulusan S-2 PENDIDIKAN FISIKA
+    ## adalah 7.98 %
 
 # Penutup
 
 ## Kesimpulan
 
-Melihat kembali [Pertanyaan Riset] serta tujuan utama dari investigasi kali ini, sangat disarankan untuk mencapai skor sesuai dengan disarankan. Di investigasi kali ini, saya menyarankan untuk mencapai nilai **SKD** dan **SKB** minimal di batas **kuartal ke-3** dari masing-masing instansi, bagian/fakultas, dan subbagian/program studi yang dilamar, dengan penekanan tinggi pada nilai SKB karena bobotnya yang lebih besar daripada skor SKD. Sebagai tambahan, perlu diingat juga bahwa **CPNS ini menganut sistem ranking** di **level** kategorisasi terkecil, yaitu **subbagian/program studi**. Oleh karenanya, saya juga menyarankan untuk mencari dan melamar formasi jabatan program studi/subbagian di instansi dan fakultas/bagian dengan **peminat paling sedikit**. Hal ini dikarenakan **peluang** untuk lulus CPNS di kriteria tersebut **lebih tinggi** dibandingkan dengan jabatan formasi lain yang populer atau banyak peminat.
+Melihat kembali [Pertanyaan Riset](#pertanyaan-riset) serta tujuan utama
+dari investigasi kali ini, sangat disarankan untuk mencapai skor sesuai
+dengan disarankan. Di investigasi kali ini, saya menyarankan untuk
+mencapai nilai **SKD** dan **SKB** minimal di batas **kuartal ke-3**
+dari masing-masing instansi, bagian/fakultas, dan subbagian/program
+studi yang dilamar, dengan penekanan tinggi pada nilai SKB karena
+bobotnya yang lebih besar daripada skor SKD. Sebagai tambahan, perlu
+diingat juga bahwa **CPNS ini menganut sistem ranking** di **level**
+kategorisasi terkecil, yaitu **subbagian/program studi**. Oleh
+karenanya, saya juga menyarankan untuk mencari dan melamar formasi
+jabatan program studi/subbagian di instansi dan fakultas/bagian dengan
+**peminat paling sedikit**. Hal ini dikarenakan **peluang** untuk lulus
+CPNS di kriteria tersebut **lebih tinggi** dibandingkan dengan jabatan
+formasi lain yang populer atau banyak peminat.
 
 ## Limitasi
 
-Proyek ini (CPNS Kemendik 2024) tidaklah tanpa kekurangan. Saya menyadari banyak sekali aspek yang dapat dikembangkan lebih jauh lagi. Berikut adalah beberapa poin yang saya pikir perlu ditingkatkan:
+Proyek ini (CPNS Kemendik 2024) tidaklah tanpa kekurangan. Saya
+menyadari banyak sekali aspek yang dapat dikembangkan lebih jauh lagi.
+Berikut adalah beberapa poin yang saya pikir perlu ditingkatkan:
 
--   **Impor data yang lebih akurat dan presisi serta menyeluruh:** Pada awalnya saya hanya merencanakan untuk menganalisa data peserta CPNS saja sehingga mengabaikan data lainnya yang ternyata tidak kalah pentingnya dalam pengambilan keputusan. Data seperti (1) detail lokasi, (2) detail jurusan yang boleh melamar di suatu formasi jabatan per subbagian, per bagian, dan per institusi, (3) tahun skor SKD, dan (4) jumlah kebutuhan di tiap formasi jabatan per subbagian, per bagian, dan per institusi. Data-data tersebut akan sangat berguna untuk proses analisis data karena bisa memberikan wawasan yang lebih komprehensif dan menyeluruh tentang tren pelamar CPNS.
+- **Impor data yang lebih akurat dan presisi serta menyeluruh:** Pada
+  awalnya saya hanya merencanakan untuk menganalisa data peserta CPNS
+  saja sehingga mengabaikan data lainnya yang ternyata tidak kalah
+  pentingnya dalam pengambilan keputusan. Data seperti (1) detail
+  lokasi, (2) detail jurusan yang boleh melamar di suatu formasi jabatan
+  per subbagian, per bagian, dan per institusi, (3) tahun skor SKD,
+  dan (4) jumlah kebutuhan di tiap formasi jabatan per subbagian, per
+  bagian, dan per institusi. Data-data tersebut akan sangat berguna
+  untuk proses analisis data karena bisa memberikan wawasan yang lebih
+  komprehensif dan menyeluruh tentang tren pelamar CPNS.
 
--   **Metode analisis:** Saya menyadari bahwa analisis yang telah saya lakukan masih banyak aspek yang perlu ditingkatkan. Hal ini terjadi lantaran kurangnya pengetahuan saya terhadap analisis data kuantitatif. Contohnya, analisis pada investigasi ini bisa saja menggunakan sampling dan/atau bootstrap sampling untuk melakukan analisis yang lebih mendalam.
+- **Metode analisis:** Saya menyadari bahwa analisis yang telah saya
+  lakukan masih banyak aspek yang perlu ditingkatkan. Hal ini terjadi
+  lantaran kurangnya pengetahuan saya terhadap analisis data
+  kuantitatif. Contohnya, analisis pada investigasi ini bisa saja
+  menggunakan sampling dan/atau bootstrap sampling untuk melakukan
+  analisis yang lebih mendalam.
 
--   **Penyajian temuan:** Karena sifat dari dokumen dan investigasi ini yang cenderung formal-akademik, presentasi temuan hasil investigasi masih berfokus pada visualisasi yang minimal. Hal ini dikarenakan kurangnya pengalaman baik secara teori maupun praktikal dalam penggunaan infografis untuk penyajian hasil analisis data. Jika temuan yang didapat dipresentasikan dalam bentuk yang lebih menarik dan mudah dicerna oleh masyarakat luas, kebermanfaatan investigasi ini tentu akan jauh lebih luas dan besar dampaknya dari yang saat ini.
+- **Penyajian temuan:** Karena sifat dari dokumen dan investigasi ini
+  yang cenderung formal-akademik, presentasi temuan hasil investigasi
+  masih berfokus pada visualisasi yang minimal. Hal ini dikarenakan
+  kurangnya pengalaman baik secara teori maupun praktikal dalam
+  penggunaan infografis untuk penyajian hasil analisis data. Jika temuan
+  yang didapat dipresentasikan dalam bentuk yang lebih menarik dan mudah
+  dicerna oleh masyarakat luas, kebermanfaatan investigasi ini tentu
+  akan jauh lebih luas dan besar dampaknya dari yang saat ini.
 
--   **Bahasa pemrograman alternatif:** Per tanggal pada saat investigasi ini selesai dibuat dan dipublikasikan di platform pilihan, bahasa pemrograman yang predominan digunakan adalah R. Bahasa lain seperti SQL (MySQL, PostgreSQL) dan Python memiliki proporsi yang jauh lebih sedikit. Mengingat dominasi bahasa pemrograman Python yang lebih banyak diadopsi pada saat ini, saya berpikir bahwa investigasi ini akan jauh lebih mudah untuk direplikasi.
+- **Bahasa pemrograman alternatif:** Per tanggal pada saat investigasi
+  ini selesai dibuat dan dipublikasikan di platform pilihan, bahasa
+  pemrograman yang predominan digunakan adalah R. Bahasa lain seperti
+  SQL (MySQL, PostgreSQL) dan Python memiliki proporsi yang jauh lebih
+  sedikit. Mengingat dominasi bahasa pemrograman Python yang lebih
+  banyak diadopsi pada saat ini, saya berpikir bahwa investigasi ini
+  akan jauh lebih mudah untuk direplikasi.
 
 ## Rekomendasi
 
-Berkaca dari kekurangan investigasi ini, saya mengajukan beberapa rekomendasi untuk investigasi selanjutnya yang mana dapat memberikan dampak yang lebih besar dan luas. Di bawah ini adalah beberapa rekomendasi yang saya sarankan:
+Berkaca dari kekurangan investigasi ini, saya mengajukan beberapa
+rekomendasi untuk investigasi selanjutnya yang mana dapat memberikan
+dampak yang lebih besar dan luas. Di bawah ini adalah beberapa
+rekomendasi yang saya sarankan:
 
--   **Data engineering:** Buat *script* yang bisa menangkap data secara lebih menyeluruh, akurat, dan presisi.
+- **Data engineering:** Buat *script* yang bisa menangkap data secara
+  lebih menyeluruh, akurat, dan presisi.
 
--   **Data analysis:** Gunakan metode analisis yang lebih beragam untuk mengekstrak *insight* yang lebih kaya.
+- **Data analysis:** Gunakan metode analisis yang lebih beragam untuk
+  mengekstrak *insight* yang lebih kaya.
 
--   **Data visualization:** Buat infografis untuk penyajian data yang lebih ringkas namun tetap bermakna.
+- **Data visualization:** Buat infografis untuk penyajian data yang
+  lebih ringkas namun tetap bermakna.
 
--   **Flexibility:** Disamping bahasa pemrograman utama, tambah bahasa pemrograman lain untuk memudahkan replikasi hasil analisis (contoh: Jupyter Notebook)
+- **Flexibility:** Disamping bahasa pemrograman utama, tambah bahasa
+  pemrograman lain untuk memudahkan replikasi hasil analisis (contoh:
+  Jupyter Notebook)
 
-# Ucapan Terima Kasih {.appendix}
+# Ucapan Terima Kasih
 
-Dari proyek/investigasi data ini, banyak sekali pihak yang mendukung saya. Mulai dari orang tua saya yang mendukung penuh arah karir saya sebagai Data Analyst/Data Scientist, teman-teman saya yang antusias terhadap hasil analisis saya. Di samping itu, saya juga sangat berterima kasih kepada [DataCamp](https://datacamp.com/) atas materi kursus yang ditawarkannya. Investigasi ini tidak mungkin eksis tanpa kursus yang ditawarkan oleh [DataCamp](https://datacamp.com/). Satu lagi, saya juga mengucapkan terima kasih yang besar kepada [Alex The Analyst](https://youtube.com/@AlexTheAnalyst) karena kursus gratis beliau lah yang memercikkan api semangat analis dalam diri saya sehingga investigasi ini pun bisa terwujud. Akhir kata, saya mengucapkan banyak terima kasih kepada semua pihak yang terlibat secara aktif maupun pasif, karena dengan bantuan orang lain lah saya bisa menyelesaikan proyek/investigasi ini.
+Dari proyek/investigasi data ini, banyak sekali pihak yang mendukung
+saya. Mulai dari orang tua saya yang mendukung penuh arah karir saya
+sebagai Data Analyst/Data Scientist, teman-teman saya yang antusias
+terhadap hasil analisis saya. Di samping itu, saya juga sangat berterima
+kasih kepada [DataCamp](https://datacamp.com/) atas materi kursus yang
+ditawarkannya. Investigasi ini tidak mungkin eksis tanpa kursus yang
+ditawarkan oleh [DataCamp](https://datacamp.com/). Satu lagi, saya juga
+mengucapkan terima kasih yang besar kepada [Alex The
+Analyst](https://youtube.com/@AlexTheAnalyst) karena kursus gratis
+beliau lah yang memercikkan api semangat analis dalam diri saya sehingga
+investigasi ini pun bisa terwujud. Akhir kata, saya mengucapkan banyak
+terima kasih kepada semua pihak yang terlibat secara aktif maupun pasif,
+karena dengan bantuan orang lain lah saya bisa menyelesaikan
+proyek/investigasi ini.

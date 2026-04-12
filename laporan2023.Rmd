@@ -1,0 +1,106 @@
+---
+title: "Analisis Hasil Tes CPNS Periode 20xx-2023 Kemendik"
+subtitle: "Telaah Dari Sudut Pandang Retrospektif"
+description: "Investigasi ini berfokus pada perubahan tren hasil tes CPNS (Calon Pegawai Negeri Sipil) di Kementerian Pendidikan Indonesia dari periode 20xx sampai 2023."
+author: 
+  - name: "Zelvy Fauzan"
+    url: https://ze-fn.github.io/
+    orcid_id: 0000-0002-2011-8239
+    affiliation: Independent
+    affiliation_url: https://github.com/ze-fn/
+date:
+abstract: ""
+keywords: [""]
+subject: 
+description: ""
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+    code_folding: true
+    highlight: tango
+    self_contained: false
+lang: "id-ID"
+---
+
+# Abstrak
+
+
+
+# Pendahuluan
+
+
+
+## Latar Belakang
+
+
+
+## Pertanyaan Riset
+
+
+
+## Tujuan Riset
+
+
+
+## Kontribusi Riset
+
+
+
+## Sumber Data
+
+
+
+# Persiapan Data
+
+
+
+## Perkakas (Library)
+
+
+
+## Impor Data
+
+
+
+## Pembersihan Data
+
+
+
+## Hasil Pembersihan Data
+
+
+
+# Analisis Data
+
+
+
+## PR1
+
+
+
+## PR2
+
+
+
+## PRn
+
+
+
+# Penutup
+
+
+
+## Kesimpulan
+
+
+
+## Limitasi
+
+
+
+## Rekomendasi
+
+
+
+# Ucapan Terima Kasih {.appendix}
