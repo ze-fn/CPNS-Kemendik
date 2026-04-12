@@ -1524,6 +1524,52 @@ proporsi_status_kelulusan_skd
 
 ### 16. Proporsi Kelulusan SKB masing-masing jabatan formasi
 
+```{r sixteenth-question}
+# Tabel untuk proporsi berdasarkan decl_code (status kelulusan)
+piv_wider_decl_code_skb <- hasil_skb_forward_fill %>% 
+  select(decl_code, loc_code, jp_code) %>% 
+  group_by(loc_code, jp_code, decl_code) %>% 
+  mutate(decl_code = factor(as.factor(decl_code),  
+                            levels = c("P/L", "P/L-U1", "P/L-U3", "P/L-E1",
+                                       "P/L-E2", "P/L-E3", "APS", 
+                                       "TMS", "TMS-1", 
+                                       "TL", "TH"))) %>% 
+  summarize(count = n()) %>% 
+  arrange(loc_code, jp_code, decl_code) %>% 
+  pivot_wider(names_from = decl_code,
+              values_from = count)
+
+# Replace NA values dengan 0 (integer) dan buat kolom baru "total"
+n_status_kelulusan_skb <- piv_wider_decl_code_skb %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) %>% 
+  mutate(n_total = rowSums(across(c("P/L", "P/L-U1", "P/L-U3", "P/L-E1",
+                                       "P/L-E2", "P/L-E3", "APS", 
+                                       "TMS", "TMS-1", 
+                                       "TL", "TH")))) %>% 
+  ungroup() %>% 
+  left_join(lokasi_cleaning3, by = "loc_code") %>% 
+  left_join(jabatan_formasi, by = "jp_code") %>% 
+  select(-jp_code, -loc_code)
+
+proporsi_status_kelulusan_skb <- n_status_kelulusan_skb %>% 
+  mutate(`P/L` = round(`P/L` / n_total * 100, 2),
+         `P/L-U1` = round(`P/L-U1` / n_total * 100, 2),
+         `P/L-U3` = round(`P/L-U3` / n_total * 100, 2),
+         `P/L-E1` = round(`P/L-E1` / n_total * 100, 2),
+         `P/L-E2` = round(`P/L-E2` / n_total * 100, 2),
+         `P/L-E3` = round(`P/L-E3` / n_total * 100, 2),
+         APS = round(APS / n_total * 100, 2),
+         TMS = round(TMS / n_total * 100, 2),
+         `TMS-1` = round(`TMS-1` / n_total * 100, 2),
+         TL = round(TL / n_total * 100, 2),
+         TH = round(TH / n_total * 100, 2)) %>% 
+  arrange(desc(n_total))
+
+n_status_kelulusan_skb
+proporsi_status_kelulusan_skb
+
+```
+
 ### 17. Jabatan formasi dengan peminat paling banyak
 
 ```{r seventeenth-question}
@@ -1558,7 +1604,7 @@ jf_peminat_asc
 
 ### 19. Instansi yang paling banyak diminati
 
-```{r}
+```{r nineteenth-question}
 instansi_peminat_desc <- n_status_kelulusan_skd %>% 
   select(-job_position, -fa_bag, -prodi_subbag) %>% 
   group_by(instansi) %>% 
